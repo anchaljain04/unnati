@@ -27,7 +27,7 @@ function App() {
     <div
       style={{
         background: "pink",
-        height: "100vh",
+        height: "100%",
       }}
     >
       <NaviBar />
@@ -47,6 +47,9 @@ function App() {
         >
           <MDBTabsItem>
             <MDBTabsLink
+              style={{
+                border: "1px solid blue",
+              }}
               onClick={() => handleJustifyClick("tab1")}
               active={justifyActive === "tab1"}
             >
@@ -55,6 +58,9 @@ function App() {
           </MDBTabsItem>
           <MDBTabsItem>
             <MDBTabsLink
+              style={{
+                border: "1px solid blue",
+              }}
               onClick={() => handleJustifyClick("tab2")}
               active={justifyActive === "tab2"}
             >
@@ -142,27 +148,36 @@ function App() {
               type="number"
             />
             <select
+              style={{
+                width: "100%",
+                height: "36px",
+                border: "none",
+                borderRadius: "5px",
+                padding: "0px 5px",
+              }}
               wrapperClass="mb-4"
               label="Category"
               id="form1"
-              >
-              <option > Provider</option>
-              <option > Customer</option>
+            >
+              <option> Provider</option>
+              <option> Customer</option>
             </select>
-            <MDBInput
+            {/* <MDBInput
               
               label="Category"
               
               
-            /> 
+            />  */}
+            <label>Category</label>
+            <br/><br/>
 
-            <div className="d-flex justify-content-center mb-4">
+            {/* <div className="d-flex justify-content-center mb-4">
               <MDBCheckbox
                 name="flexCheck"
                 id="flexCheckDefault"
                 label="I have read and agree to the terms"
               />
-            </div>
+            </div> */}
 
             <MDBBtn className="mb-4 w-100">Sign up</MDBBtn>
           </MDBTabsPane>
