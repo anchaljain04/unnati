@@ -28,7 +28,7 @@ export default function Services() {
         <Card style={{ width: "18rem", margin: "25px" }}>
           <Card.Img
             variant="top"
-            src="/images/maid.jpg"
+            src="/images/maidPic.jpg"
             width="286px"
             height="200"
           />
@@ -48,7 +48,7 @@ export default function Services() {
         <Card style={{ width: "18rem", margin: "25px" }}>
           <Card.Img
             variant="top"
-            src="/images/carpenter.png"
+            src="/images/carpenter.jpg"
             width="286px"
             height="200"
           />
@@ -67,7 +67,7 @@ export default function Services() {
         <Card style={{ width: "18rem", margin: "25px" }}>
           <Card.Img
             variant="top"
-            src="/images/electrician.jpeg"
+            src="/images/electrician.jpg"
             width="286px"
             height="200"
           />
@@ -110,7 +110,7 @@ export default function Services() {
         <Card style={{ width: "18rem", margin: "25px" }}>
           <Card.Img
             variant="top"
-            src="/images/painter.jpeg"
+            src="/images/painter.jpg"
             width="286px"
             height="200"
           />
@@ -129,7 +129,7 @@ export default function Services() {
         <Card style={{ width: "18rem", margin: "25px" }}>
           <Card.Img
             variant="top"
-            src="/images/chef.jpeg"
+            src="/images/chef.jpg"
             width="286px"
             height="200"
           />

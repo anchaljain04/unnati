@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function ProviderData() {
   const location = window.location.pathname.split("/").pop();
@@ -16,19 +17,34 @@ export default function ProviderData() {
   }, [location]);
 
   return (
-    <div style={{textAlign:'center',    background: "pink",height:'100vh'}}>
+    <div style={{ textAlign: "center", background: "pink", height: "100vh" }}>
       <NavBar />
-      <h1 style={{marginTop:'80px',fontFamily: 'Roboto Slab, serif', fontStyle:'italic'}}>List of Service Providers for {location.toLocaleUpperCase()} service</h1>
-      <div className="container"
+      <h1
+        style={{
+          marginTop: "80px",
+          fontFamily: "Roboto Slab, serif",
+          fontStyle: "italic",
+        }}
+      >
+        List of Service Providers for {location.toLocaleUpperCase()} service
+      </h1>
+      <div
+        className="container"
         style={{
           marginTop: "50px",
-          textAlign:'center',
+          textAlign: "center",
         }}
       >
         {providers.length === 0 ? (
           <h2>No data Available at the moment!</h2>
         ) : (
-          <Table striped bordered hover variant="dark" style={{width:'85%', margin:'auto'}}>
+          <Table
+            striped
+            bordered
+            hover
+            variant="dark"
+            style={{ width: "85%", margin: "auto" }}
+          >
             <thead>
               <tr>
                 <th>#</th>
@@ -59,6 +75,26 @@ export default function ProviderData() {
             </tbody>
           </Table>
         )}
+        <h2 style={{ marginTop: "50px" }}>Post your requirement:</h2>
+        <Link
+          to="/"
+          style={{
+            fontFamily: "sans-serif",
+            color: "black",
+            fontSize: "30px",
+          }}
+        >
+          <Button
+            style={{
+              background: "#9e3369",
+              justifyContent: "center",
+              alignItems: "center",
+              border: "none",
+            }}
+          >
+            Submit{" "}
+          </Button>
+        </Link>
       </div>
     </div>
   );

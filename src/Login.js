@@ -278,9 +278,9 @@ function App() {
               </button>
             </form>
 
-            <div className="d-flex justify-content-between mb-4">
+            {/* <div className="d-flex justify-content-between mb-4">
               <a href="!#">Forgot password?</a>
-            </div>
+            </div> */}
             <p className="text-center">
               Not a member? <a href="#!">Register</a>
             </p>
