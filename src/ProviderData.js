@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
-import { Table, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Table } from "react-bootstrap";
+import PostRequirements from "./PostRequirements";
 
 export default function ProviderData() {
   const location = window.location.pathname.split("/").pop();
@@ -75,26 +75,12 @@ export default function ProviderData() {
             </tbody>
           </Table>
         )}
-        <h2 style={{ marginTop: "50px" }}>Post your requirement:</h2>
-        <Link
-          to="/"
-          style={{
-            fontFamily: "sans-serif",
-            color: "black",
-            fontSize: "30px",
-          }}
-        >
-          <Button
-            style={{
-              background: "#9e3369",
-              justifyContent: "center",
-              alignItems: "center",
-              border: "none",
-            }}
-          >
-            Submit{" "}
-          </Button>
-        </Link>
+        <h3 style={{ marginTop: "50px" }}>
+          Not found suitable provider?
+          <br />
+          Post your requirement now:
+        </h3>
+        <PostRequirements />
       </div>
     </div>
   );
