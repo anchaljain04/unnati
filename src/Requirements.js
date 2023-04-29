@@ -5,14 +5,50 @@ import { Table } from "react-bootstrap";
 
 function Requirements() {
   const [requirements, setRequirements] = useState([]);
+  const userData = localStorage.getItem("Profile");
+  const user = JSON.parse(userData);
+  let url;
+  let raw;
+  if (user.category === "customer") {
+    url = `http://localhost:8000/user/get-requirements`;
+  } else {
+    url = `http://localhost:8000/provider/get-requirements`;
+    raw = {
+      params: { service: `${user.serviceProviding}` },
+    };
+  }
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/user/get-requirements`)
+      .get(url, raw)
       .then((response) => {
         setRequirements(response.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [url, raw]);
+
+  const handleConnectClick = (e, requirement) => {
+    e.preventDefault();
+    const raw = {
+      subject: "connection request",
+      userName: requirement?.name,
+      text: "Someone has sent you a connection request",
+      to: requirement?.email,
+      service:
+        user.serviceProviding.charAt(0).toUpperCase() +
+        user.serviceProviding.slice(1),
+      providerId: user?._id,
+      requirementId: requirement?._id,
+      userId: requirement?.userId,
+    };
+    axios
+      .post("http://localhost:8000/user/send-email", raw)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <div style={{ textAlign: "center", background: "pink", height: "100vh" }}>
@@ -52,6 +88,7 @@ function Requirements() {
                   <th>Address</th>
                   <th>Service Required</th>
                   <th>Experience Required</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,6 +104,13 @@ function Requirements() {
                       <td>{requirement.address}</td>
                       <td>{requirement.service}</td>
                       <td>{requirement.experience}</td>
+                      <td>
+                        <button
+                          onClick={(e) => handleConnectClick(e, requirement)}
+                        >
+                          Connect
+                        </button>
+                      </td>
                     </tr>
                   ))
                 )}

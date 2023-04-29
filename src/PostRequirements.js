@@ -35,9 +35,10 @@ function PostRequirements() {
         name: user.name,
         email: user.email,
         mobile: user.mobile,
-        service: service,
+        service: service.toLowerCase(),
         experience: experience,
         address: address,
+        userId: user?._id,
       })
       .then((response) => {
         if (response.status === 200) {

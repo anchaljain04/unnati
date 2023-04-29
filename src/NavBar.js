@@ -108,6 +108,10 @@ export default function NavBar() {
                 <NavDropdown.Item onClick={() => navigate("/activities")}>
                   Activities
                 </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={() => navigate("/connection-requests")}>
+                  Connection Requests
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

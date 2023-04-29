@@ -7,6 +7,7 @@ import ProviderData from "./ProviderData";
 import Requirements from "./Requirements";
 import About from "./About";
 import MyActivities from "./MyActivities";
+import ConnectionRequests from "./ConnectionRequests";
 
 function App() {
   return (
@@ -27,7 +28,12 @@ function App() {
         <Route exact path="/requirements" element={<Requirements />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/about" element={<About />} />
-        <Route exact path="/activities" element={<MyActivities/>} />
+        <Route exact path="/activities" element={<MyActivities />} />
+        <Route
+          exact
+          path="/connection-requests"
+          element={<ConnectionRequests />}
+        />
       </Routes>
     </BrowserRouter>
   );
