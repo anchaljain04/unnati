@@ -1,7 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -16,31 +15,31 @@ const style = {
   px: 3,
 };
 
-function AcceptRequestModal({ open, setOpen }) {
-  console.log(open, setOpen);
-  //   const [open, setOpen] = React.useState(false);
-  //   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const navigate = useNavigate();
-
+function AcceptRequestModal(props) {
+  const close = () => {
+    props.setOpen(false);
+    window.location.reload(true);
+  };
   return (
     <div>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={close}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div>
-            <h3>You have successfully accepted the request.</h3>
-            <h4>
+          <div style={{ textAlign: "center" }}>
+            <h4>You have successfully accepted the request.</h4>
+            <br />
+            <h5>
               Contact details of the provider will be sent to your e-mail soon.
-            </h4>
+            </h5>
+            <br />
             <h5>Thank you for your visit.</h5>
           </div>
-          <div>
-            <button onClick={() => navigate("/")}>Close</button>
+          <div style={{ textAlign: "center", marginTop: "25px" }}>
+            <button onClick={close}>Close</button>
           </div>
         </Box>
       </Modal>

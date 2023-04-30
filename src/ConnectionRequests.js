@@ -15,17 +15,55 @@ function ConnectionRequests() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
 
+  const [isCustomer, setIsCustomer] = useState(false);
+
+  let url;
+  let raw;
+  if (user.category === "customer") {
+    url = "http://localhost:8000/user/get-connection-requests";
+    raw = {
+      params: { userId: user?._id },
+    };
+    setIsCustomer(true);
+  } else {
+    url = "http://localhost:8000/provider/get-connection-requests";
+    raw = {
+      params: { providerId: user?._id },
+    };
+  }
   useEffect(() => {
     axios
-      .get("http://localhost:8000/user/get-connection-requests", {
-        params: { userId: user?._id },
-      })
+      .get(url, raw)
       .then((response) => {
         setRequests(response.data);
       })
       .catch((error) => console.log(error));
-  }, [user?._id]);
+  }, [user?._id, url, raw]);
 
+  const sendEmail = (e, request) => {
+    e.preventDefault();
+    const raw = {
+      subject: "Provider's Details",
+      userName: request?.userId?.name,
+      to: request?.userId?.email,
+      service:
+        request?.requirementId?.service.charAt(0).toUpperCase() +
+        request?.requirementId?.service.slice(1),
+      providerName: request?.providerId?.name,
+      providerAddress: request?.providerId?.address,
+      providerExperience: request?.providerId?.experience,
+      providerEmail: request?.providerId?.email,
+      providerMobile: request?.providerId?.mobile,
+    };
+    axios
+      .post("http://localhost:8000/user/send-email", raw)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const handleAccept = (e, request) => {
     e.preventDefault();
     axios
@@ -33,11 +71,9 @@ function ConnectionRequests() {
         params: { id: request?._id, status: "accepted" },
       })
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
-          // handleOpen();
-          <AcceptRequestModal open={open} setOpen={setOpen} />;
-          // window.location.reload(true);
+          handleOpen();
+          sendEmail(e, request);
         }
       })
       .catch((error) => console.log(error));
@@ -66,7 +102,9 @@ function ConnectionRequests() {
           fontStyle: "italic",
         }}
       >
-        List of customer requirements
+        {isCustomer
+          ? "List of connection requests you received"
+          : "List of connection requests you have sent"}
       </h1>
       <div
         className="container"
@@ -87,13 +125,16 @@ function ConnectionRequests() {
           >
             <thead>
               <tr>
-                <th>#</th>
+                <th>S. No.</th>
                 <th>Requirement of</th>
                 <th>Requirement Posted On</th>
-                <th>Provider's Name</th>
-                <th>Provider's Address</th>
-                <th>Provider's Experience</th>
-                <th>Actions</th>
+                {!isCustomer ? <th>Required Experience</th> : ""}
+                <th>{isCustomer ? "Provider's Name" : "Customer's Name"}</th>
+                <th>
+                  {isCustomer ? "Provider's Address" : "Customer's Address"}
+                </th>
+                {isCustomer ? <th>"Provider's Experience"</th> : ""}
+                <th>{isCustomer ? "Actions" : "Status"}</th>
               </tr>
             </thead>
             <tbody>
@@ -109,11 +150,24 @@ function ConnectionRequests() {
                         "DD-MM-YYYY"
                       )}
                     </td>
-                    <td>{request.providerId.name}</td>
-                    <td>{request.providerId.address}</td>
-                    <td>{request.providerId.experience}</td>
+                    {!isCustomer ? (
+                      <td>{request.requirementId.experience}</td>
+                    ) : (
+                      ""
+                    )}
                     <td>
-                      {request.status === "pending" ? (
+                      {isCustomer
+                        ? request.providerId.name
+                        : request.userId?.name}
+                    </td>
+                    <td>
+                      {isCustomer
+                        ? request.providerId.address
+                        : request?.userId?.address}
+                    </td>
+                    {isCustomer ? <td>{request.providerId.experience}</td> : ""}
+                    <td>
+                      {isCustomer && request.status === "pending" ? (
                         <>
                           <div>
                             <button
@@ -129,6 +183,10 @@ function ConnectionRequests() {
                               onClick={(e) => handleAccept(e, request)}
                             >
                               <CheckIcon style={{ fontSize: "18px" }} />
+                              <AcceptRequestModal
+                                open={open}
+                                setOpen={setOpen}
+                              />
                             </button>
                             <button
                               style={{

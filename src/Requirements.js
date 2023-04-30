@@ -5,6 +5,7 @@ import { Table } from "react-bootstrap";
 
 function Requirements() {
   const [requirements, setRequirements] = useState([]);
+  const [isRequestSent, setIsRequestSent] = useState(false);
   const userData = localStorage.getItem("Profile");
   const user = JSON.parse(userData);
   let url;
@@ -26,10 +27,20 @@ function Requirements() {
       .catch((error) => console.log(error));
   }, [url, raw]);
 
+  const checkRequestSent = (requirement) => {
+    axios
+      .get("http://localhost:8000/provider/is-request-sent", {
+        params: { requirementId: requirement?._id, providerId: user?._id },
+      })
+      .then((response) => {
+        setIsRequestSent(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
   const handleConnectClick = (e, requirement) => {
     e.preventDefault();
     const raw = {
-      subject: "connection request",
+      subject: "Connection Request",
       userName: requirement?.name,
       text: "Someone has sent you a connection request",
       to: requirement?.email,
@@ -96,22 +107,33 @@ function Requirements() {
                   <h1>Loading</h1>
                 ) : (
                   requirements.map((requirement, index) => (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{requirement.name}</td>
-                      <td>{requirement.email}</td>
-                      <td>{requirement.mobile}</td>
-                      <td>{requirement.address}</td>
-                      <td>{requirement.service}</td>
-                      <td>{requirement.experience}</td>
-                      <td>
-                        <button
-                          onClick={(e) => handleConnectClick(e, requirement)}
-                        >
-                          Connect
-                        </button>
-                      </td>
-                    </tr>
+                    <>
+                      <div>{checkRequestSent(requirement)}</div>
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{requirement.name}</td>
+                        <td>{requirement.email}</td>
+                        <td>{requirement.mobile}</td>
+                        <td>{requirement.address}</td>
+                        <td>{requirement.service}</td>
+                        <td>{requirement.experience}</td>
+                        <td>
+                          {isRequestSent ? (
+                            "Sent"
+                          ) : (
+                            <>
+                              <button
+                                onClick={(e) =>
+                                  handleConnectClick(e, requirement)
+                                }
+                              >
+                                Connect
+                              </button>
+                            </>
+                          )}
+                        </td>
+                      </tr>
+                    </>
                   ))
                 )}
               </tbody>

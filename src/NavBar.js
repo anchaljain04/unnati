@@ -104,12 +104,21 @@ export default function NavBar() {
                 <NavDropdown.Item onClick={() => navigate("/about")}>
                   Profile
                 </NavDropdown.Item>
+                {user?.category === "customer" ? (
+                  <>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item onClick={() => navigate("/activities")}>
+                      Activities
+                    </NavDropdown.Item>
+                  </>
+                ) : (
+                  ""
+                )}
+
                 <NavDropdown.Divider />
-                <NavDropdown.Item onClick={() => navigate("/activities")}>
-                  Activities
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={() => navigate("/connection-requests")}>
+                <NavDropdown.Item
+                  onClick={() => navigate("/connection-requests")}
+                >
                   Connection Requests
                 </NavDropdown.Item>
               </NavDropdown>
