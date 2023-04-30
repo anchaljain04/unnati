@@ -11,6 +11,8 @@ import {
   MDBTabsContent,
   MDBTabsPane,
 } from "mdb-react-ui-kit";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 function App() {
   const navigate = useNavigate();
@@ -20,6 +22,7 @@ function App() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [mobile, setMobile] = useState("");
   const [address, setAddress] = useState("");
   const [securityQues, setSecurityQues] = useState("");
@@ -27,12 +30,12 @@ function App() {
   const [category, setCategory] = useState("");
   const [service, setService] = useState("");
   const [experience, setExperience] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleJustifyClick = (value) => {
     if (value === justifyActive) {
       return;
     }
-
     setJustifyActive(value);
   };
 
@@ -47,7 +50,9 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (category === "provider") {
+    if (password !== confirmPassword) {
+      window.alert("Password doesn't match");
+    } else if (category === "provider") {
       if (
         !name ||
         !email ||
@@ -128,6 +133,9 @@ function App() {
     }
   };
 
+  const handleVisibilityClick = () => {
+    setShowPassword(!showPassword);
+  };
   let url;
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -250,18 +258,31 @@ function App() {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <label>Password:</label>
-              <input
-                type="password"
-                style={{
-                  width: "100%",
-                  marginBottom: "10px",
-                  borderRadius: "5px",
-                  border: "none",
-                  height: "30px",
-                  padding: "5px 10px",
-                }}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div style={{ display: "flex" }}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  style={{
+                    width: "100%",
+                    marginBottom: "10px",
+                    borderRadius: "5px",
+                    border: "none",
+                    height: "30px",
+                    padding: "5px 10px",
+                  }}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                {showPassword ? (
+                  <RemoveRedEyeIcon
+                    style={{ marginLeft: "5px", verticalAlign: "middle" }}
+                    onClick={handleVisibilityClick}
+                  />
+                ) : (
+                  <VisibilityOffIcon
+                    style={{ marginLeft: "5px", verticalAlign: "middle" }}
+                    onClick={handleVisibilityClick}
+                  />
+                )}
+              </div>
               <button
                 type="submit"
                 style={{
@@ -317,6 +338,34 @@ function App() {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <label>Password:</label>
+              <div style={{ display: "flex" }}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  minLength={6}
+                  style={{
+                    width: "100%",
+                    marginBottom: "10px",
+                    borderRadius: "5px",
+                    border: "none",
+                    height: "30px",
+                    padding: "5px 10px",
+                  }}
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                {showPassword ? (
+                  <RemoveRedEyeIcon
+                    style={{ marginLeft: "5px", verticalAlign: "middle" }}
+                    onClick={handleVisibilityClick}
+                  />
+                ) : (
+                  <VisibilityOffIcon
+                    style={{ marginLeft: "5px", verticalAlign: "middle" }}
+                    onClick={handleVisibilityClick}
+                  />
+                )}
+              </div>
+              <label>Confirm Password:</label>
               <input
                 type="password"
                 minLength={6}
@@ -329,8 +378,9 @@ function App() {
                   padding: "5px 10px",
                 }}
                 required
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
+
               <label>Contact Number:</label>
               <input
                 type="tel"

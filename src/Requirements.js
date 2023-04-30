@@ -25,7 +25,8 @@ function Requirements() {
         setRequirements(response.data);
       })
       .catch((error) => console.log(error));
-  }, [url, raw]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const checkRequestSent = (requirement) => {
     axios
