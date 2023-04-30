@@ -10,7 +10,11 @@ export default function NavBar() {
   const user = localStorage.getItem("Profile");
   const handleClick = (service) => {
     user
-      ? navigate(`/services/${service}`)
+      ? user.category === "customer"
+        ? navigate(`/services/${service}`)
+        : window.alert(
+            "You need to register as a customer to see the available provider's details!"
+          )
       : window.alert(
           "You need to login first to see the details of providers!"
         );
