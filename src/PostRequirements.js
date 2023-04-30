@@ -142,14 +142,28 @@ function PostRequirements() {
                   background: "#9e3369",
                   justifyContent: "center",
                   alignItems: "center",
-                  border: "none",
                   borderRadius: "5px",
                   color: "white",
                   padding: "8px 15px",
+                  border: "1px solid transparent",
                 }}
                 onClick={handleSubmit}
               >
                 Submit
+              </button>
+              <button
+                style={{
+                  marginTop: "20px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  border: "1px solid black",
+                  borderRadius: "6px",
+                  padding: "8px 15px",
+                  marginLeft: "8px",
+                }}
+                onClick={handleClose}
+              >
+                Cancel
               </button>
             </div>
           </form>
