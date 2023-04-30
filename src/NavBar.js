@@ -26,7 +26,7 @@ export default function NavBar() {
       <Navbar bg="dark" variant="dark">
         <Container fluid>
           <Navbar.Brand href="/" className="ms-2">
-            Unnati
+            UNNATI
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
@@ -92,43 +92,51 @@ export default function NavBar() {
                 </Nav.Link>
               )}
             </Nav>
-            <Nav style={{ maxHeight: "100px" }} navbarScroll>
-              <NavDropdown
-                title={
-                  <img
-                    src="/images/account.png"
-                    alt="account"
-                    style={{ height: "40px", width: "40px" }}
-                  />
-                }
-                id="navbarScrollingDropdown"
-                className="ms-4"
-                bg="dark"
-                href="/services"
-                align="end"
-              >
-                <NavDropdown.Item onClick={() => navigate("/about")}>
-                  Profile
-                </NavDropdown.Item>
-                {userData?.category === "customer" ? (
-                  <>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item onClick={() => navigate("/activities")}>
-                      Activities
+            {user ? (
+              <>
+                <Nav style={{ maxHeight: "100px" }} navbarScroll>
+                  <NavDropdown
+                    title={
+                      <img
+                        src="/images/account.png"
+                        alt="account"
+                        style={{ height: "40px", width: "40px" }}
+                      />
+                    }
+                    id="navbarScrollingDropdown"
+                    className="ms-4"
+                    bg="dark"
+                    href="/services"
+                    align="end"
+                  >
+                    <NavDropdown.Item onClick={() => navigate("/about")}>
+                      Profile
                     </NavDropdown.Item>
-                  </>
-                ) : (
-                  ""
-                )}
+                    {userData?.category === "customer" ? (
+                      <>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item
+                          onClick={() => navigate("/activities")}
+                        >
+                          Activities
+                        </NavDropdown.Item>
+                      </>
+                    ) : (
+                      ""
+                    )}
 
-                <NavDropdown.Divider />
-                <NavDropdown.Item
-                  onClick={() => navigate("/connection-requests")}
-                >
-                  Connection Requests
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item
+                      onClick={() => navigate("/connection-requests")}
+                    >
+                      Connection Requests
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              </>
+            ) : (
+              ""
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>

@@ -302,8 +302,20 @@ function App() {
             {/* <div className="d-flex justify-content-between mb-4">
               <a href="!#">Forgot password?</a>
             </div> */}
-            <p className="text-center">
-              Not a member? <a href="#!">Register</a>
+            <p className="text-center mt-2">
+              Not a member?{" "}
+              <button
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "blue",
+                  textDecoration: "underline",
+                  fontSize: "15px",
+                }}
+                onClick={() => handleJustifyClick("tab2")}
+              >
+                Register
+              </button>
             </p>
           </MDBTabsPane>
 
