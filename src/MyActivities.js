@@ -17,9 +17,22 @@ function MyActivities() {
       })
       .then((res) => {
         setRequirementData(res.data);
-      });
+      })
+      .catch((error) => console.log(error));
   }, [user.email]);
 
+  const handleDelete = (e, requirement) => {
+    axios
+      .delete("http://localhost:8000/user/delete-requirement", {
+        params: {
+          requirementId: requirement?._id,
+        },
+      })
+      .then((res) => {
+        window.location.reload(true);
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <div style={{ textAlign: "center", background: "pink", height: "100vh" }}>
       <NavBar />
@@ -58,6 +71,7 @@ function MyActivities() {
                   <th>Experience required</th>
                   <th>Address</th>
                   <th>Date of posting</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -72,6 +86,11 @@ function MyActivities() {
                       <td>{requirement.address}</td>
                       <td>
                         {moment(requirement.createdAt).format("DD-MM-YYYY")}
+                      </td>
+                      <td>
+                        <button onClick={(e) => handleDelete(e, requirement)}>
+                          delete
+                        </button>
                       </td>
                     </tr>
                   ))

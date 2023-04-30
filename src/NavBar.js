@@ -8,9 +8,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default function NavBar() {
   const navigate = useNavigate();
   const user = localStorage.getItem("Profile");
+
+  const userData = JSON.parse(user);
   const handleClick = (service) => {
     user
-      ? user.category === "customer"
+      ? userData.category === "customer"
         ? navigate(`/services/${service}`)
         : window.alert(
             "You need to register as a customer to see the available provider's details!"
@@ -108,7 +110,7 @@ export default function NavBar() {
                 <NavDropdown.Item onClick={() => navigate("/about")}>
                   Profile
                 </NavDropdown.Item>
-                {user?.category === "customer" ? (
+                {userData?.category === "customer" ? (
                   <>
                     <NavDropdown.Divider />
                     <NavDropdown.Item onClick={() => navigate("/activities")}>
