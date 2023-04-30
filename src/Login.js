@@ -445,19 +445,27 @@ function App() {
                   </select>
 
                   <label>Experience (in years)</label>
-                  <input
-                    type="text"
+
+                  <select
                     style={{
                       width: "100%",
-                      marginBottom: "10px",
-                      borderRadius: "5px",
+                      height: "32px",
                       border: "none",
-                      height: "30px",
-                      padding: "5px 10px",
+                      borderRadius: "5px",
+                      padding: "0px 5px",
                     }}
-                    required
+                    value={experience}
                     onChange={(e) => setExperience(e.target.value)}
-                  />
+                  >
+                    <option value="" hidden>
+                      select
+                    </option>
+                    <option>0-1</option>
+                    <option>1-2</option>
+                    <option>2-3</option>
+                    <option>3-4</option>
+                    <option>4+</option>
+                  </select>
                 </>
               ) : (
                 ""
