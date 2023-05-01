@@ -13,6 +13,7 @@ import {
 } from "mdb-react-ui-kit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 function App() {
   const navigate = useNavigate();
@@ -299,9 +300,9 @@ function App() {
               </button>
             </form>
 
-            {/* <div className="d-flex justify-content-between mb-4">
-              <a href="!#">Forgot password?</a>
-            </div> */}
+            <div className="d-flex justify-content-between mb-2">
+              <ForgotPasswordModal />
+            </div>
             <p className="text-center mt-2">
               Not a member?{" "}
               <button
