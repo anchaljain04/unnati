@@ -206,7 +206,7 @@ function ConnectionRequests() {
                   <th>
                     {isCustomer ? "Provider's Address" : "Customer's Address"}
                   </th>
-                  {isCustomer ? <th>"Provider's Experience"</th> : ""}
+                  {isCustomer ? <th>Provider's Experience</th> : ""}
                   <th>{isCustomer ? "Actions" : "Status"}</th>
                   {isCustomer ? (
                     <th

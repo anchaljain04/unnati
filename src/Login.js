@@ -31,6 +31,7 @@ function App() {
   const [category, setCategory] = useState("");
   const [service, setService] = useState("");
   const [experience, setExperience] = useState("");
+  const [availability, setAvailability] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleJustifyClick = (value) => {
@@ -64,7 +65,8 @@ function App() {
         !securityAns ||
         !category ||
         !service ||
-        !experience
+        !experience ||
+        !availability
       ) {
         window.alert("Please fill all the details");
       } else {
@@ -78,6 +80,7 @@ function App() {
             category,
             serviceProviding: service,
             experience,
+            availability,
             securityQues,
             securityAns,
           })
@@ -528,6 +531,27 @@ function App() {
                     <option>2-3</option>
                     <option>3-4</option>
                     <option>4+</option>
+                  </select>
+                  <label>Availability time:</label>
+                  <select
+                    style={{
+                      width: "100%",
+                      height: "32px",
+                      border: "none",
+                      borderRadius: "5px",
+                      padding: "0px 5px",
+                    }}
+                    value={availability}
+                    onChange={(e) => setAvailability(e.target.value)}
+                  >
+                    <option value="" hidden>
+                      select
+                    </option>
+                    <option>Morning Only</option>
+                    <option>Evening Only</option>
+                    <option>Morning-Evening</option>
+                    <option>All Day</option>
+                    <option>24*7</option>
                   </select>
                 </>
               ) : (

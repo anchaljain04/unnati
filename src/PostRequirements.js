@@ -24,6 +24,7 @@ function PostRequirements() {
   const [service, setService] = useState("");
   const [experience, setExperience] = useState("");
   const [address, setAddress] = useState("");
+  const [availability, setAvailability] = useState("");
 
   const userData = localStorage.getItem("Profile");
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ function PostRequirements() {
         experience: experience,
         address: address,
         userId: user?._id,
+        availability: availability,
       })
       .then((response) => {
         if (response.status === 200) {
@@ -122,6 +124,29 @@ function PostRequirements() {
               <option>2-3</option>
               <option>3-4</option>
               <option>4+</option>
+            </select>
+
+            <label>Preferred time:</label>
+            <select
+              style={{
+                width: "100%",
+                height: "32px",
+                border: "1px solid black",
+                borderRadius: "5px",
+                padding: "0px 5px",
+                marginBottom: "10px",
+              }}
+              value={availability}
+              onChange={(e) => setAvailability(e.target.value)}
+            >
+              <option value="" hidden>
+                select
+              </option>
+              <option>Morning Only</option>
+              <option>Evening Only</option>
+              <option>Morning-Evening</option>
+              <option>All Day</option>
+              <option>Anytime</option>
             </select>
             <label>Address:</label>
             <br />

@@ -100,6 +100,7 @@ function Requirements() {
                   <th>Address</th>
                   <th>Service Required</th>
                   <th>Experience Required</th>
+                  <th>Preferred Time</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -118,6 +119,11 @@ function Requirements() {
                         <td>{requirement.address}</td>
                         <td>{requirement.service}</td>
                         <td>{requirement.experience}</td>
+                        <td>
+                          {requirement?.availabilityTime
+                            ? requirement?.availabilityTime
+                            : "-"}
+                        </td>
                         <td>
                           {isRequestSent ? (
                             "Sent"

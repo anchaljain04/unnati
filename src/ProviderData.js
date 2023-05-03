@@ -54,6 +54,7 @@ export default function ProviderData() {
                 <th>Address</th>
                 <th>Availability</th>
                 <th>Experience</th>
+                <th>Availability</th>
               </tr>
             </thead>
             <tbody>
@@ -69,6 +70,11 @@ export default function ProviderData() {
                     <td>{provider.address}</td>
                     <td>Yes</td>
                     <td>{provider.experience}</td>
+                    <td>
+                      {provider?.availabilityTime
+                        ? provider?.availabilityTime
+                        : "-"}
+                    </td>
                   </tr>
                 ))
               )}
