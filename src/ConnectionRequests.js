@@ -7,13 +7,15 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { useNavigate } from "react-router-dom";
+import { TextField } from "@mui/material";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 430,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -29,6 +31,26 @@ function ConnectionRequests() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [userId, setUserId] = useState("");
+  const [providerId, setProviderId] = useState("");
+  const [requirementId, setRequirementId] = useState("");
+
+  const [openFeedback, setOpenFeedback] = React.useState(false);
+  const handleOpenFeedback = (user, provider, requirement) => {
+    setOpenFeedback(true);
+    setUserId(user);
+    setProviderId(provider);
+    setRequirementId(requirement);
+  };
+  const handleCloseFeedback = () => setOpenFeedback(false);
+  const [experience, setExperience] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [isDone, setIsDone] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const [feedbackData, setFeedbackData] = useState([]);
+  const navigate = useNavigate();
 
   const isCustomer = useState(user?.category === "customer" ? true : false);
 
@@ -46,6 +68,20 @@ function ConnectionRequests() {
     };
   }
 
+  const isExistingFeedback = (requirementId) => {
+    axios
+      .get("http://localhost:8000/feedback/get")
+      .then((res) => {
+        setFeedbackData(res.data);
+      })
+      .catch((error) => console.log(error));
+    const exists = feedbackData.filter(
+      (item) => item.requirementId === requirementId
+    );
+    if (exists.length > 0) {
+      return true;
+    }
+  };
   useEffect(() => {
     axios
       .get(url, raw)
@@ -53,7 +89,8 @@ function ConnectionRequests() {
         setRequests(response.data);
       })
       .catch((error) => console.log(error));
-  }, [user?._id, url, raw]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const sendEmail = (e, request) => {
     e.preventDefault();
@@ -78,6 +115,26 @@ function ConnectionRequests() {
       .catch((error) => {
         console.log(error);
       });
+  };
+  const handleSubmitFeedback = (e) => {
+    e.preventDefault();
+    if (!experience || !feedback || !message) {
+      window.alert("please fill all the fields");
+    } else {
+      axios
+        .post("http://localhost:8000/feedback/save", {
+          providerId: providerId,
+          userId: userId,
+          requirementId: requirementId,
+          experience: experience,
+          feedback: feedback,
+          message: message,
+        })
+        .then((res) => {
+          setIsDone(true);
+        })
+        .catch((error) => console.log(error));
+    }
   };
   const handleAccept = (e, request) => {
     e.preventDefault();
@@ -151,6 +208,21 @@ function ConnectionRequests() {
                   </th>
                   {isCustomer ? <th>"Provider's Experience"</th> : ""}
                   <th>{isCustomer ? "Actions" : "Status"}</th>
+                  {isCustomer ? (
+                    <th
+                      style={{
+                        borderWidth: "0px",
+                        "--bs-table-bg": "none",
+                        "--bs-table-striped-bg": "none",
+                        border: "none",
+                        boxShadow: "none",
+                        borderBottomStyle: "hidden",
+                        borderTopStyle: "hidden",
+                      }}
+                    ></th>
+                  ) : (
+                    ""
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -223,6 +295,54 @@ function ConnectionRequests() {
                           <>{request.status}</>
                         )}
                       </td>
+                      {isCustomer &&
+                      request.status === "accepted" &&
+                      !isExistingFeedback(request?.requirementId?._id) ? (
+                        <td
+                          className="table-borderless"
+                          style={{
+                            borderWidth: "0px",
+                            "--bs-table-bg": "none",
+                            "--bs-table-striped-bg": "none",
+                            border: "none",
+                            boxShadow: "none",
+                            borderBottomStyle: "hidden",
+                            borderTopStyle: "hidden",
+                            paddingLeft: "0px",
+                          }}
+                        >
+                          <button
+                            onClick={(e) =>
+                              handleOpenFeedback(
+                                request?.userId?._id,
+                                request?.providerId?._id,
+                                request?.requirementId?._id
+                              )
+                            }
+                            style={{
+                              background: "none",
+                              border: "none",
+                              color: "blue",
+                              textDecoration: "underline",
+                              fontSize: "14px",
+                            }}
+                          >
+                            give feedback
+                          </button>
+                        </td>
+                      ) : (
+                        <th
+                          style={{
+                            borderWidth: "0px",
+                            "--bs-table-bg": "none",
+                            "--bs-table-striped-bg": "none",
+                            border: "none",
+                            boxShadow: "none",
+                            borderBottomStyle: "hidden",
+                            borderTopStyle: "hidden",
+                          }}
+                        ></th>
+                      )}
                     </tr>
                   ))
                 )}
@@ -252,6 +372,132 @@ function ConnectionRequests() {
             <div style={{ textAlign: "center", marginTop: "25px" }}>
               <button onClick={handleClose}>Close</button>
             </div>
+          </Box>
+        </Modal>
+        <Modal
+          open={openFeedback}
+          onClose={handleCloseFeedback}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            {isDone ? (
+              <div style={{ textAlign: "center" }}>
+                <h4 style={{ marginTop: "10px" }}>
+                  Thank you for your time. Your feedback is valuable to us.
+                  <br />
+                  <br />
+                  Have a nice day.
+                </h4>
+                <div style={{ textAlign: "center" }}>
+                  <button
+                    style={{
+                      marginTop: "20px",
+                      background: "#9e3369",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: "5px",
+                      color: "white",
+                      padding: "8px 15px",
+                      border: "1px solid transparent",
+                    }}
+                    onClick={() => navigate("/")}
+                  >
+                    close
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <h5>Feedback</h5>
+                  <button
+                    onClick={handleCloseFeedback}
+                    style={{
+                      borderRadius: "50%",
+                      padding: "2px 9px",
+                      backgroundColor: "red",
+                      border: "none",
+                      color: "white",
+                      position: "absolute",
+                      right: "25px",
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
+                <br />
+                <label>How was your experience?</label>
+                <select
+                  style={{
+                    marginTop: "5px",
+                    width: "100%",
+                    height: "32px",
+                    borderRadius: "5px",
+                    padding: "0px 5px",
+                    marginBottom: "10px",
+                  }}
+                  value={experience}
+                  onChange={(e) => setExperience(e.target.value)}
+                >
+                  <option value="" hidden>
+                    select
+                  </option>
+                  <option value="happy">Happy</option>
+                  <option value="unhappy">Unhappy</option>
+                </select>
+                <label>
+                  How would you describe the service of our provider?
+                </label>
+                <select
+                  style={{
+                    marginTop: "5px",
+                    width: "100%",
+                    height: "32px",
+                    borderRadius: "5px",
+                    padding: "0px 5px",
+                    marginBottom: "10px",
+                  }}
+                  value={feedback}
+                  onChange={(e) => setFeedback(e.target.value)}
+                >
+                  <option value="" hidden>
+                    select
+                  </option>
+                  <option value="fantastic">Fantastic</option>
+                  <option value="average">Average</option>
+                  <option value="worst">Worst</option>
+                </select>
+                <label>Anything else you want to share?</label>
+                <TextField
+                  type="text"
+                  style={{
+                    width: "100%",
+                    marginTop: "5px",
+                    border: "1px solid black",
+                    borderRadius: "5px",
+                  }}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+                <div style={{ textAlign: "center" }}>
+                  <button
+                    style={{
+                      marginTop: "20px",
+                      background: "#9e3369",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: "5px",
+                      color: "white",
+                      padding: "8px 15px",
+                      border: "1px solid transparent",
+                    }}
+                    onClick={handleSubmitFeedback}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </>
+            )}
           </Box>
         </Modal>
       </div>
