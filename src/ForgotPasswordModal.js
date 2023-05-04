@@ -66,7 +66,8 @@ function ForgotPasswordModal() {
         }
       )
       .then((res) => {
-        if (res.data.message === "answer matched") {
+        console.log(res);
+        if (res.data.message === "Answer matched") {
           setIsAnswerMatched(true);
         } else {
           setIsAnswerMatched(false);

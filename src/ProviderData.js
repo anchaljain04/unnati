@@ -16,6 +16,29 @@ export default function ProviderData() {
       .catch((error) => console.log(error));
   }, [location]);
 
+  const userData = localStorage.getItem("Profile");
+  const user = JSON.parse(userData);
+  const handleConnectClick = (e, provider) => {
+    e.preventDefault();
+    const raw = {
+      subject: `Connection Request for the service of ${location}`,
+      userName: user?.name,
+      to: provider?.email,
+      service:
+        provider.serviceProviding.charAt(0).toUpperCase() +
+        provider.serviceProviding.slice(1),
+      providerId: provider?._id,
+      userId: user?._id,
+    };
+    axios
+      .post("http://localhost:8000/user/send-email", raw)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div style={{ textAlign: "center", background: "pink", height: "100vh" }}>
       <NavBar />
@@ -55,6 +78,7 @@ export default function ProviderData() {
                 <th>Availability</th>
                 <th>Experience</th>
                 <th>Availability</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -74,6 +98,11 @@ export default function ProviderData() {
                       {provider?.availabilityTime
                         ? provider?.availabilityTime
                         : "-"}
+                    </td>
+                    <td>
+                      <button onClick={(e) => handleConnectClick(e, provider)}>
+                        connect
+                      </button>
                     </td>
                   </tr>
                 ))

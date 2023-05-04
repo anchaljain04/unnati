@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
+import ConnectionRequestsSent from "./ConnectionRequestsSent";
 
 const style = {
   position: "absolute",
@@ -24,13 +25,16 @@ const style = {
 };
 
 function ConnectionRequests() {
-  const [requests, setRequests] = useState([]);
+  const [requestReceived, setRequestReceived] = useState([]);
   const userData = localStorage.getItem("Profile");
   const user = JSON.parse(userData);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    navigate("/");
+  };
 
   const [userId, setUserId] = useState("");
   const [providerId, setProviderId] = useState("");
@@ -52,7 +56,7 @@ function ConnectionRequests() {
   const [feedbackData, setFeedbackData] = useState([]);
   const navigate = useNavigate();
 
-  const isCustomer = useState(user?.category === "customer" ? true : false);
+  const [isCustomer, setIsCustomer] = useState(false);
 
   let url;
   let raw;
@@ -86,7 +90,16 @@ function ConnectionRequests() {
     axios
       .get(url, raw)
       .then((response) => {
-        setRequests(response.data);
+        if (user?.category === "customer") {
+          setIsCustomer(true);
+          setRequestReceived(
+            response.data.filter((item) => item.sentBy === "provider")
+          );
+        } else {
+          setRequestReceived(
+            response.data.filter((item) => item.sentBy === "user")
+          );
+        }
       })
       .catch((error) => console.log(error));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -100,7 +113,9 @@ function ConnectionRequests() {
       to: request?.userId?.email,
       service:
         request?.requirementId?.service.charAt(0).toUpperCase() +
-        request?.requirementId?.service.slice(1),
+          request?.requirementId?.service.slice(1) ||
+        request?.providerId?.service.charAt(0).toUpperCase() +
+          request?.providerId?.service.slice(1),
       providerName: request?.providerId?.name,
       providerAddress: request?.providerId?.address,
       providerExperience: request?.providerId?.experience,
@@ -175,9 +190,7 @@ function ConnectionRequests() {
             fontStyle: "italic",
           }}
         >
-          {isCustomer
-            ? "List of connection requests you received"
-            : "List of connection requests you have sent"}
+          "List of connection requests you received"
         </h1>
         <div
           className="container"
@@ -186,7 +199,7 @@ function ConnectionRequests() {
             textAlign: "center",
           }}
         >
-          {requests.length === 0 ? (
+          {requestReceived.length === 0 ? (
             <h2>No data Available at the moment!</h2>
           ) : (
             <Table
@@ -200,14 +213,22 @@ function ConnectionRequests() {
                 <tr>
                   <th>S. No.</th>
                   <th>Requirement of</th>
-                  <th>Requirement Posted On</th>
-                  {!isCustomer ? <th>Required Experience</th> : ""}
-                  <th>{isCustomer ? "Provider's Name" : "Customer's Name"}</th>
-                  <th>
-                    {isCustomer ? "Provider's Address" : "Customer's Address"}
-                  </th>
-                  {isCustomer ? <th>Provider's Experience</th> : ""}
-                  <th>{isCustomer ? "Actions" : "Status"}</th>
+                  {isCustomer ? (
+                    <>
+                      <th>Requirement Posted On</th>
+                      <th>Required Experience</th>
+                      <th>Provider's Name</th>
+                      <th>Provider's Address</th>
+                      <th>Provider's Experience</th>
+                      <th>Provider's Availability</th>
+                    </>
+                  ) : (
+                    <>
+                      <th>Customer's Name</th>
+                      <th>Customer's Address</th>
+                    </>
+                  )}
+                  <th>"Wish to connect?"</th>
                   {isCustomer ? (
                     <th
                       style={{
@@ -226,40 +247,37 @@ function ConnectionRequests() {
                 </tr>
               </thead>
               <tbody>
-                {requests === [] ? (
+                {requestReceived === [] ? (
                   <h1>Loading</h1>
                 ) : (
-                  requests.map((request, index) => (
+                  requestReceived.map((request, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
-                      <td>{request?.requirementId?.service}</td>
-                      <td>
-                        {moment(request?.requirementId?.createdAt).format(
-                          "DD-MM-YYYY"
-                        )}
-                      </td>
-                      {!isCustomer ? (
-                        <td>{request.requirementId.experience}</td>
-                      ) : (
-                        ""
-                      )}
-                      <td>
-                        {isCustomer
-                          ? request.providerId.name
-                          : request.userId?.name}
-                      </td>
-                      <td>
-                        {isCustomer
-                          ? request.providerId.address
-                          : request?.userId?.address}
-                      </td>
                       {isCustomer ? (
-                        <td>{request.providerId.experience}</td>
+                        <>
+                          <td>{request?.requirementId?.service}</td>
+                          <td>
+                            {moment(request?.requirementId?.createdAt).format(
+                              "DD-MM-YYYY"
+                            )}
+                          </td>
+                          <td>{request?.requirementId?.experience}</td>
+                          <td>{request.providerId.name}</td>
+                          <td>{request.providerId.address}</td>
+                          <td>{request?.providerId?.experience}</td>
+                          <td>
+                            {request?.providerId?.availabilityTime || "-"}
+                          </td>
+                        </>
                       ) : (
-                        ""
+                        <>
+                          <td>{request?.providerId?.serviceProviding}</td>
+                          <td>{request.userId?.name}</td>
+                          <td>{request?.userId?.address}</td>
+                        </>
                       )}
                       <td>
-                        {isCustomer && request.status === "pending" ? (
+                        {request.status === "pending" ? (
                           <>
                             <div>
                               <button
@@ -351,6 +369,7 @@ function ConnectionRequests() {
           )}
         </div>
       </div>
+      <ConnectionRequestsSent />
       <div>
         <Modal
           open={open}
@@ -362,11 +381,22 @@ function ConnectionRequests() {
             <div style={{ textAlign: "center" }}>
               <h4>You have successfully accepted the request.</h4>
               <br />
-              <h5>
-                Contact details of the provider will be sent to your e-mail
-                soon.
-              </h5>
-              <br />
+              {isCustomer ? (
+                <>
+                  <h5>
+                    Contact details of the provider will be sent to your e-mail
+                    soon.
+                  </h5>
+                  <br />
+                </>
+              ) : (
+                <>
+                  <h5>
+                    Your contact details will be shared with the user soon.
+                  </h5>
+                  <br />
+                </>
+              )}
               <h5>Thank you for your visit.</h5>
             </div>
             <div style={{ textAlign: "center", marginTop: "25px" }}>
