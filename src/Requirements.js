@@ -63,13 +63,14 @@ function Requirements() {
   };
   return (
     <div>
-      <div style={{ textAlign: "center", background: "pink", height: "100vh" }}>
+      <div style={{ textAlign: "center", backgroundImage: 'url("/images/background.jpg")', height: "100vh" }}>
         <NavBar />
         <h1
           style={{
-            marginTop: "80px",
+            marginTop: "90px",
             fontFamily: "Roboto Slab, serif",
             fontStyle: "italic",
+            color: "white",
           }}
         >
           List of customer requirements

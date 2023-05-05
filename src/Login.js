@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./index.css";
 
 import NavBar from "./NavBar";
 import {
@@ -33,11 +34,15 @@ function App() {
   const [experience, setExperience] = useState("");
   const [availability, setAvailability] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [bgClr, setBgClr] = useState('white');
+
 
   const handleJustifyClick = (value) => {
     if (value === justifyActive) {
       return;
     }
+    setBgClr("#1d2951");
+    
     setJustifyActive(value);
   };
 
@@ -176,7 +181,7 @@ function App() {
   return (
     <div
       style={{
-        background: "pink",
+        backgroundImage: 'url("/images/background.jpg")',
         height: "120vh",
       }}
     >
@@ -187,7 +192,7 @@ function App() {
         style={{
           width: "500px",
           border: "groove",
-          background: "#dfdbe4",
+          background: "#f8f8ff",
         }}
       >
         <MDBTabs
@@ -196,10 +201,13 @@ function App() {
           className="mb-3 d-flex flex-row justify-content-between"
         >
           <MDBTabsItem>
+          
             <MDBTabsLink
               style={{
                 border: "1px solid blue",
-              }}
+                marginRight: "5px",
+                backgroundColor: "#1d2951",
+                }}
               onClick={() => handleJustifyClick("tab1")}
               active={justifyActive === "tab1"}
             >
@@ -210,6 +218,8 @@ function App() {
             <MDBTabsLink
               style={{
                 border: "1px solid blue",
+                marginLeft: "5px",
+                background: {bgClr}
               }}
               onClick={() => handleJustifyClick("tab2")}
               active={justifyActive === "tab2"}
@@ -223,6 +233,7 @@ function App() {
           <MDBTabsPane show={justifyActive === "tab1"}>
             <form onSubmit={handleLogin}>
               <input
+                id="foc"
                 type="radio"
                 value="provider"
                 name="role"
@@ -231,10 +242,13 @@ function App() {
                   marginRight: "5px",
                   transform: "scale(1.3)",
                   verticalAlign: "middle",
+                  
+                  
                 }}
               />
-              <label>Provider</label>
+              <label for="foc">Provider</label>
               <input
+                id="foc"
                 type="radio"
                 value="customer"
                 name="role"
@@ -246,7 +260,7 @@ function App() {
                   verticalAlign: "middle",
                 }}
               />
-              <label style={{ marginBottom: "15px" }}>Customer</label>
+              <label for="foc" style={{ marginBottom: "15px" }}>Customer</label>
               <br />
               <label>Email:</label>
               <input
@@ -294,7 +308,7 @@ function App() {
                   padding: "6px",
                   borderRadius: "5px",
                   marginTop: "15px",
-                  background: "#0d6efd",
+                  background: "#1d2951",
                   color: "white",
                   border: "none",
                 }}
@@ -565,7 +579,7 @@ function App() {
                   padding: "6px",
                   borderRadius: "5px",
                   marginTop: "15px",
-                  background: "#0d6efd",
+                  background: "#1d2951",
                   color: "white",
                   border: "none",
                 }}

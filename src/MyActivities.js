@@ -34,13 +34,14 @@ function MyActivities() {
       .catch((error) => console.log(error));
   };
   return (
-    <div style={{ textAlign: "center", background: "pink", height: "100vh" }}>
+    <div style={{ textAlign: "center", backgroundImage: 'url("/images/background.jpg")', height: "100vh" }}>
       <NavBar />
       <h2
         style={{
-          marginTop: "70px",
+          marginTop: "90px",
           fontFamily: "Roboto Slab, serif",
           fontStyle: "italic",
+          color: "white",
         }}
       >
         Requirements posted:
@@ -53,7 +54,9 @@ function MyActivities() {
       >
         {requirementData.length === 0 ? (
           <>
-            <h2>You haven't posted any requirement yet</h2>
+            <h2 style={{
+            color:"white"
+          }}>You haven't posted any requirement yet</h2>
           </>
         ) : (
           <>

@@ -180,14 +180,15 @@ function ConnectionRequests() {
       .catch((error) => console.log(error));
   };
   return (
-    <div style={{ textAlign: "center", background: "pink", height: "100vh" }}>
+    <div style={{ textAlign: "center", backgroundImage: 'url("/images/background.jpg")', height: "100vh" }}>
       <NavBar />
       <div>
         <h1
           style={{
-            marginTop: "80px",
+            marginTop: "90px",
             fontFamily: "Roboto Slab, serif",
             fontStyle: "italic",
+            color: "white",
           }}
         >
           "List of connection requests you received"
@@ -200,7 +201,7 @@ function ConnectionRequests() {
           }}
         >
           {requestReceived.length === 0 ? (
-            <h2>No data Available at the moment!</h2>
+            <h2 style={{color:"white"}}>No data Available at the moment!</h2>
           ) : (
             <Table
               striped

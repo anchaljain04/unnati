@@ -40,13 +40,14 @@ export default function ProviderData() {
       });
   };
   return (
-    <div style={{ textAlign: "center", background: "pink", height: "100vh" }}>
+    <div style={{ textAlign: "center", backgroundImage: 'url("/images/background.jpg")', height: "100vh" }}>
       <NavBar />
       <h1
         style={{
-          marginTop: "80px",
+          marginTop: "90px",
           fontFamily: "Roboto Slab, serif",
           fontStyle: "italic",
+          color: "white",
         }}
       >
         List of Service Providers for {location.toLocaleUpperCase()} service
@@ -59,7 +60,9 @@ export default function ProviderData() {
         }}
       >
         {providers.length === 0 ? (
-          <h2>No data Available at the moment!</h2>
+          <h2 style={{
+            color:"white"
+          }}>No data Available at the moment!</h2>
         ) : (
           <Table
             striped
@@ -110,7 +113,7 @@ export default function ProviderData() {
             </tbody>
           </Table>
         )}
-        <h3 style={{ marginTop: "50px" }}>
+        <h3 style={{ marginTop: "50px" , color:"white" }}>
           Not found suitable provider?
           <br />
           Post your requirement now:

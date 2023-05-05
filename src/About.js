@@ -7,7 +7,7 @@ export default class About extends Component {
     const userData = localStorage.getItem("Profile");
     const user = JSON.parse(userData);
     return (
-      <div style={{ textAlign: "center", background: "pink", height: "100vh" }}>
+      <div style={{ textAlign: "center", backgroundImage: 'url("/images/background.jpg")', height: "100vh" }}>
         <NavBar />
         <div>
           <div
@@ -15,7 +15,10 @@ export default class About extends Component {
               display: "flex",
               width: "50%",
               margin: "auto",
-              marginTop: "70px",
+              marginTop: "90px",
+              borderRadius: "5px",
+              backgroundColor: "#f2f2f2",
+              padding: "20px",
             }}
           >
             <div
