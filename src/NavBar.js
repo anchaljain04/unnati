@@ -24,7 +24,8 @@ export default function NavBar() {
   return (
     <div 
       style={{
-      
+        zIndex:"5",
+        position:"relative"
     }}>
       <Navbar bg="dark" variant="dark">
         <Container 
@@ -34,7 +35,7 @@ export default function NavBar() {
           <Navbar.Collapse id="navbarScroll">
             <Nav
               className="me-4 ms-4 my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
+              // style={{ maxHeight: "70px" }}
               navbarScroll
             >
               <NavDropdown
@@ -72,9 +73,10 @@ export default function NavBar() {
             <Navbar.Brand href="/" className="ms-auto me-5"
              style={{
               letterSpacing:"2.0rem",
+              
             
              }}>
-            UNNATI
+             <strong>UNNATI</strong>
           </Navbar.Brand>
 
             <Nav className="ms-auto me-2" style={{ maxHeight: "100px" }} navbarScroll>

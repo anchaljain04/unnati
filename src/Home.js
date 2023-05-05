@@ -20,7 +20,7 @@ export default class Home extends Component {
           backgroundAttachment: "fixed",
         }}
       >
-        <h1 style={{ fontFamily: "Roboto Slab, serif", fontStyle: "italic", color: "white"}}>
+        <h1 style={{ fontFamily: "Roboto Slab, serif", fontStyle: "italic", backgroundColor:"black" , color:"white" , marginLeft:"420px" , marginRight:"420px"}}>
           UNNATI - THE SERVICE PROVIDER
         </h1>
         <br />
@@ -29,7 +29,7 @@ export default class Home extends Component {
             width: "600px",
             margin: "auto",
             border: "solid",
-            padding: "30px",
+            padding: "20px",
             textAlign: "center",
             background: "#dfdbe4",
           }}
@@ -61,24 +61,20 @@ export default class Home extends Component {
             <>
               <h2
                 style={{
-                  fontSize: "30px",
+                  fontSize: "35px",
                   fontStyle: "italic",
+                  fontFamily: " 'Montserrat'  sans-serif"
                 }}
               >
                 Welcome to UNNATI for the unnati of local workers and for people
                 who need workers .
-              </h2>
-              <br />
-              <h2 
-                 style={{
-                   fontSize: "30px",
-                   fontStyle: "italic",
-                }}>
+
                 Here, we provide various services of and for local workers for
                 our day to day services like maids, plumbers, carpenters,
                 electricians, painters etc.
               </h2>
-              <br />
+              
+              
               <Link
                 to="/services"
                 style={{

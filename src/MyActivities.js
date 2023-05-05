@@ -34,7 +34,7 @@ function MyActivities() {
       .catch((error) => console.log(error));
   };
   return (
-    <div style={{ textAlign: "center", backgroundImage: 'url("/images/background.jpg")', height: "100vh" }}>
+    <div style={{ textAlign: "center", backgroundImage: 'url("/images/back3.jpg")', height: "100vh" }}>
       <NavBar />
       <h2
         style={{

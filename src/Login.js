@@ -181,7 +181,7 @@ function App() {
   return (
     <div
       style={{
-        backgroundImage: 'url("/images/background.jpg")',
+        backgroundImage: 'url("/images/back3.jpg")',
         height: "120vh",
       }}
     >

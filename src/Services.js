@@ -22,7 +22,7 @@ export default function Services() {
           flexWrap: "wrap",
           padding: "25px 100px",
           justifyContent: "center",
-          backgroundImage: 'url("/images/background.jpg")',
+          backgroundImage: 'url("/images/back3.jpg")',
         }}
       >
         <Card style={{ width: "18rem", margin: "25px" }}>

@@ -44,13 +44,15 @@ function ConnectionRequestsSent() {
   }, []);
 
   return (
-    <div style={{ textAlign: "center", background: "pink", height: "100vh" }}>
+    <div style={{ textAlign: "center",
+        }}>
       <div>
         <h1
           style={{
             marginTop: "80px",
             fontFamily: "Roboto Slab, serif",
             fontStyle: "italic",
+            color: "white"
           }}
         >
           "List of connection requests you have sent"
@@ -60,6 +62,7 @@ function ConnectionRequestsSent() {
           style={{
             marginTop: "50px",
             textAlign: "center",
+            color:"white"
           }}
         >
           {requestSent.length === 0 ? (

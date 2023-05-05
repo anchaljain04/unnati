@@ -180,7 +180,13 @@ function ConnectionRequests() {
       .catch((error) => console.log(error));
   };
   return (
-    <div style={{ textAlign: "center", backgroundImage: 'url("/images/background.jpg")', height: "100vh" }}>
+    <div 
+     style={{ 
+       textAlign: "center", 
+       backgroundImage: 'url("/images/back3.jpg")', 
+       backgroundRepeat: "no-repeat",
+       backgroundSize: "cover",
+       height: "100vh" }}>
       <NavBar />
       <div>
         <h1
@@ -300,7 +306,6 @@ function ConnectionRequests() {
                                   borderRadius: "50%",
                                   padding: "0px 4px",
                                   paddingBottom: "2px",
-                                  background: "red",
                                   color: "white",
                                   border: "none",
                                 }}
