@@ -5,7 +5,6 @@ import { Table } from "react-bootstrap";
 
 function Requirements() {
   const [requirements, setRequirements] = useState([]);
-  const [isRequestSent, setIsRequestSent] = useState(false);
   const userData = localStorage.getItem("Profile");
   const user = JSON.parse(userData);
   let url;
@@ -27,49 +26,36 @@ function Requirements() {
             params: { providerId: user?._id },
           })
           .then((response) => {
-            res.data.map((item) => {
-              return new Promise((resolve, reject) => {
-                const providerRequest = response.data.filter(
-                  (item) => item.sentBy === "provider"
-                );
-                providerRequest.map((ele) => {
-                  return new Promise((resolve, reject) => {
-                    if (
-                      ele.requirementId._id === item._id &&
-                      ele.providerId._id === user?._id
-                    ) {
-                      item.isRequestSent = true;
-                      return item;
-                    } else {
-                      item.isRequestSent = false;
-                      return item;
-                    }
-                  });
-                });
-                resolve(item);
+            const providerRequest = response.data.filter(
+              (item) => item.sentBy === "provider"
+            );
+            const data = res.data.map((item) => {
+              let firstAttempt = false;
+              providerRequest.map((ele) => {
+                if (
+                  firstAttempt ||
+                  (ele.requirementId._id === item._id &&
+                    ele.providerId._id === user?._id)
+                ) {
+                  item.isRequestSent = true;
+                  firstAttempt = true;
+                  return;
+                } else {
+                  item.isRequestSent = false;
+                }
+                return item;
               });
+              return item;
             });
+            setRequirements(data);
           })
           .catch((error) => console.log(error));
-        setRequirements(res.data);
       })
       .catch((error) => console.log(error));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("+=+=", requirements);
-  const requestSent = (requirement) => {
-    axios
-      .get("http://localhost:8000/provider/is-request-sent", {
-        params: { requirementId: requirement?._id, providerId: user?._id },
-      })
-      .then((response) => {
-        setIsRequestSent(response.data);
-        return response.data;
-      })
-      .catch((error) => console.log(error));
-  };
   const handleConnectClick = (e, requirement) => {
     e.preventDefault();
     const raw = {
@@ -148,43 +134,36 @@ function Requirements() {
                   <h1>Loading</h1>
                 ) : (
                   requirements.map((requirement, index) => (
-                    <>
-                      {/* <div>{checkRequestSent(requirement)}</div> */}
-                      <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{requirement.name}</td>
-                        <td>{requirement.email}</td>
-                        <td>{requirement.mobile}</td>
-                        <td>{requirement.address}</td>
-                        <td>{requirement.service}</td>
-                        <td>{requirement.experience}</td>
-                        <td>
-                          {requirement?.availabilityTime
-                            ? requirement?.availabilityTime
-                            : "-"}
-                        </td>
-                        {console.log(
-                          "///////",
-                          requirement,
-                          requirement.isRequestSent
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{requirement.name}</td>
+                      <td>{requirement.email}</td>
+                      <td>{requirement.mobile}</td>
+                      <td>{requirement.address}</td>
+                      <td>{requirement.service}</td>
+                      <td>{requirement.experience}</td>
+                      <td>
+                        {requirement?.availabilityTime
+                          ? requirement?.availabilityTime
+                          : "-"}
+                      </td>
+                      {/* {console.log(requirement.name, requirement.isRequestSent)} */}
+                      <td>
+                        {requirement?.isRequestSent ? (
+                          "Sent"
+                        ) : (
+                          <>
+                            <button
+                              onClick={(e) =>
+                                handleConnectClick(e, requirement)
+                              }
+                            >
+                              Connect
+                            </button>
+                          </>
                         )}
-                        <td>
-                          {requirement?.isRequestSent ? (
-                            "Sent"
-                          ) : (
-                            <>
-                              <button
-                                onClick={(e) =>
-                                  handleConnectClick(e, requirement)
-                                }
-                              >
-                                Connect
-                              </button>
-                            </>
-                          )}
-                        </td>
-                      </tr>
-                    </>
+                      </td>
+                    </tr>
                   ))
                 )}
               </tbody>
