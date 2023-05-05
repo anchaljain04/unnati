@@ -39,7 +39,7 @@ function Requirements() {
                 ) {
                   item.isRequestSent = true;
                   firstAttempt = true;
-                  return;
+                  return item;
                 } else {
                   item.isRequestSent = false;
                 }
