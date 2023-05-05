@@ -180,13 +180,15 @@ function ConnectionRequests() {
       .catch((error) => console.log(error));
   };
   return (
-    <div 
-     style={{ 
-       textAlign: "center", 
-       backgroundImage: 'url("/images/back3.jpg")', 
-       backgroundRepeat: "no-repeat",
-       backgroundSize: "cover",
-       height: "100vh" }}>
+    <div
+      style={{
+        textAlign: "center",
+        backgroundImage: 'url("/images/back3.jpg")',
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        height: "100vh",
+      }}
+    >
       <NavBar />
       <div>
         <h1
@@ -207,7 +209,7 @@ function ConnectionRequests() {
           }}
         >
           {requestReceived.length === 0 ? (
-            <h2 style={{color:"white"}}>No data Available at the moment!</h2>
+            <h2 style={{ color: "white" }}>No data Available at the moment!</h2>
           ) : (
             <Table
               striped
@@ -307,6 +309,7 @@ function ConnectionRequests() {
                                   padding: "0px 4px",
                                   paddingBottom: "2px",
                                   color: "white",
+                                  background: "red",
                                   border: "none",
                                 }}
                                 onClick={(e) => handleReject(e, request)}
