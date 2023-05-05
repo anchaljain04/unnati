@@ -21,20 +21,52 @@ function Requirements() {
   useEffect(() => {
     axios
       .get(url, raw)
-      .then((response) => {
-        setRequirements(response.data);
+      .then((res) => {
+        axios
+          .get("http://localhost:8000/provider/get-connection-requests", {
+            params: { providerId: user?._id },
+          })
+          .then((response) => {
+            res.data.map((item) => {
+              return new Promise((resolve, reject) => {
+                const providerRequest = response.data.filter(
+                  (item) => item.sentBy === "provider"
+                );
+                providerRequest.map((ele) => {
+                  return new Promise((resolve, reject) => {
+                    if (
+                      ele.requirementId._id === item._id &&
+                      ele.providerId._id === user?._id
+                    ) {
+                      item.isRequestSent = true;
+                      return item;
+                    } else {
+                      item.isRequestSent = false;
+                      return item;
+                    }
+                  });
+                });
+                resolve(item);
+              });
+            });
+          })
+          .catch((error) => console.log(error));
+        setRequirements(res.data);
       })
       .catch((error) => console.log(error));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const checkRequestSent = (requirement) => {
+  console.log("+=+=", requirements);
+  const requestSent = (requirement) => {
     axios
       .get("http://localhost:8000/provider/is-request-sent", {
         params: { requirementId: requirement?._id, providerId: user?._id },
       })
       .then((response) => {
         setIsRequestSent(response.data);
+        return response.data;
       })
       .catch((error) => console.log(error));
   };
@@ -63,7 +95,13 @@ function Requirements() {
   };
   return (
     <div>
-      <div style={{ textAlign: "center", backgroundImage: 'url("/images/back3.jpg")', height: "100vh" }}>
+      <div
+        style={{
+          textAlign: "center",
+          backgroundImage: 'url("/images/background.jpg")',
+          height: "100vh",
+        }}
+      >
         <NavBar />
         <h1
           style={{
@@ -111,7 +149,7 @@ function Requirements() {
                 ) : (
                   requirements.map((requirement, index) => (
                     <>
-                      <div>{checkRequestSent(requirement)}</div>
+                      {/* <div>{checkRequestSent(requirement)}</div> */}
                       <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{requirement.name}</td>
@@ -125,8 +163,13 @@ function Requirements() {
                             ? requirement?.availabilityTime
                             : "-"}
                         </td>
+                        {console.log(
+                          "///////",
+                          requirement,
+                          requirement.isRequestSent
+                        )}
                         <td>
-                          {isRequestSent ? (
+                          {requirement?.isRequestSent ? (
                             "Sent"
                           ) : (
                             <>
