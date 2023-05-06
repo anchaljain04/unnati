@@ -1,16 +1,22 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import MainLoader from "./MainLoader";
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Sansita&display=swap');
 </style>;
 
-export default class Home extends Component {
-  render() {
-    const user = localStorage.getItem("Profile");
-    // console.log(JSON.parse(user).category)
-    return (
+function Home() {
+  const [loader, setLoader] = useState(true);
+  const user = localStorage.getItem("Profile");
+  // console.log(JSON.parse(user).category)
+  return (
+    <>
+      {/* {loader ? (
+        <MainLoader setLoader={setLoader} />
+      ) : (
+        <> */}
       <div
         style={{
           backgroundImage: 'url("/images/bg4.png")',
@@ -118,7 +124,12 @@ export default class Home extends Component {
           )}
         </div>
       </div>
-    );
-  }
+    </>
+  );
 }
+// </>
+// );
+// }
+
 //backgroundImage: 'url("/images/back.jpg")',
+export default Home;

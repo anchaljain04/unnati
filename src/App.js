@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./Home";
@@ -9,8 +10,11 @@ import Requirements from "./Requirements";
 import About from "./About";
 import MyActivities from "./MyActivities";
 import ConnectionRequests from "./ConnectionRequests";
+import MainLoader from "./MainLoader";
 
 function App() {
+  const [loader, setLoader] = useState(true);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -18,10 +22,14 @@ function App() {
           exact
           path="/"
           element={
-            <div className="App">
-              <NavBar />
-              <Home />
-            </div>
+            loader ? (
+              <MainLoader setLoader={setLoader} />
+            ) : (
+              <div className="App">
+                <NavBar />
+                <Home />
+              </div>
+            )
           }
         />
         <Route exact path="/services/:service" element={<ProviderData />} />
