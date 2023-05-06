@@ -87,7 +87,8 @@ function ConnectionRequests() {
       return true;
     }
   };
-  useEffect(() => {
+
+  const apiCall = () => {
     axios
       .get(url, raw)
       .then((response) => {
@@ -103,6 +104,9 @@ function ConnectionRequests() {
         }
       })
       .catch((error) => console.log(error));
+  };
+  useEffect(() => {
+    apiCall();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -174,8 +178,8 @@ function ConnectionRequests() {
       })
       .then((response) => {
         if (response.status === 200) {
+          apiCall();
           window.alert("Connection request rejected!");
-          window.location.reload(true);
         }
       })
       .catch((error) => console.log(error));
@@ -187,7 +191,7 @@ function ConnectionRequests() {
         backgroundImage: 'url("/images/bg4.png")',
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        // height: "100vh",
+        minHeight: "100vh",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
         paddingBottom: "20px",

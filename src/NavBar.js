@@ -73,16 +73,16 @@ export default function NavBar() {
               </NavDropdown>
             </Nav>
             <Navbar.Brand
-              href="/"
               className="ms-auto me-5"
               style={{
                 letterSpacing: "2.0rem",
                 color: "var(--secondary-color-light)",
+                cursor: "pointer",
               }}
+              onClick={() => navigate("/")}
             >
               <strong>UNNATI</strong>
             </Navbar.Brand>
-
             <Nav
               className="ms-auto me-2"
               style={{ maxHeight: "100px" }}
@@ -138,7 +138,6 @@ export default function NavBar() {
                     id="navbarScrollingDropdown"
                     className="ms-4"
                     bg="dark"
-                    href="/services"
                     align="end"
                   >
                     <NavDropdown.Item onClick={() => navigate("/about")}>

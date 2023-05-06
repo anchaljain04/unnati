@@ -15,21 +15,19 @@ import MainLoader from "./MainLoader";
 function App() {
   const [loader, setLoader] = useState(true);
 
-  return (
+  return loader ? (
+    <MainLoader setLoader={setLoader} />
+  ) : (
     <BrowserRouter>
       <Routes>
         <Route
           exact
           path="/"
           element={
-            loader ? (
-              <MainLoader setLoader={setLoader} />
-            ) : (
-              <div className="App">
-                <NavBar />
-                <Home />
-              </div>
-            )
+            <div className="App">
+              <NavBar />
+              <Home />
+            </div>
           }
         />
         <Route exact path="/services/:service" element={<ProviderData />} />

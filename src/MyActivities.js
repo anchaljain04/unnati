@@ -31,7 +31,12 @@ function MyActivities() {
         },
       })
       .then((res) => {
-        window.location.reload(true);
+        if (res.status === 200) {
+          const updatedData = requirementData.filter(
+            (item) => item?._id !== requirement?._id
+          );
+          setRequirementData(updatedData);
+        }
       })
       .catch((error) => console.log(error));
   };
