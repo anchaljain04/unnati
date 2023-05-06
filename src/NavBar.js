@@ -1,4 +1,5 @@
 import React from "react";
+import "./NavBar.css";
 import Container from "react-bootstrap/Container";
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -28,7 +29,7 @@ export default function NavBar() {
         position: "relative",
       }}
     >
-      <Navbar bg="dark" variant="dark">
+      <Navbar style={{ background: "#54236d" }}>
         <Container fluid>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
@@ -41,7 +42,7 @@ export default function NavBar() {
                 title="Services"
                 id="navbarScrollingDropdown"
                 className="ms-2"
-                bg="dark"
+                // bg="dark"
                 href="/services"
               >
                 <NavDropdown.Item onClick={() => handleClick("maid")}>
@@ -74,6 +75,7 @@ export default function NavBar() {
               className="ms-auto me-5"
               style={{
                 letterSpacing: "2.0rem",
+                color: "var(--secondary-color-light)",
               }}
             >
               <strong>UNNATI</strong>
@@ -97,12 +99,17 @@ export default function NavBar() {
                     background: "transparent",
                     border: "none",
                     padding: "0",
+                    color: "var(--secondary-color-light)",
                   }}
                 >
                   Logout
                 </Nav.Link>
               ) : (
-                <Nav.Link as={Link} to={"/login"}>
+                <Nav.Link
+                  as={Link}
+                  to={"/login"}
+                  style={{ color: "var(--secondary-color-light)" }}
+                >
                   Login
                 </Nav.Link>
               )}
@@ -116,8 +123,8 @@ export default function NavBar() {
                         style={{
                           height: "40px",
                           width: "40px",
-                          background: "white",
-                          color: "black",
+                          background: "var(--primary-color)",
+                          color: "var(--secondary-color-light)",
                           borderRadius: "50%",
                           fontSize: "18px",
                           padding: "4px 8px",
