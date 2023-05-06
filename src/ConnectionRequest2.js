@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import axios from "axios";
-import NavBar from "./NavBar";
+import NavBar2 from "./NavBar2";
 import { Table } from "react-bootstrap";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
-import ConnectionRequestsSent from "./ConnectionRequestsSent";
+import ConnectionRequestSent2 from "./ConnectionRequestSent2";
 import Tooltip from "@mui/material/Tooltip";
 
 const style = {
@@ -25,7 +25,7 @@ const style = {
   px: 3,
 };
 
-function ConnectionRequests() {
+function ConnectionRequest2() {
   const [requestReceived, setRequestReceived] = useState([]);
   const userData = localStorage.getItem("Profile");
   const user = JSON.parse(userData);
@@ -197,7 +197,7 @@ function ConnectionRequests() {
         paddingBottom: "20px",
       }}
     >
-      {/* <NavBar /> */}
+      <NavBar2/>
       <div>
         <h2
           style={{
@@ -208,7 +208,7 @@ function ConnectionRequests() {
             textShadow: "1px 1px black",
           }}
         >
-          "List of connection requests you received"
+          "आपको प्राप्त कनेक्शन अनुरोधों की सूची"
         </h2>
         <div
           className="container"
@@ -218,35 +218,35 @@ function ConnectionRequests() {
           }}
         >
           {requestReceived.length === 0 ? (
-            <h2 style={{ color: "white" }}>No data Available at the moment!</h2>
+            <h2 style={{ color: "white" }}>फिलहाल कोई डेटा उपलब्ध नहीं है!</h2>
           ) : (
             <Table
               striped
               bordered
               hover
-              
+              variant="dark"
               style={{ width: "90%", margin: "auto" }}
             >
-              <thead style={{background: "#870A30", color:"white"}}>
+              <thead>
                 <tr>
-                  <th>S. No.</th>
-                  <th>Requirement of</th>
+                  <th >क्र.सं.</th>
+                  <th >आवश्यकता</th>
                   {isCustomer ? (
                     <>
-                      <th>Requirement Posted On</th>
-                      <th>Required Experience</th>
-                      <th>Provider's Name</th>
-                      <th>Provider's Address</th>
-                      <th>Provider's Experience</th>
-                      <th>Provider's Availability</th>
+                      <th >पोस्ट करने की तारिक</th>
+                      <th >आवश्यक अनुभव</th>
+                      <th >प्रदाता का नाम</th>
+                      <th >प्रदाता का पता</th>
+                      <th >प्रदाता अनुभव</th>
+                      <th >प्रदाता की उपलब्धता</th>
                     </>
                   ) : (
                     <>
-                      <th>Customer's Name</th>
-                      <th>Customer's Address</th>
+                      <th>ग्राहक का नाम</th>
+                      <th>ग्राहक का पता</th>
                     </>
                   )}
-                  <th>"Wish to connect?"</th>
+                  <th >"कनेक्ट करना चाहते हैं ?"</th>
                   {isCustomer ? (
                     <th
                       style={{
@@ -264,14 +264,13 @@ function ConnectionRequests() {
                   )}
                 </tr>
               </thead>
-              <tbody style={{background:"#870A30" , color:"white"}}>
+              <tbody>
                 {requestReceived === [] ? (
-                  <h1>Loading</h1>
+                  <h1>लोड हो रहा है</h1>
                 ) : (
                   requestReceived.map((request, index) => (
-                    <tr style={{background:"#870A30" , color:"white"}}
-                     key={index}>
-                      <td >{index + 1}</td>
+                    <tr key={index}>
+                      <td>{index + 1}</td>
                       {isCustomer ? (
                         <>
                           <td>{request?.requirementId?.service}</td>
@@ -306,7 +305,7 @@ function ConnectionRequests() {
                                       fontSize: "14px",
                                     }}
                                   >
-                                    accept
+                                    स्वीकार
                                   </span>
                                 }
                                 placement="right"
@@ -334,7 +333,7 @@ function ConnectionRequests() {
                                       fontSize: "14px",
                                     }}
                                   >
-                                    reject
+                                    अस्वीकार
                                   </span>
                                 }
                                 placement="right"
@@ -391,7 +390,7 @@ function ConnectionRequests() {
                               fontSize: "14px",
                             }}
                           >
-                            give feedback
+                           प्रतिक्रिया दें
                           </button>
                         </td>
                       ) : (
@@ -416,7 +415,7 @@ function ConnectionRequests() {
         </div>
       </div>
       <div style={{ marginBottom: "50px" }}>
-        <ConnectionRequestsSent />
+        <ConnectionRequestSent2 />
       </div>
       <div>
         <Modal
@@ -427,25 +426,26 @@ function ConnectionRequests() {
         >
           <Box sx={style}>
             <div style={{ textAlign: "center" }}>
-              <h4>You have successfully accepted the request.</h4>
+              <h4>आपने अनुरोध को सफलतापूर्वक स्वीकार कर लिया है|</h4>
               <br />
               {isCustomer ? (
                 <>
                   <h5>
-                    Contact details of the provider will be sent to your e-mail
-                    soon.
+                  प्रदाता का संपर्क विवरण जल्द ही आपके ई-मेल पर भेज दिया जाएगा।
+
                   </h5>
                   <br />
                 </>
               ) : (
                 <>
                   <h5>
-                    Your contact details will be shared with the user soon.
+                  आपका संपर्क विवरण जल्द ही उपयोगकर्ता के साथ साझा किया जाएगा।
+
                   </h5>
                   <br />
                 </>
               )}
-              <h5>Thank you for your visit.</h5>
+              <h5>आपकी विज़िट के लिए धन्यवाद।</h5>
             </div>
             <div style={{ textAlign: "center", marginTop: "25px" }}>
               <button
@@ -459,7 +459,8 @@ function ConnectionRequests() {
                 }}
                 onClick={handleClose}
               >
-                Close
+                बंद 
+
               </button>
             </div>
           </Box>
@@ -474,10 +475,12 @@ function ConnectionRequests() {
             {isDone ? (
               <div style={{ textAlign: "center" }}>
                 <h4 style={{ marginTop: "10px", textShadow: "1px 1px white" }}>
-                  Thank you for your time. Your feedback is valuable to us.
+                अपना समय देने के लिए धन्यवाद। आपकी प्रतिक्रिया हमारे लिए बहुमूल्य है।
+
                   <br />
                   <br />
-                  Have a nice day.
+                  आपका दिन शुभ हो।
+
                 </h4>
                 <div style={{ textAlign: "center" }}>
                   <button
@@ -493,14 +496,16 @@ function ConnectionRequests() {
                     }}
                     onClick={() => navigate("/")}
                   >
-                    close
+                    
+                    बंद
+                    
                   </button>
                 </div>
               </div>
             ) : (
               <>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h5>Feedback</h5>
+                  <h5>प्रतिक्रिया</h5>
                   <button
                     onClick={handleCloseFeedback}
                     style={{
@@ -520,7 +525,7 @@ function ConnectionRequests() {
                 <label
                   style={{ fontWeight: "500", textShadow: "1px 1px white" }}
                 >
-                  How was your experience?
+                  आपका अनुभव कैसा रहा?
                 </label>
                 <select
                   style={{
@@ -536,7 +541,8 @@ function ConnectionRequests() {
                   onChange={(e) => setExperience(e.target.value)}
                 >
                   <option value="" hidden>
-                    select
+                  चुनना
+
                   </option>
                   <option value="happy">Happy</option>
                   <option value="unhappy">Unhappy</option>
@@ -544,7 +550,8 @@ function ConnectionRequests() {
                 <label
                   style={{ fontWeight: "500", textShadow: "1px 1px white" }}
                 >
-                  How would you describe the service of our provider?
+                  आप हमारे प्रदाता की सेवा का वर्णन कैसे करेंगे?
+
                 </label>
                 <select
                   style={{
@@ -569,7 +576,8 @@ function ConnectionRequests() {
                 <label
                   style={{ fontWeight: "500", textShadow: "1px 1px white" }}
                 >
-                  Anything else you want to share?
+                  आप और कुछ साझा करना चाहते हैं?
+
                 </label>
                 <TextField
                   type="text"
@@ -595,7 +603,7 @@ function ConnectionRequests() {
                     }}
                     onClick={handleSubmitFeedback}
                   >
-                    Submit
+                    जमा
                   </button>
                 </div>
               </>
@@ -607,4 +615,4 @@ function ConnectionRequests() {
   );
 }
 
-export default ConnectionRequests;
+export default ConnectionRequest2;

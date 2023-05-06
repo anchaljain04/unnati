@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import axios from "axios";
 import { Table } from "react-bootstrap";
+import NavBar2 from "./NavBar2";
 
-function ConnectionRequestsSent() {
+function ConnectionRequestSent2() {
   const [requestSent, setRequestSent] = useState([]);
   const userData = localStorage.getItem("Profile");
   const user = JSON.parse(userData);
@@ -55,7 +56,7 @@ function ConnectionRequestsSent() {
             textShadow: "1px 1px black",
           }}
         >
-          "List of connection requests you have sent"
+          "आपके द्वारा भेजे गए कनेक्शन अनुरोधों की सूची"
         </h2>
         <div
           className="container"
@@ -66,39 +67,39 @@ function ConnectionRequestsSent() {
           }}
         >
           {requestSent.length === 0 ? (
-            <h2>No data Available at the moment!</h2>
+            <h2>फिलहाल कोई डेटा उपलब्ध नहीं है!</h2>
           ) : (
             <Table
               striped
               bordered
               hover
-              
+              variant="dark"
               style={{ width: "85%", margin: "auto" }}
             >
-              <thead style={{color: "#870A30"}}>
+              <thead>
                 <tr>
-                  <th>S. No.</th>
-                  <th>Requirement of</th>
+                  <th>क्र.सं.</th>
+                  <th>आवश्यकता</th>
                   {isCustomer ? (
                     <>
-                      <th>Provider's Name</th>
-                      <th>Provider's Address</th>
-                      <th>Provider's Experience</th>
+                      <th>प्रदाता का नाम</th>
+                      <th>प्रदाता का पता</th>
+                      <th>प्रदाता का अनुभव</th>
                     </>
                   ) : (
                     <>
-                      <th>Requirement Posted On</th>
-                      <th>Required Experience</th>
-                      <th>Customer's Name</th>
-                      <th>Customer's Address</th>
+                      <th>आवश्यकता पर पोस्ट किया गया</th>
+                      <th>आवश्यक अनुभव</th>
+                      <th>ग्राहक का नाम</th>
+                      <th>ग्राहक का पता</th>
                     </>
                   )}
-                  <th>Action taken</th>
+                  <th>कार्रवाई की</th>
                 </tr>
               </thead>
               <tbody>
                 {requestSent === [] ? (
-                  <h1>Loading</h1>
+                  <h1>लोड हो रहा है</h1>
                 ) : (
                   requestSent.map((request, index) => (
                     <tr key={index}>
@@ -136,4 +137,4 @@ function ConnectionRequestsSent() {
   );
 }
 
-export default ConnectionRequestsSent;
+export default ConnectionRequestSent2;

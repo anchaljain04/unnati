@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import NavBar2 from "./NavBar2";
 
 const style = {
   position: "absolute",
@@ -17,7 +18,7 @@ const style = {
   p: 4,
 };
 
-function PostRequirements() {
+function PostRequirement2() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -35,8 +36,7 @@ function PostRequirements() {
       .post("http://localhost:8000/user/save-requirements", {
         name: user.name,
         email: user.email,
-        
-        service: service.toLowerCase(),
+        service: service,
         experience: experience,
         address: address,
         userId: user?._id,
@@ -44,13 +44,13 @@ function PostRequirements() {
       })
       .then((response) => {
         if (response.status === 200) {
-          window.alert("Requirement saved successfully.");
+          window.alert("आवश्यकता सफलतापूर्वक सहेजी गई|");
           navigate("/");
         }
       })
       .catch((error) => {
         if (error.response.status === 400) {
-          window.alert("Failed to save requirement. Please try again later.");
+          window.alert("आवश्यकता सहेजने में विफल. कृपया बाद में पुन: प्रयास करें।");
           navigate("/");
         }
       });
@@ -58,6 +58,7 @@ function PostRequirements() {
 
   return (
     <div>
+    <NavBar2/>
       <Button
         onClick={handleOpen}
         style={{
@@ -70,7 +71,7 @@ function PostRequirements() {
           padding: "8px 15px",
         }}
       >
-        Post Requirement
+       पोस्ट की आवश्यकता
       </Button>
       <Modal
         open={open}
@@ -81,7 +82,7 @@ function PostRequirements() {
         <Box sx={style}>
           <form>
             <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
-              Requirement of:
+             की आवश्यकता:
             </label>
             <select
               style={{
@@ -96,17 +97,17 @@ function PostRequirements() {
               onChange={(e) => setService(e.target.value)}
             >
               <option value="" hidden>
-                select
+              चुनना
               </option>
-              <option>Maid</option>
-              <option>Carpenter</option>
-              <option>Electrician</option>
-              <option>Plumber</option>
-              <option>Painter</option>
-              <option>Chef</option>
+              <option>नौकरानी</option>
+              <option>बढ़ई</option>
+              <option>बिजली मिस्त्री</option>
+              <option>प्लंबर</option>
+              <option>पेंटर</option>
+              <option>बावर्ची</option>
             </select>
             <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
-              Required experience:
+              आवश्यक अनुभव:
             </label>
             <select
               style={{
@@ -121,7 +122,7 @@ function PostRequirements() {
               onChange={(e) => setExperience(e.target.value)}
             >
               <option value="" hidden>
-                select
+              चुनना
               </option>
               <option>0-1</option>
               <option>1-2</option>
@@ -131,7 +132,7 @@ function PostRequirements() {
             </select>
 
             <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
-              Preferred time:
+             पसंदीदा समय:
             </label>
             <select
               style={{
@@ -146,16 +147,16 @@ function PostRequirements() {
               onChange={(e) => setAvailability(e.target.value)}
             >
               <option value="" hidden>
-                select
+              चुनना
               </option>
-              <option>Morning Only</option>
-              <option>Evening Only</option>
-              <option>Morning-Evening</option>
-              <option>All Day</option>
-              <option>Anytime</option>
+              <option>केवल सुबह</option>
+              <option>केवल शाम</option>
+              <option>सुबह शाम</option>
+              <option>पूरे दिन</option>
+              <option>किसी भी समय</option>
             </select>
             <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
-              Address:
+            पता:
             </label>
             <br />
             <input
@@ -183,7 +184,7 @@ function PostRequirements() {
                 }}
                 onClick={handleSubmit}
               >
-                Submit
+                जमा
               </button>
               <button
                 style={{
@@ -197,7 +198,7 @@ function PostRequirements() {
                 }}
                 onClick={handleClose}
               >
-                Cancel
+                रद्द 
               </button>
             </div>
           </form>
@@ -207,4 +208,4 @@ function PostRequirements() {
   );
 }
 
-export default PostRequirements;
+export default PostRequirement2;

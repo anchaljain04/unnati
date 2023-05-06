@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import NavBar from "./NavBar";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Table } from "react-bootstrap";
-import PostRequirements from "./PostRequirements";
+import PostRequirement2 from "./PostRequirement2";
 import { useNavigate } from "react-router-dom";
+import NavBar2 from "./NavBar2";
 
 const style = {
   position: "absolute",
@@ -20,7 +20,7 @@ const style = {
   px: 3,
 };
 
-export default function ProviderData() {
+export default function ProviderData2() {
   const location = window.location.pathname.split("/").pop();
   const [providers, setProviders] = useState([]);
 
@@ -77,11 +77,11 @@ export default function ProviderData() {
     handleOpen();
 
     const raw = {
-      subject: `Connection Request for the service of ${location}`,
+      subject: `${location} की सेवा के लिए कनेक्शन अनुरोध`,
       userName: user?.name,
       to: provider?.email,
       service:
-        provider.serviceProviding.charAt(0).toUpperCase() +
+        provider.serviceProviding.charAt(0) +
         provider.serviceProviding.slice(1),
       providerId: provider?._id,
       userId: user?._id,
@@ -108,7 +108,7 @@ export default function ProviderData() {
         backgroundAttachment: "fixed",
       }}
     >
-      <NavBar />
+      <NavBar2 />
       <h1
         style={{
           marginTop: "50px",
@@ -118,7 +118,7 @@ export default function ProviderData() {
           textShadow: "2px 2px black",
         }}
       >
-        List of Service Providers for {location.toLocaleUpperCase()} service
+        {location.toLocaleUpperCase()} के लिए सेवा प्रदाताओं की सूची 
       </h1>
       <div
         className="container"
@@ -134,7 +134,7 @@ export default function ProviderData() {
               textShadow: "2px 2px black",
             }}
           >
-            No data Available at the moment!
+            फिलहाल कोई डेटा उपलब्ध नहीं है!
           </h2>
         ) : (
           <Table
@@ -147,18 +147,19 @@ export default function ProviderData() {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Availability</th>
-                <th>Experience</th>
-                <th>Availability</th>
-                <th>Action</th>
+                <th>पूरा नाम</th>
+                <th>ईमेल</th>
+                <th>फ़ोन नंबर</th>
+                
+                <th>उपलब्धता</th>
+                <th>अनुभव</th>
+                <th>उपलब्धता</th>
+                <th>कार्य</th>
               </tr>
             </thead>
             <tbody>
               {providers === [] ? (
-                <h1>Loading</h1>
+                <h1>लोड हो रहा है</h1>
               ) : (
                 providers.map((provider, index) => (
                   <tr key={index}>
@@ -167,7 +168,7 @@ export default function ProviderData() {
                     <td>{provider.email}</td>
                     
                     <td>{provider.address}</td>
-                    <td>Yes</td>
+                    <td>हाँ</td>
                     <td>{provider.experience}</td>
                     <td>
                       {provider?.availabilityTime
@@ -181,7 +182,7 @@ export default function ProviderData() {
                         <button
                           onClick={(e) => handleConnectClick(e, provider)}
                         >
-                          connect
+                          जोड़ना
                         </button>
                       )}
                     </td>
@@ -192,11 +193,11 @@ export default function ProviderData() {
           </Table>
         )}
         <h4 style={{ marginTop: "50px", color: "white",textShadow: "2px 2px black", }}>
-          Not found suitable provider?
+        उपयुक्त प्रदाता नहीं मिला?
           <br />
-          Post your requirement now:
+          अपनी आवश्यकता अभी पोस्ट करें:
         </h4>
-        <PostRequirements />
+        <PostRequirement2 />
       </div>
       <div>
         <Modal
@@ -207,17 +208,17 @@ export default function ProviderData() {
         >
           <Box sx={style}>
             <div style={{ textAlign: "center" }}>
-              <h4>You have successfully sent the request.</h4>
+              <h4>आपने सफलतापूर्वक अनुरोध भेज दिया है।</h4>
               <br />
               <h4>
-                The provider's details will be sent to you on your registered
-                email, once he/she confirms his/her availability.
+              प्रदाता का विवरण आपको आपके पंजीकृत पर भेजा जाएगा
+                ईमेल, एक बार जब वह अपनी उपलब्धता की पुष्टि करता है।
               </h4>
               <br />
-              <h5>Thank you for your visit.</h5>
+              <h5>आपकी विज़िट के लिए धन्यवाद।</h5>
             </div>
             <div style={{ textAlign: "center", marginTop: "25px" }}>
-              <button onClick={handleClose}>Close</button>
+              <button onClick={handleClose}>बंद</button>
             </div>
           </Box>
         </Modal>

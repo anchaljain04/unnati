@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import NavBar from "./NavBar";
+import NavBar2 from "./NavBar2";
 import { Table } from "react-bootstrap";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import Tooltip from "@mui/material/Tooltip";
 
-function Requirements() {
+function Requirements2() {
   const [requirements, setRequirements] = useState([]);
   const userData = localStorage.getItem("Profile");
   const user = JSON.parse(userData);
@@ -89,7 +89,7 @@ function Requirements() {
           height: "100vh",
         }}
       >
-        <NavBar />
+        <NavBar2 />
         <h1
           style={{
             marginTop: "90px",
@@ -98,7 +98,7 @@ function Requirements() {
             color: "white",
           }}
         >
-          List of customer requirements
+          ग्राहकों की आवश्यकताओं की सूचीs
         </h1>
         <div
           className="container"
@@ -108,7 +108,7 @@ function Requirements() {
           }}
         >
           {requirements.length === 0 ? (
-            <h2>No data Available at the moment!</h2>
+            <h2>फिलहाल कोई डेटा उपलब्ध नहीं है!</h2>
           ) : (
             <Table
               striped
@@ -120,18 +120,18 @@ function Requirements() {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Full Name</th>
-                  <th>Email</th>
-                  <th>Address</th>
-                  <th>Service Required</th>
-                  <th>Experience Required</th>
-                  <th>Preferred Time</th>
-                  <th>Action</th>
+                  <th>पूरा नाम</th>
+                  <th>ईमेल</th>
+                  <th>पता</th>
+                  <th>सेवा की आवश्यकता</th>
+                  <th>अनुभव जरूरी</th>
+                  <th>पसंदीदा समय</th>
+                  <th>कार्य</th>
                 </tr>
               </thead>
               <tbody>
                 {requirements === [] ? (
-                  <h1>Loading</h1>
+                  <h1>लोड हो रहा है</h1>
                 ) : (
                   requirements.map((requirement, index) => (
                     <tr key={index}>
@@ -159,7 +159,7 @@ function Requirements() {
                                     fontSize: "14px",
                                   }}
                                 >
-                                  connect
+                                  जोड़ना
                                 </span>
                               }
                               placement="right"
@@ -188,4 +188,4 @@ function Requirements() {
   );
 }
 
-export default Requirements;
+export default Requirements2;

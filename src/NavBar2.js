@@ -1,31 +1,39 @@
 import React from "react";
 import "./NavBar.css";
-
 import Container from "react-bootstrap/Container";
-
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import {Select , MenuItem} from "@mui/material";
+import { useState } from "react";
+import { MyContextState } from "./MyContext";
+
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import ToastComp from "./ToastComp";
 
-export default function NavBar() {
+export default function NavBar2() {
   const navigate = useNavigate();
   const user = localStorage.getItem("Profile");
-  
+  const [radioValue, setRadioValue] = useState("1");
+ // const{language , setLanguage}= MyContextState();
+  const radios = [
+    { name: "English", value: "1" },
+    { name: "Hindi", value: "2" },
+  ];
+
   const userData = JSON.parse(user);
   const handleClick = (service) => {
     user
-      ? userData.category === "customer"
+      ? userData.category === "Profile"
         ? navigate(`/services/${service}`)
         : window.alert(
-            "You need to register as a customer to see the available provider's details!"
+            "उपलब्ध प्रदाता के विवरण देखने के लिए आपको ग्राहक के रूप में पंजीकरण करना होगा!"
           )
       : window.alert(
-          "You need to login first to see the details of providers!"
+          "प्रदाताओं का विवरण देखने के लिए आपको पहले लॉगिन करना होगा!"
         );
   };
-
   return (
     <div
       style={{
@@ -45,49 +53,78 @@ export default function NavBar() {
               navbarScroll
             >
               <NavDropdown
-                title="Services"
+                title="सेवा"
                 id="navbarScrollingDropdown"
                 className="ms-2"
                 // bg="dark"
                 href="/services"
               >
                 <NavDropdown.Item onClick={() => handleClick("maid")}>
-                  Maid
+                नौकरानी
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleClick("carpenter")}>
-                  Carpenter{" "}
+                  बढ़ई{" "}
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleClick("electrician")}>
-                  Electrician{" "}
+                बिजली मिस्त्री{" "}
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleClick("plumber")}>
-                  Plumber
+                प्लंबर
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleClick("painter")}>
-                  Painter
+                पेंटर
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleClick("chef")}>
-                  Chef
+                बावर्ची
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Navbar.Brand
               className="ms-auto me-auto"
               style={{
-                letterSpacing: "2.0rem",
                 color: "var(--secondary-color-light)",
                 cursor: "pointer",
               }}
               onClick={() => navigate("/")}
             >
-              <strong>UNNATI</strong>
+              <strong>उन्नति</strong>
             </Navbar.Brand>
-            
+           {/* <ButtonGroup className="ms-2 me-2">
+          {radios.map((radio, idx) => (
+            <ToggleButton
+              key={idx}
+              id={`radio-${idx}`}
+              type="radio"
+              variant={idx % 2 ? "outline-success" : "outline-danger"}
+              name="radio"
+              value={radio.value}
+              checked={radioValue === radio.value}
+              onChange={(e) => setRadioValue(e.currentTarget.value)}
+              
+            >
+              {radio.name}
+            </ToggleButton>
+          ))}
+        </ButtonGroup>  */}
+        <Select 
+              variant="outlined"
+              style={{
+                width:100,
+                height:40,
+                marginRight:15,
+              }} 
+              // value={language}
+              // onChange={(e) => setLanguage(e.target.value)}
+              >
+    
+                <MenuItem value={"English"}>English</MenuItem>
+                <MenuItem value={"Hindi"}>Hindi</MenuItem>
+              </Select>
             <Nav
               className="ms-2 me-2"
               style={{ maxHeight: "100px" }}
@@ -109,7 +146,7 @@ export default function NavBar() {
                     color: "var(--secondary-color-light)",
                   }}
                 >
-                  Logout
+                  लॉग आउट
                 </Nav.Link>
               ) : (
                 <Nav.Link
@@ -117,13 +154,13 @@ export default function NavBar() {
                   to={"/login"}
                   style={{ color: "var(--secondary-color-light)" }}
                 >
-                  Login
+                  लॉग इन
                 </Nav.Link>
               )}
             </Nav>
             {user ? (
               <>
-                <Nav style={{ maxHeight: "100px" }} navbarScroll>
+                <Nav className="me-2" style={{ maxHeight: "100px" }} navbarScroll>
                   <NavDropdown
                     title={
                       <span
@@ -146,7 +183,7 @@ export default function NavBar() {
                     align="end"
                   >
                     <NavDropdown.Item onClick={() => navigate("/about")}>
-                      Profile
+                    प्रोफ़ाइल
                     </NavDropdown.Item>
                     {userData?.category === "customer" ? (
                       <>
@@ -154,7 +191,7 @@ export default function NavBar() {
                         <NavDropdown.Item
                           onClick={() => navigate("/activities")}
                         >
-                          Activities
+                          गतिविधियाँ
                         </NavDropdown.Item>
                       </>
                     ) : (
@@ -165,7 +202,7 @@ export default function NavBar() {
                     <NavDropdown.Item
                       onClick={() => navigate("/connection-requests")}
                     >
-                      Connection Requests
+                      कनेक्शन अनुरोध
                     </NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
@@ -176,16 +213,7 @@ export default function NavBar() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* <nav className="navbar navbar-expand-sm bg-dark navbar-dark px-sm-5">
-        <ul className="navbar-nav align-items-center">
-          <li className="nav-item ml-5">
-            <Link to ="/" className="services">Services</Link>
-          </li>
-        </ul>
-        <Link to ="/">
-          <p className="navbar-brand"> UNNATI</p>
-        </Link>
-      </nav> */}
+     
     </div>
   );
 }

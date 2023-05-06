@@ -1,17 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import ToastComp from "./ToastComp";
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Sansita&display=swap');
 </style>;
 
-function Home() {
+function Home2() {
   const user = localStorage.getItem("Profile");
   return (
     <>
-    {/* <ToastComp style={{position:"fixed" , top:0 ,right:"40px"}}/> */}
       <div
         style={{
           backgroundImage: 'url("/images/bg4.png")',
@@ -38,7 +36,7 @@ function Home() {
             textShadow: "1px 1px var(--secondary-color-light)",
           }}
         >
-          UNNATI - THE SERVICE PROVIDER
+          उन्नति - एक सेवा प्रदाता
         </h1>
         <br />
         <div
@@ -65,7 +63,7 @@ function Home() {
                   fontFamily: "'Sansita', sans-serif",
                 }}
               >
-                See the requirements of our customers
+                हमारे ग्राहकों की आवश्यकताओं को देखें
               </h2>
               <Link
                 to="/requirements"
@@ -84,7 +82,7 @@ function Home() {
                     border: "1px solid var(--primary-color)",
                   }}
                 >
-                  Explore Now{" "}
+                  अभी एक्सप्लोर करें{" "}
                 </Button>
               </Link>
             </>
@@ -99,11 +97,10 @@ function Home() {
                   fontFamily: "'Sansita', sans-serif",
                 }}
               >
-                Welcome to UNNATI for the unnati of local workers and for people
-                who need workers .<br />
-                <br /> Here, we provide various services of and for local
-                workers for our day to day services like maids, plumbers,
-                carpenters, electricians, painters etc.
+                स्थानीय श्रमिकों की उन्नति के लिए और उन लोगों के लिए जिन्हें श्रमिकों की आवश्यकता है,उन्नति में आपका स्वागत है |<br />
+                <br /> यहां, हम स्थानीय के लिए और उसके लिए विभिन्न सेवाएं प्रदान करते हैं
+                नौकरानियों, प्लंबर, जैसे हमारे दैनिक सेवाओं के लिए कर्मचारी
+                बढ़ई, बिजली मिस्त्री, चित्रकार आदि।
               </h2>
               <br />
               <Link
@@ -123,7 +120,7 @@ function Home() {
                     border: "1px solid var(--primary-color)",
                   }}
                 >
-                  Explore Now{" "}
+                  अभी एक्सप्लोर करें{" "}
                 </Button>
               </Link>
             </>
@@ -134,4 +131,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Home2;

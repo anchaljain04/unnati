@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 
-import NavBar from "./NavBar";
+import NavBar2 from "./NavBar2";
 import {
   MDBContainer,
   MDBTabs,
@@ -14,9 +14,9 @@ import {
 } from "mdb-react-ui-kit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import ForgotPasswordModal from "./ForgotPasswordModal";
+import ForgotPasswordModal2 from "./ForgotPasswordModal2";
 
-function Login() {
+function Login2() {
   const navigate = useNavigate();
   const [justifyActive, setJustifyActive] = useState("tab1");
   const [showService, setShowService] = useState(false);
@@ -46,9 +46,9 @@ function Login() {
 
   const handleChange = (e) => {
     setCategory(e.target.value);
-    if (e.target.value === "provider") {
+    if (e.target.value === "प्रदाता") {
       setShowService(true);
-    } else if (e.target.value === "customer") {
+    } else if (e.target.value === "ग्राहक") {
       setShowService(false);
     }
   };
@@ -56,8 +56,8 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      window.alert("Password doesn't match");
-    } else if (category === "provider") {
+      window.alert("पासवर्ड मेल नहीं खाता");
+    } else if (category === "प्रदाता") {
       if (
         !name ||
         !email ||
@@ -70,7 +70,7 @@ function Login() {
         !experience ||
         !availability
       ) {
-        window.alert("Please fill all the details");
+        window.alert("कृपया सभी विवरण भरें");
       } else {
         axios
           .post("http://localhost:8000/provider/register", {
@@ -87,13 +87,13 @@ function Login() {
           })
           .then((response) => {
             if (response.status === 200) {
-              window.alert("Provider Registered successfully.");
+              window.alert("प्रदाता सफलतापूर्वक पंजीकृत।");
               navigate("/");
             }
           })
           .catch((error) => {
             if (error.response.status === 400) {
-              window.alert("User already exists. Please Login!");
+              window.alert("उपयोगकर्ता पहले से मौजूद है। कृपया लॉगिन करें!");
               setJustifyActive("tab1");
             }
           });
@@ -108,7 +108,7 @@ function Login() {
         !securityAns ||
         !category
       ) {
-        window.alert("Please fill all the details");
+        window.alert("कृपया सभी विवरण भरें");
       } else {
         axios
           .post("http://localhost:8000/user/register", {
@@ -122,13 +122,13 @@ function Login() {
           })
           .then((response) => {
             if (response.status === 200) {
-              window.alert("User Registered successfully.");
+              window.alert("उपयोगकर्ता सफलतापूर्वक पंजीकृत.");
               navigate("/");
             }
           })
           .catch((error) => {
             if (error.response.status === 400) {
-              window.alert("User already exists. Please Login!");
+              window.alert("उपयोगकर्ता पहले से मौजूद है। कृपया लॉगिन करें!");
               setJustifyActive("tab1");
             }
           });
@@ -143,9 +143,9 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!role || !email || !password) {
-      window.alert("Please fill all the details!");
+      window.alert("कृपया सभी विवरण भरें!");
     } else {
-      if (role === "provider") {
+      if (role === "प्रदाता") {
         url = "http:///localhost:8000/provider/login";
       } else if (role === "customer") {
         url = "http://localhost:8000/user/login";
@@ -154,7 +154,7 @@ function Login() {
         .post(url, { email, password })
         .then((response) => {
           if (response.status === 200) {
-            window.alert("User logged in successfully");
+            window.alert("उपयोगकर्ता सफलतापूर्वक लॉग इन हुआ");
             localStorage.setItem(
               "Profile",
               JSON.stringify(response.data.result)
@@ -164,10 +164,10 @@ function Login() {
         })
         .catch((error) => {
           if (error.response.status === 404) {
-            window.alert("User not registered!");
+            window.alert("उपयोगकर्ता पंजीकृत नहीं है!");
             setJustifyActive("tab2");
           } else if (error.response.status === 400) {
-            window.alert("Password doesn't match");
+            window.alert("पासवर्ड मेल नहीं खाता");
           }
         });
     }
@@ -179,7 +179,7 @@ function Login() {
         height: "120vh",
       }}
     >
-      <NavBar />
+      <NavBar2 />
 
       <MDBContainer
         className="p-3 my-5 d-flex flex-column "
@@ -204,7 +204,7 @@ function Login() {
               onClick={() => handleJustifyClick("tab1")}
               active={justifyActive === "tab1"}
             >
-              Login
+             लॉग इन
             </MDBTabsLink>
           </MDBTabsItem>
           <MDBTabsItem>
@@ -217,7 +217,7 @@ function Login() {
               onClick={() => handleJustifyClick("tab2")}
               active={justifyActive === "tab2"}
             >
-              Register
+              पंजीकरण
             </MDBTabsLink>
           </MDBTabsItem>
         </MDBTabs>
@@ -237,7 +237,7 @@ function Login() {
                   verticalAlign: "middle",
                 }}
               />
-              <label htmlFor="foc">Provider</label>
+              <label htmlFor="foc">प्रदाता</label>
               <input
                 id="foc"
                 type="radio"
@@ -251,11 +251,11 @@ function Login() {
                   verticalAlign: "middle",
                 }}
               />
-              <label loginFor="foc" style={{ marginBottom: "15px" }}>
-                Customer
+              <label htmlFor="foc" style={{ marginBottom: "15px" }}>
+                ग्राहक
               </label>
               <br />
-              <label>Email:</label>
+              <label>ईमेल:</label>
               <input
                 type="email"
                 style={{
@@ -268,7 +268,7 @@ function Login() {
                 }}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label>Password:</label>
+              <label>पासवर्ड:</label>
               <div style={{ display: "flex" }}>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -306,15 +306,15 @@ function Login() {
                   border: "none",
                 }}
               >
-                Login
+                लॉग इन करें
               </button>
             </form>
 
             <div className="d-flex justify-content-between mb-2">
-              <ForgotPasswordModal />
+              <ForgotPasswordModal2 />
             </div>
             <p className="text-center mt-2">
-              Not a member?{" "}
+            सदस्य नहीं हैं?{" "}
               <button
                 style={{
                   background: "none",
@@ -332,7 +332,7 @@ function Login() {
 
           <MDBTabsPane show={justifyActive === "tab2"}>
             <form onSubmit={handleSubmit}>
-              <label>Name:</label>
+              <label>नाम:</label>
               <input
                 type="text"
                 style={{
@@ -346,7 +346,7 @@ function Login() {
                 required
                 onChange={(e) => setName(e.target.value)}
               />
-              <label>Email:</label>
+              <label>ईमेल:</label>
               <input
                 type="email"
                 style={{
@@ -360,7 +360,7 @@ function Login() {
                 required
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label>Password:</label>
+              <label>पासवर्ड:</label>
               <div style={{ display: "flex" }}>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -388,7 +388,7 @@ function Login() {
                   />
                 )}
               </div>
-              <label>Confirm Password:</label>
+              <label>पासवर्ड की पुष्टि कीजिये:</label>
               <input
                 type="password"
                 minLength={6}
@@ -404,8 +404,7 @@ function Login() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
 
-              
-              <label>Address:</label>
+              <label>पता:</label>
               <input
                 type="text"
                 style={{
@@ -419,7 +418,7 @@ function Login() {
                 required
                 onChange={(e) => setAddress(e.target.value)}
               />
-              <label>Security Question:</label>
+              <label>सुरक्षा प्रश्न:</label>
               <select
                 style={{
                   width: "100%",
@@ -433,17 +432,17 @@ function Login() {
                 onChange={(e) => setSecurityQues(e.target.value)}
               >
                 <option value="" hidden>
-                  select
+                चुनना
                 </option>
                 <option value="What is the name of street you live in?">
-                  What is the name of street you live in?
+                आप जिस गली में रहते हैं उसका नाम क्या है?
                 </option>
                 <option value="What is your favourite color?">
-                  What is your favourite color?
+                अपने पसंदीदा रंग क्या है?
                 </option>
               </select>
               <br />
-              <label>Security Answer:</label>
+              <label>सुरक्षा जवाब:</label>
               <input
                 type="text"
                 style={{
@@ -457,7 +456,7 @@ function Login() {
                 required
                 onChange={(e) => setSecurityAns(e.target.value)}
               />
-              <label>Category</label>
+              <label>वर्ग</label>
               <select
                 style={{
                   width: "100%",
@@ -471,15 +470,15 @@ function Login() {
                 onChange={handleChange}
               >
                 <option value="" hidden>
-                  select
+                चुनना
                 </option>
-                <option value="provider"> Provider</option>
-                <option value="customer"> Customer</option>
+                <option value="provider"> प्रदाता</option>
+                <option value="customer"> ग्राहक</option>
               </select>
               <br />
               {showService ? (
                 <>
-                  <label>Service Providing</label>
+                  <label>सेवा प्रदान करना</label>
                   <select
                     style={{
                       width: "100%",
@@ -492,17 +491,17 @@ function Login() {
                     onChange={(e) => setService(e.target.value)}
                   >
                     <option value="" hidden>
-                      select
+                    चुनना
                     </option>
-                    <option>Maid</option>
-                    <option>Carpenter</option>
-                    <option>Electrician</option>
-                    <option>Plumber</option>
-                    <option>Painter</option>
-                    <option>Chef</option>
+                    <option>नौकरानी</option>
+                    <option>बढ़ई</option>
+                    <option>बिजली मिस्त्री</option>
+                    <option>प्लंबर</option>
+                    <option>चित्रकार</option>
+                    <option>बावर्ची</option>
                   </select>
 
-                  <label>Experience (in years)</label>
+                  <label>अनुभव (वर्षों में)</label>
 
                   <select
                     style={{
@@ -516,7 +515,7 @@ function Login() {
                     onChange={(e) => setExperience(e.target.value)}
                   >
                     <option value="" hidden>
-                      select
+                     चुनना
                     </option>
                     <option>0-1</option>
                     <option>1-2</option>
@@ -524,7 +523,7 @@ function Login() {
                     <option>3-4</option>
                     <option>4+</option>
                   </select>
-                  <label>Availability time:</label>
+                  <label>उपलब्धता का समय:</label>
                   <select
                     style={{
                       width: "100%",
@@ -537,12 +536,12 @@ function Login() {
                     onChange={(e) => setAvailability(e.target.value)}
                   >
                     <option value="" hidden>
-                      select
+                    चुनना
                     </option>
-                    <option>Morning Only</option>
-                    <option>Evening Only</option>
-                    <option>Morning-Evening</option>
-                    <option>All Day</option>
+                    <option>केवल सुबह</option>
+                    <option>केवल शाम</option>
+                    <option>सुबह शाम</option>
+                    <option>पूरे दिन</option>
                     <option>24*7</option>
                   </select>
                 </>
@@ -562,7 +561,7 @@ function Login() {
                   border: "none",
                 }}
               >
-                Sign Up
+                साइन अप करें
               </button>
             </form>
           </MDBTabsPane>
@@ -572,4 +571,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Login2;
