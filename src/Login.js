@@ -34,15 +34,14 @@ function App() {
   const [experience, setExperience] = useState("");
   const [availability, setAvailability] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [bgClr, setBgClr] = useState('white');
-
+  const [bgClr, setBgClr] = useState("white");
 
   const handleJustifyClick = (value) => {
     if (value === justifyActive) {
       return;
     }
     setBgClr("#1d2951");
-    
+
     setJustifyActive(value);
   };
 
@@ -181,7 +180,7 @@ function App() {
   return (
     <div
       style={{
-        backgroundImage: 'url("/images/back3.jpg")',
+        backgroundImage: 'url("/images/bg4.png")',
         height: "120vh",
       }}
     >
@@ -201,13 +200,12 @@ function App() {
           className="mb-3 d-flex flex-row justify-content-between"
         >
           <MDBTabsItem>
-          
             <MDBTabsLink
               style={{
                 border: "1px solid blue",
                 marginRight: "5px",
                 backgroundColor: "#1d2951",
-                }}
+              }}
               onClick={() => handleJustifyClick("tab1")}
               active={justifyActive === "tab1"}
             >
@@ -219,7 +217,7 @@ function App() {
               style={{
                 border: "1px solid blue",
                 marginLeft: "5px",
-                background: {bgClr}
+                background: { bgClr },
               }}
               onClick={() => handleJustifyClick("tab2")}
               active={justifyActive === "tab2"}
@@ -242,8 +240,6 @@ function App() {
                   marginRight: "5px",
                   transform: "scale(1.3)",
                   verticalAlign: "middle",
-                  
-                  
                 }}
               />
               <label for="foc">Provider</label>
@@ -260,7 +256,9 @@ function App() {
                   verticalAlign: "middle",
                 }}
               />
-              <label for="foc" style={{ marginBottom: "15px" }}>Customer</label>
+              <label for="foc" style={{ marginBottom: "15px" }}>
+                Customer
+              </label>
               <br />
               <label>Email:</label>
               <input

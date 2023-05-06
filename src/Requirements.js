@@ -83,7 +83,7 @@ function Requirements() {
       <div
         style={{
           textAlign: "center",
-          backgroundImage: 'url("/images/background.jpg")',
+          backgroundImage: 'url("/images/bg4.png")',
           height: "100vh",
         }}
       >

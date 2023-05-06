@@ -183,7 +183,7 @@ function ConnectionRequests() {
     <div
       style={{
         textAlign: "center",
-        backgroundImage: 'url("/images/back3.jpg")',
+        backgroundImage: 'url("/images/bg4.png")',
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         height: "100vh",

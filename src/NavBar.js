@@ -22,15 +22,14 @@ export default function NavBar() {
         );
   };
   return (
-    <div 
+    <div
       style={{
-        zIndex:"5",
-        position:"relative"
-    }}>
+        zIndex: "5",
+        position: "relative",
+      }}
+    >
       <Navbar bg="dark" variant="dark">
-        <Container 
-          fluid>
-          
+        <Container fluid>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -70,16 +69,21 @@ export default function NavBar() {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Navbar.Brand href="/" className="ms-auto me-5"
-             style={{
-              letterSpacing:"2.0rem",
-              
-            
-             }}>
-             <strong>UNNATI</strong>
-          </Navbar.Brand>
+            <Navbar.Brand
+              href="/"
+              className="ms-auto me-5"
+              style={{
+                letterSpacing: "2.0rem",
+              }}
+            >
+              <strong>UNNATI</strong>
+            </Navbar.Brand>
 
-            <Nav className="ms-auto me-2" style={{ maxHeight: "100px" }} navbarScroll>
+            <Nav
+              className="ms-auto me-2"
+              style={{ maxHeight: "100px" }}
+              navbarScroll
+            >
               {user ? (
                 <Nav.Link
                   as={Button}
@@ -108,14 +112,19 @@ export default function NavBar() {
                 <Nav style={{ maxHeight: "100px" }} navbarScroll>
                   <NavDropdown
                     title={
-                      <p>{
-                        userData.name.charAt(0)
-                      }</p>
-                      // <img
-                      //   src="/images/account.png"
-                      //   alt="account"
-                      //   style={{ height: "40px", width: "40px" }}
-                      // />
+                      <span
+                        style={{
+                          height: "40px",
+                          width: "40px",
+                          background: "white",
+                          color: "black",
+                          borderRadius: "50%",
+                          fontSize: "18px",
+                          padding: "4px 8px",
+                        }}
+                      >
+                        {userData.name.charAt(0)}
+                      </span>
                     }
                     id="navbarScrollingDropdown"
                     className="ms-4"
@@ -152,7 +161,6 @@ export default function NavBar() {
               ""
             )}
           </Navbar.Collapse>
-          
         </Container>
       </Navbar>
       {/* <nav className="navbar navbar-expand-sm bg-dark navbar-dark px-sm-5">

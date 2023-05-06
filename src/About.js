@@ -7,7 +7,7 @@ export default class About extends Component {
     const userData = localStorage.getItem("Profile");
     const user = JSON.parse(userData);
     return (
-      <div style={{ textAlign: "center", backgroundImage: 'url("/images/back3.jpg")', height: "100vh" }}>
+      <div style={{ textAlign: "center", backgroundImage: 'url("/images/bg4.png")', height: "100vh" }}>
         <NavBar />
         <div>
           <div

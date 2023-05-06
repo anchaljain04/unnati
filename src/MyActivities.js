@@ -34,7 +34,13 @@ function MyActivities() {
       .catch((error) => console.log(error));
   };
   return (
-    <div style={{ textAlign: "center", backgroundImage: 'url("/images/back3.jpg")', height: "100vh" }}>
+    <div
+      style={{
+        textAlign: "center",
+        backgroundImage: 'url("/images/bg4.png")',
+        height: "100vh",
+      }}
+    >
       <NavBar />
       <h2
         style={{
@@ -54,9 +60,13 @@ function MyActivities() {
       >
         {requirementData.length === 0 ? (
           <>
-            <h2 style={{
-            color:"white"
-          }}>You haven't posted any requirement yet</h2>
+            <h2
+              style={{
+                color: "white",
+              }}
+            >
+              You haven't posted any requirement yet
+            </h2>
           </>
         ) : (
           <>

@@ -9,7 +9,7 @@ export default class Home extends Component {
     return (
       <div
         style={{
-          backgroundImage: 'url("/images/background.jpg")',
+          backgroundImage: 'url("/images/bg4.png")',
           height: "100vh",
           width: "100%",
           paddingTop: "40px",
@@ -20,7 +20,16 @@ export default class Home extends Component {
           backgroundAttachment: "fixed",
         }}
       >
-        <h1 style={{ fontFamily: "Roboto Slab, serif", fontStyle: "italic", backgroundColor:"black" , color:"white" , marginLeft:"420px" , marginRight:"420px"}}>
+        <h1
+          style={{
+            fontFamily: "Roboto Slab, serif",
+            fontStyle: "italic",
+            backgroundColor: "black",
+            color: "white",
+            marginLeft: "420px",
+            marginRight: "420px",
+          }}
+        >
           UNNATI - THE SERVICE PROVIDER
         </h1>
         <br />
@@ -63,18 +72,15 @@ export default class Home extends Component {
                 style={{
                   fontSize: "35px",
                   fontStyle: "italic",
-                  fontFamily: " 'Montserrat'  sans-serif"
+                  fontFamily: " 'Montserrat'  sans-serif",
                 }}
               >
                 Welcome to UNNATI for the unnati of local workers and for people
-                who need workers .
-
-                Here, we provide various services of and for local workers for
-                our day to day services like maids, plumbers, carpenters,
-                electricians, painters etc.
+                who need workers . Here, we provide various services of and for
+                local workers for our day to day services like maids, plumbers,
+                carpenters, electricians, painters etc.
               </h2>
-              
-              
+
               <Link
                 to="/services"
                 style={{
@@ -85,7 +91,8 @@ export default class Home extends Component {
               >
                 <Button
                   style={{
-                    background: "#9e3369",
+                    background:
+                      "linear-gradient(to bottom left, #800080 0%, #da71b7 71%)",
                     justifyContent: "center",
                     alignItems: "center",
                     border: "none",
