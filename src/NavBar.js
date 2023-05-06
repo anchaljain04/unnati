@@ -26,7 +26,9 @@ export default function NavBar() {
     <div
       style={{
         zIndex: "5",
-        position: "relative",
+        position: "sticky",
+        width: "100%",
+        top: 0,
       }}
     >
       <Navbar style={{ background: "#54236d" }}>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
 import { Table } from "react-bootstrap";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import Tooltip from "@mui/material/Tooltip";
 
 function Requirements() {
   const [requirements, setRequirements] = useState([]);
@@ -152,13 +154,27 @@ function Requirements() {
                           "Sent"
                         ) : (
                           <>
-                            <button
-                              onClick={(e) =>
-                                handleConnectClick(e, requirement)
+                            <Tooltip
+                              title={
+                                <span
+                                  style={{
+                                    fontSize: "14px",
+                                  }}
+                                >
+                                  connect
+                                </span>
                               }
+                              placement="right"
                             >
-                              Connect
-                            </button>
+                              <button
+                                onClick={(e) =>
+                                  handleConnectClick(e, requirement)
+                                }
+                                style={{ background: "none", border: "none" }}
+                              >
+                                <PersonAddAltIcon style={{ color: "white" }} />
+                              </button>
+                            </Tooltip>
                           </>
                         )}
                       </td>

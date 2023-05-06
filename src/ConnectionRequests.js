@@ -10,13 +10,14 @@ import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 import ConnectionRequestsSent from "./ConnectionRequestsSent";
+import Tooltip from "@mui/material/Tooltip";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 430,
+  width: 440,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -186,21 +187,25 @@ function ConnectionRequests() {
         backgroundImage: 'url("/images/bg4.png")',
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        height: "100vh",
+        // height: "100vh",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+        paddingBottom: "20px",
       }}
     >
       <NavBar />
       <div>
-        <h1
+        <h2
           style={{
-            marginTop: "90px",
+            marginTop: "50px",
             fontFamily: "Roboto Slab, serif",
             fontStyle: "italic",
             color: "white",
+            textShadow: "1px 1px black",
           }}
         >
           "List of connection requests you received"
-        </h1>
+        </h2>
         <div
           className="container"
           style={{
@@ -216,7 +221,7 @@ function ConnectionRequests() {
               bordered
               hover
               variant="dark"
-              style={{ width: "85%", margin: "auto" }}
+              style={{ width: "90%", margin: "auto" }}
             >
               <thead>
                 <tr>
@@ -289,33 +294,60 @@ function ConnectionRequests() {
                         {request.status === "pending" ? (
                           <>
                             <div>
-                              <button
-                                style={{
-                                  borderRadius: "50%",
-                                  padding: "0px 4px",
-                                  paddingBottom: "2px",
-                                  marginRight: "5px",
-                                  background: "green",
-                                  color: "white",
-                                  border: "none",
-                                }}
-                                onClick={(e) => handleAccept(e, request)}
+                              <Tooltip
+                                title={
+                                  <span
+                                    style={{
+                                      fontSize: "14px",
+                                    }}
+                                  >
+                                    accept
+                                  </span>
+                                }
+                                placement="right"
                               >
-                                <CheckIcon style={{ fontSize: "18px" }} />
-                              </button>
-                              <button
-                                style={{
-                                  borderRadius: "50%",
-                                  padding: "0px 4px",
-                                  paddingBottom: "2px",
-                                  color: "white",
-                                  background: "red",
-                                  border: "none",
-                                }}
-                                onClick={(e) => handleReject(e, request)}
+                                <button
+                                  style={{
+                                    borderRadius: "50%",
+                                    padding: "0px 4px",
+                                    paddingBottom: "2px",
+                                    marginRight: "5px",
+                                    background: "green",
+                                    color: "white",
+                                    border: "none",
+                                  }}
+                                  onClick={(e) => handleAccept(e, request)}
+                                >
+                                  <CheckIcon style={{ fontSize: "18px" }} />
+                                </button>
+                              </Tooltip>
+
+                              <Tooltip
+                                title={
+                                  <span
+                                    style={{
+                                      fontSize: "14px",
+                                    }}
+                                  >
+                                    reject
+                                  </span>
+                                }
+                                placement="right"
                               >
-                                <CloseIcon style={{ fontSize: "18px" }} />
-                              </button>
+                                <button
+                                  style={{
+                                    borderRadius: "50%",
+                                    padding: "0px 4px",
+                                    paddingBottom: "2px",
+                                    color: "white",
+                                    background: "red",
+                                    border: "none",
+                                  }}
+                                  onClick={(e) => handleReject(e, request)}
+                                >
+                                  <CloseIcon style={{ fontSize: "18px" }} />
+                                </button>
+                              </Tooltip>
                             </div>
                           </>
                         ) : (
@@ -349,7 +381,7 @@ function ConnectionRequests() {
                             style={{
                               background: "none",
                               border: "none",
-                              color: "blue",
+                              color: "deepskyblue",
                               textDecoration: "underline",
                               fontSize: "14px",
                             }}
@@ -378,7 +410,9 @@ function ConnectionRequests() {
           )}
         </div>
       </div>
-      <ConnectionRequestsSent />
+      <div style={{ marginBottom: "50px" }}>
+        <ConnectionRequestsSent />
+      </div>
       <div>
         <Modal
           open={open}
@@ -409,7 +443,19 @@ function ConnectionRequests() {
               <h5>Thank you for your visit.</h5>
             </div>
             <div style={{ textAlign: "center", marginTop: "25px" }}>
-              <button onClick={handleClose}>Close</button>
+              <button
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  border: "2px solid var(--primary-color)",
+                  borderRadius: "6px",
+                  padding: "8px 15px",
+                  marginLeft: "8px",
+                }}
+                onClick={handleClose}
+              >
+                Close
+              </button>
             </div>
           </Box>
         </Modal>
@@ -422,7 +468,7 @@ function ConnectionRequests() {
           <Box sx={style}>
             {isDone ? (
               <div style={{ textAlign: "center" }}>
-                <h4 style={{ marginTop: "10px" }}>
+                <h4 style={{ marginTop: "10px", textShadow: "1px 1px white" }}>
                   Thank you for your time. Your feedback is valuable to us.
                   <br />
                   <br />
@@ -437,8 +483,8 @@ function ConnectionRequests() {
                       alignItems: "center",
                       borderRadius: "5px",
                       color: "white",
-                      padding: "8px 15px",
-                      border: "1px solid transparent",
+                      padding: "8px 16px",
+                      border: "1px solid var(--primary-color)",
                     }}
                     onClick={() => navigate("/")}
                   >
@@ -466,12 +512,17 @@ function ConnectionRequests() {
                   </button>
                 </div>
                 <br />
-                <label>How was your experience?</label>
+                <label
+                  style={{ fontWeight: "500", textShadow: "1px 1px white" }}
+                >
+                  How was your experience?
+                </label>
                 <select
                   style={{
                     marginTop: "5px",
                     width: "100%",
                     height: "32px",
+                    border: "2px solid var(--primary-color)",
                     borderRadius: "5px",
                     padding: "0px 5px",
                     marginBottom: "10px",
@@ -485,7 +536,9 @@ function ConnectionRequests() {
                   <option value="happy">Happy</option>
                   <option value="unhappy">Unhappy</option>
                 </select>
-                <label>
+                <label
+                  style={{ fontWeight: "500", textShadow: "1px 1px white" }}
+                >
                   How would you describe the service of our provider?
                 </label>
                 <select
@@ -493,6 +546,7 @@ function ConnectionRequests() {
                     marginTop: "5px",
                     width: "100%",
                     height: "32px",
+                    border: "2px solid var(--primary-color)",
                     borderRadius: "5px",
                     padding: "0px 5px",
                     marginBottom: "10px",
@@ -507,13 +561,17 @@ function ConnectionRequests() {
                   <option value="average">Average</option>
                   <option value="worst">Worst</option>
                 </select>
-                <label>Anything else you want to share?</label>
+                <label
+                  style={{ fontWeight: "500", textShadow: "1px 1px white" }}
+                >
+                  Anything else you want to share?
+                </label>
                 <TextField
                   type="text"
                   style={{
                     width: "100%",
                     marginTop: "5px",
-                    border: "1px solid black",
+                    border: "2px solid var(--primary-color)",
                     borderRadius: "5px",
                   }}
                   onChange={(e) => setMessage(e.target.value)}
@@ -528,7 +586,7 @@ function ConnectionRequests() {
                       borderRadius: "5px",
                       color: "white",
                       padding: "8px 15px",
-                      border: "1px solid transparent",
+                      border: "2px solid var(--primary-color)",
                     }}
                     onClick={handleSubmitFeedback}
                   >

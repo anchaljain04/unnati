@@ -3,6 +3,8 @@ import NavBar from "./NavBar";
 import axios from "axios";
 import moment from "moment";
 import { Table } from "react-bootstrap";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import Tooltip from "@mui/material/Tooltip";
 
 function MyActivities() {
   const userData = localStorage.getItem("Profile");
@@ -44,10 +46,11 @@ function MyActivities() {
       <NavBar />
       <h2
         style={{
-          marginTop: "90px",
+          marginTop: "50px",
           fontFamily: "Roboto Slab, serif",
           fontStyle: "italic",
           color: "white",
+          textShadow: "1px 1px black",
         }}
       >
         Requirements posted:
@@ -101,9 +104,25 @@ function MyActivities() {
                         {moment(requirement.createdAt).format("DD-MM-YYYY")}
                       </td>
                       <td>
-                        <button onClick={(e) => handleDelete(e, requirement)}>
-                          delete
-                        </button>
+                        <Tooltip
+                          title={
+                            <span
+                              style={{
+                                fontSize: "14px",
+                              }}
+                            >
+                              delete
+                            </span>
+                          }
+                          placement="right"
+                        >
+                          <button
+                            onClick={(e) => handleDelete(e, requirement)}
+                            style={{ background: "none", border: "none" }}
+                          >
+                            <DeleteOutlineIcon style={{ color: "white" }} />
+                          </button>
+                        </Tooltip>
                       </td>
                     </tr>
                   ))

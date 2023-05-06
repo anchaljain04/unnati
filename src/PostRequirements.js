@@ -80,12 +80,14 @@ function PostRequirements() {
       >
         <Box sx={style}>
           <form>
-            <label>Requirement of:</label>
+            <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
+              Requirement of:
+            </label>
             <select
               style={{
                 width: "100%",
                 height: "32px",
-                border: "1px solid black",
+                border: "2px solid var(--primary-color)",
                 borderRadius: "5px",
                 padding: "0px 5px",
                 marginBottom: "10px",
@@ -103,12 +105,14 @@ function PostRequirements() {
               <option>Painter</option>
               <option>Chef</option>
             </select>
-            <label>Required experience:</label>
+            <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
+              Required experience:
+            </label>
             <select
               style={{
                 width: "100%",
                 height: "32px",
-                border: "1px solid black",
+                border: "2px solid var(--primary-color)",
                 borderRadius: "5px",
                 padding: "0px 5px",
                 marginBottom: "10px",
@@ -126,12 +130,14 @@ function PostRequirements() {
               <option>4+</option>
             </select>
 
-            <label>Preferred time:</label>
+            <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
+              Preferred time:
+            </label>
             <select
               style={{
                 width: "100%",
                 height: "32px",
-                border: "1px solid black",
+                border: "2px solid var(--primary-color)",
                 borderRadius: "5px",
                 padding: "0px 5px",
                 marginBottom: "10px",
@@ -148,7 +154,9 @@ function PostRequirements() {
               <option>All Day</option>
               <option>Anytime</option>
             </select>
-            <label>Address:</label>
+            <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
+              Address:
+            </label>
             <br />
             <input
               type="text"
@@ -156,6 +164,7 @@ function PostRequirements() {
                 marginBottom: "10px",
                 borderRadius: "5px",
                 width: "100%",
+                border: "2px solid var(--primary-color)",
               }}
               onChange={(e) => setAddress(e.target.value)}
             />
@@ -170,7 +179,7 @@ function PostRequirements() {
                   borderRadius: "5px",
                   color: "white",
                   padding: "8px 15px",
-                  border: "1px solid transparent",
+                  border: "2px solid var(--primary-color)",
                 }}
                 onClick={handleSubmit}
               >
@@ -181,7 +190,7 @@ function PostRequirements() {
                   marginTop: "20px",
                   justifyContent: "center",
                   alignItems: "center",
-                  border: "1px solid black",
+                  border: "2px solid var(--primary-color)",
                   borderRadius: "6px",
                   padding: "8px 15px",
                   marginLeft: "8px",

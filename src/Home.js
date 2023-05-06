@@ -1,22 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import MainLoader from "./MainLoader";
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Sansita&display=swap');
 </style>;
 
 function Home() {
-  const [loader, setLoader] = useState(true);
   const user = localStorage.getItem("Profile");
-  // console.log(JSON.parse(user).category)
   return (
     <>
-      {/* {loader ? (
-        <MainLoader setLoader={setLoader} />
-      ) : (
-        <> */}
       <div
         style={{
           backgroundImage: 'url("/images/bg4.png")',
@@ -61,7 +54,17 @@ function Home() {
         >
           {JSON.parse(user)?.category === "provider" ? (
             <>
-              <h2>See the requirements of our customers</h2>
+              <h2
+                style={{
+                  fontSize: "32px",
+                  fontStyle: "italic",
+                  color: "var(--primary-color)",
+                  fontWeight: "600",
+                  fontFamily: "'Sansita', sans-serif",
+                }}
+              >
+                See the requirements of our customers
+              </h2>
               <Link
                 to="/requirements"
                 style={{
@@ -72,10 +75,11 @@ function Home() {
               >
                 <Button
                   style={{
-                    background: "#9e3369",
+                    background:
+                      "linear-gradient(to bottom left, #800080 0%, #da71b7 71%)",
                     justifyContent: "center",
                     alignItems: "center",
-                    border: "none",
+                    border: "1px solid var(--primary-color)",
                   }}
                 >
                   Explore Now{" "}
@@ -127,9 +131,5 @@ function Home() {
     </>
   );
 }
-// </>
-// );
-// }
 
-//backgroundImage: 'url("/images/back.jpg")',
 export default Home;

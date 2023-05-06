@@ -101,15 +101,21 @@ export default function ProviderData() {
         textAlign: "center",
         backgroundImage: 'url("/images/bg4.png")',
         height: "100vh",
+        paddingBottom: "20px",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
       }}
     >
       <NavBar />
       <h1
         style={{
-          marginTop: "90px",
+          marginTop: "50px",
           fontFamily: "Roboto Slab, serif",
           fontStyle: "italic",
           color: "white",
+          textShadow: "2px 2px black",
         }}
       >
         List of Service Providers for {location.toLocaleUpperCase()} service
@@ -125,6 +131,7 @@ export default function ProviderData() {
           <h2
             style={{
               color: "white",
+              textShadow: "2px 2px black",
             }}
           >
             No data Available at the moment!
@@ -185,11 +192,11 @@ export default function ProviderData() {
             </tbody>
           </Table>
         )}
-        <h3 style={{ marginTop: "50px", color: "white" }}>
+        <h4 style={{ marginTop: "50px", color: "white",textShadow: "2px 2px black", }}>
           Not found suitable provider?
           <br />
           Post your requirement now:
-        </h3>
+        </h4>
         <PostRequirements />
       </div>
       <div>

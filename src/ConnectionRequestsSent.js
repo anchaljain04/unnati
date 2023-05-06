@@ -44,25 +44,25 @@ function ConnectionRequestsSent() {
   }, []);
 
   return (
-    <div style={{ textAlign: "center",
-        }}>
+    <div style={{ textAlign: "center" }}>
       <div>
-        <h1
+        <h2
           style={{
-            marginTop: "80px",
+            marginTop: "50px",
             fontFamily: "Roboto Slab, serif",
             fontStyle: "italic",
-            color: "white"
+            color: "white",
+            textShadow: "1px 1px black",
           }}
         >
           "List of connection requests you have sent"
-        </h1>
+        </h2>
         <div
           className="container"
           style={{
             marginTop: "50px",
             textAlign: "center",
-            color:"white"
+            color: "white",
           }}
         >
           {requestSent.length === 0 ? (

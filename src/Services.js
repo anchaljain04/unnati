@@ -23,14 +23,25 @@ export default function Services() {
           padding: "25px 100px",
           justifyContent: "center",
           backgroundImage: 'url("/images/bg4.png")',
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundAttachment: "fixed",
         }}
       >
-        <Card style={{ width: "18rem", margin: "25px" }}>
+        <Card
+          style={{
+            width: "18rem",
+            margin: "25px",
+            height: "26rem",
+            border: "2px solid var(--primary-color)",
+          }}
+        >
           <Card.Img
             variant="top"
             src="/images/maidPic.jpg"
-            width="286px"
-            height="200"
+            width="280px"
+            height="180px"
           />
           <Card.Body>
             <Card.Title>Maid Services</Card.Title>
@@ -44,20 +55,30 @@ export default function Services() {
               align="center"
               onClick={(e) => handleClick("maid")}
               style={{
-                backgroundColor: "#9e3369",
+                background:
+                  "linear-gradient(to bottom left, #800080 0%, #da71b7 71%)",
                 justifyContent: "center",
+                alignItems: "center",
+                border: "1px solid var(--primary-color)",
               }}
             >
               Explore{" "}
             </Button>
           </Card.Body>
         </Card>
-        <Card style={{ width: "18rem", margin: "25px" }}>
+        <Card
+          style={{
+            width: "18rem",
+            margin: "25px",
+            height: "26rem",
+            border: "2px solid var(--primary-color)",
+          }}
+        >
           <Card.Img
             variant="top"
             src="/images/carpenter.jpg"
-            width="286px"
-            height="200"
+            width="280px"
+            height="180px"
           />
           <Card.Body>
             <Card.Title>Carpenter Services</Card.Title>
@@ -69,20 +90,30 @@ export default function Services() {
             <Button
               onClick={(e) => handleClick("carpenter")}
               style={{
-                backgroundColor: "#9e3369",
+                background:
+                  "linear-gradient(to bottom left, #800080 0%, #da71b7 71%)",
                 justifyContent: "center",
+                alignItems: "center",
+                border: "1px solid var(--primary-color)",
               }}
             >
               Explore{" "}
             </Button>
           </Card.Body>
         </Card>
-        <Card style={{ width: "18rem", margin: "25px" }}>
+        <Card
+          style={{
+            width: "18rem",
+            margin: "25px",
+            height: "26rem",
+            border: "2px solid var(--primary-color)",
+          }}
+        >
           <Card.Img
             variant="top"
             src="/images/electrician.jpg"
-            width="286px"
-            height="200"
+            width="280px"
+            height="180px"
           />
           <Card.Body>
             <Card.Title>Electrician Services</Card.Title>
@@ -94,8 +125,11 @@ export default function Services() {
             <Button
               onClick={(e) => handleClick("electrician")}
               style={{
-                backgroundColor: "#9e3369",
+                background:
+                  "linear-gradient(to bottom left, #800080 0%, #da71b7 71%)",
                 justifyContent: "center",
+                alignItems: "center",
+                border: "1px solid var(--primary-color)",
               }}
             >
               Explore{" "}
@@ -104,12 +138,19 @@ export default function Services() {
         </Card>
         <br />
         <br />
-        <Card style={{ width: "18rem", margin: "25px" }}>
+        <Card
+          style={{
+            width: "18rem",
+            margin: "25px",
+            height: "26rem",
+            border: "2px solid var(--primary-color)",
+          }}
+        >
           <Card.Img
             variant="top"
             src="/images/pplumber.jpg"
-            width="286px"
-            height="200"
+            width="280px"
+            height="180px"
           />
           <Card.Body>
             <Card.Title>Plumber Services</Card.Title>
@@ -122,20 +163,30 @@ export default function Services() {
             <Button
               onClick={(e) => handleClick("plumber")}
               style={{
-                backgroundColor: "#9e3369",
+                background:
+                  "linear-gradient(to bottom left, #800080 0%, #da71b7 71%)",
                 justifyContent: "center",
+                alignItems: "center",
+                border: "1px solid var(--primary-color)",
               }}
             >
               Explore{" "}
             </Button>
           </Card.Body>
         </Card>
-        <Card style={{ width: "18rem", margin: "25px" }}>
+        <Card
+          style={{
+            width: "18rem",
+            margin: "25px",
+            height: "26rem",
+            border: "2px solid var(--primary-color)",
+          }}
+        >
           <Card.Img
             variant="top"
             src="/images/painter.jpg"
-            width="286px"
-            height="200"
+            width="280px"
+            height="180px"
           />
           <Card.Body>
             <Card.Title>Painter</Card.Title>
@@ -147,20 +198,30 @@ export default function Services() {
             <Button
               onClick={(e) => handleClick("painter")}
               style={{
-                backgroundColor: "#9e3369",
+                background:
+                  "linear-gradient(to bottom left, #800080 0%, #da71b7 71%)",
                 justifyContent: "center",
+                alignItems: "center",
+                border: "1px solid var(--primary-color)",
               }}
             >
               Explore{" "}
             </Button>
           </Card.Body>
         </Card>
-        <Card style={{ width: "18rem", margin: "25px" }}>
+        <Card
+          style={{
+            width: "18rem",
+            margin: "25px",
+            height: "26rem",
+            border: "2px solid var(--primary-color)",
+          }}
+        >
           <Card.Img
             variant="top"
             src="/images/chef.jpg"
-            width="286px"
-            height="200"
+            width="280px"
+            height="180px"
           />
           <Card.Body>
             <Card.Title>Chef</Card.Title>
@@ -172,8 +233,11 @@ export default function Services() {
             <Button
               onClick={(e) => handleClick("chef")}
               style={{
-                backgroundColor: "#9e3369",
-                textAlign: "center",
+                background:
+                  "linear-gradient(to bottom left, #800080 0%, #da71b7 71%)",
+                justifyContent: "center",
+                alignItems: "center",
+                border: "1px solid var(--primary-color)",
               }}
             >
               Explore{" "}
