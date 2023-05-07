@@ -152,17 +152,16 @@ export default function ProviderData() {
           </h2>
         ) : (
           <Table
-            striped
             bordered
             hover
-            variant="dark"
+            
             style={{ width: "85%", margin: "auto" }}
           >
-            <thead>
+            <thead style={{ background: "#330033", color: "white" }}>
               <tr>
                 <th>#</th>
                 <th>{data?.fullName}</th>
-                <th>{data?.email}</th>
+                
                 <th>{data?.address}</th>
                 <th>{data?.experience}</th>
                 <th>{data?.availability}</th>
@@ -170,7 +169,7 @@ export default function ProviderData() {
                 <th>{data?.action}</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody style={{ background: "#990099", color: "white" }}>
               {providers === [] ? (
                 <h1>{data?.loading}</h1>
               ) : (
@@ -178,7 +177,7 @@ export default function ProviderData() {
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{provider.name}</td>
-                    <td>{provider.email}</td>
+                    
                     <td>{provider.address}</td>
                     <td>{provider.experience}</td>
                     <td>
@@ -191,7 +190,7 @@ export default function ProviderData() {
                       {provider.isRequestSent ? (
                         data?.sent
                       ) : (
-                        <button
+                        <button style={{background:"#69124A" , color:"white"}}
                           onClick={(e) => handleConnectClick(e, provider)}
                         >
                           {data?.connect}

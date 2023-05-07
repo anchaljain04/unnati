@@ -114,13 +114,11 @@ function Requirements() {
             <h2>{data?.notProviderData}</h2>
           ) : (
             <Table
-              striped
               bordered
               hover
-              variant="dark"
               style={{ width: "85%", margin: "auto" }}
             >
-              <thead>
+              <thead style={{ background: "#330033", color: "white" }}>
                 <tr>
                   <th>#</th>
                   <th>{data?.fullName}</th>
@@ -132,7 +130,7 @@ function Requirements() {
                   <th>{data?.action}</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody style={{ background: "#990099" , color:"white"}}>
                 {requirements === [] ? (
                   <h1>{data?.loading}</h1>
                 ) : (

@@ -25,6 +25,7 @@ function Login2() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone , setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [securityQues, setSecurityQues] = useState("");
   const [securityAns, setSecurityAns] = useState("");
@@ -63,6 +64,7 @@ function Login2() {
         !email ||
         !password ||
         !address ||
+        !phone||
         !securityQues ||
         !securityAns ||
         !category ||
@@ -78,6 +80,7 @@ function Login2() {
             email,
             password,
             address,
+            phone,
             category,
             serviceProviding: service,
             experience,
@@ -103,6 +106,7 @@ function Login2() {
         !name ||
         !email ||
         !password ||
+        !phone||
         !address ||
         !securityQues ||
         !securityAns ||
@@ -115,6 +119,7 @@ function Login2() {
             name,
             email,
             password,
+            phone,
             address,
             category,
             securityQues,
@@ -325,7 +330,7 @@ function Login2() {
                 }}
                 onClick={() => handleJustifyClick("tab2")}
               >
-                Register
+                पंजीकरण
               </button>
             </p>
           </MDBTabsPane>
@@ -402,6 +407,20 @@ function Login2() {
                 }}
                 required
                 onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <label>फ़ोन नंबर:</label>
+              <input
+                type="text"
+                style={{
+                  width: "100%",
+                  marginBottom: "10px",
+                  borderRadius: "5px",
+                  border: "none",
+                  height: "30px",
+                  padding: "5px 10px",
+                }}
+                required
+                onChange={(e) => setPhoneNumber(e.target.value)}
               />
 
               <label>पता:</label>

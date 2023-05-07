@@ -32,12 +32,17 @@ function ConnectionRequests() {
   const user = JSON.parse(userData);
   const myContext = useContext(AppContext);
   const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
+  const [optionValue, setOptionValue] = useState("");
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
     navigate("/");
+  };
+  const handleOptionChange = (e, value) => {
+    setExperience(e.target.value);
+    setOptionValue(e.target.value);
   };
 
   const [userId, setUserId] = useState("");
@@ -231,13 +236,8 @@ function ConnectionRequests() {
           {requestReceived.length === 0 ? (
             <h2 style={{ color: "white" }}>{data?.notProviderData}</h2>
           ) : (
-            <Table
-              striped
-              bordered
-              hover
-              style={{ width: "90%", margin: "auto" }}
-            >
-              <thead style={{ background: "#870A30", color: "white" }}>
+            <Table bordered hover style={{ width: "90%", margin: "auto" }}>
+              <thead style={{ background: "#330033", color: "white" }}>
                 <tr>
                   <th>S. No.</th>
                   <th>{data?.requirementOf}</th>
@@ -258,32 +258,15 @@ function ConnectionRequests() {
                     </>
                   )}
                   <th>{data?.wishToConnect}</th>
-                  {isCustomer ? (
-                    <th
-                      style={{
-                        borderWidth: "0px",
-                        "--bs-table-bg": "none",
-                        "--bs-table-striped-bg": "none",
-                        border: "none",
-                        boxShadow: "none",
-                        borderBottomStyle: "hidden",
-                        borderTopStyle: "hidden",
-                      }}
-                    ></th>
-                  ) : (
-                    ""
-                  )}
+                  {isCustomer ? <th>{data?.feedbackStatus}</th> : ""}
                 </tr>
               </thead>
-              <tbody style={{ background: "#870A30", color: "white" }}>
+              <tbody style={{ background: "#990099", color: "white" }}>
                 {requestReceived === [] ? (
                   <h1>{data?.loading}</h1>
                 ) : (
                   requestReceived.map((request, index) => (
-                    <tr
-                      style={{ background: "#870A30", color: "white" }}
-                      key={index}
-                    >
+                    <tr key={index}>
                       <td>{index + 1}</td>
                       {isCustomer ? (
                         <>
@@ -386,19 +369,7 @@ function ConnectionRequests() {
                       {isCustomer &&
                       request.status === "accepted" &&
                       !request.feedBackSent ? (
-                        <td
-                          className="table-borderless"
-                          style={{
-                            borderWidth: "0px",
-                            "--bs-table-bg": "none",
-                            "--bs-table-striped-bg": "none",
-                            border: "none",
-                            boxShadow: "none",
-                            borderBottomStyle: "hidden",
-                            borderTopStyle: "hidden",
-                            paddingLeft: "0px",
-                          }}
-                        >
+                        <td className="table-borderless">
                           <button
                             onClick={(e) =>
                               handleOpenFeedback(
@@ -410,7 +381,7 @@ function ConnectionRequests() {
                             style={{
                               background: "none",
                               border: "none",
-                              color: "deepskyblue",
+                              color: "darkturquoise",
                               textDecoration: "underline",
                               fontSize: "14px",
                             }}
@@ -419,17 +390,10 @@ function ConnectionRequests() {
                           </button>
                         </td>
                       ) : (
-                        <th
-                          style={{
-                            borderWidth: "0px",
-                            "--bs-table-bg": "none",
-                            "--bs-table-striped-bg": "none",
-                            border: "none",
-                            boxShadow: "none",
-                            borderBottomStyle: "hidden",
-                            borderTopStyle: "hidden",
-                          }}
-                        ></th>
+                        <th>
+                          {/* {request.status === "accepted" &&
+                            request.feedBackSent ? "Feedback Sent" :"-"} */}
+                        </th>
                       )}
                     </tr>
                   ))
@@ -536,55 +500,98 @@ function ConnectionRequests() {
                   </button>
                 </div>
                 <br />
-                <label
-                  style={{ fontWeight: "500", textShadow: "1px 1px white" }}
-                >
-                  {data?.feedbackQuestions[0]}
-                </label>
-                <select
-                  style={{
-                    marginTop: "5px",
-                    width: "100%",
-                    height: "32px",
-                    border: "2px solid var(--primary-color)",
-                    borderRadius: "5px",
-                    padding: "0px 5px",
-                    marginBottom: "10px",
-                  }}
-                  value={experience}
-                  onChange={(e) => setExperience(e.target.value)}
-                >
-                  <option value="" hidden>
-                    {data?.select}
-                  </option>
-                  <option value="happy">Happy</option>
-                  <option value="unhappy">Unhappy</option>
-                </select>
-                <label
-                  style={{ fontWeight: "500", textShadow: "1px 1px white" }}
-                >
-                  {data?.feedbackQuestions[1]}
-                </label>
-                <select
-                  style={{
-                    marginTop: "5px",
-                    width: "100%",
-                    height: "32px",
-                    border: "2px solid var(--primary-color)",
-                    borderRadius: "5px",
-                    padding: "0px 5px",
-                    marginBottom: "10px",
-                  }}
-                  value={feedback}
-                  onChange={(e) => setFeedback(e.target.value)}
-                >
-                  <option value="" hidden>
-                    {data?.select}
-                  </option>
-                  <option value="fantastic">Fantastic</option>
-                  <option value="average">Average</option>
-                  <option value="worst">Worst</option>
-                </select>
+                <div>
+                  <label
+                    style={{ fontWeight: "500", textShadow: "1px 1px white" }}
+                  >
+                    {data?.feedbackQuestions[0]}
+                  </label>
+                  <select
+                    style={{
+                      marginTop: "5px",
+                      width: "100%",
+                      height: "32px",
+                      border: "2px solid var(--primary-color)",
+                      borderRadius: "5px",
+                      padding: "0px 5px",
+                      marginBottom: "10px",
+                    }}
+                    value={experience}
+                    onChange={(e) => {
+                      handleOptionChange(e, e.target.value);
+                    }}
+                  >
+                    <option value="" hidden>
+                      {data?.select}
+                    </option>
+
+                    <option value="veryHappy">Very Happy</option>
+                    <option value="happy">Happy</option>
+                    <option value="average">Average</option>
+                    <option value="unhappy">Unhappy</option>
+                    <option value="veryUnhappy">Very Unhappy</option>
+                  </select>
+                </div>
+
+                {/* {optionValue === "veryHappy" ? ( */}
+                <>
+                  <label
+                    style={{
+                      fontWeight: "500",
+                      textShadow: "1px 1px white",
+                    }}
+                  >
+                    {data?.feedbackQuestions[1]}
+                  </label>
+                  <select
+                    style={{
+                      marginTop: "5px",
+                      width: "100%",
+                      height: "32px",
+                      border: "2px solid var(--primary-color)",
+                      borderRadius: "5px",
+                      padding: "0px 5px",
+                      marginBottom: "10px",
+                    }}
+                    value={feedback}
+                    onChange={(e) => setFeedback(e.target.value)}
+                  >
+                    <option value="" hidden>
+                      {data?.select}
+                    </option>
+                    {optionValue === "veryHappy" ? (
+                      <>
+                        <option value="remarkable">Remarkable</option>
+                        <option value="stunning">Stunning</option>
+                      </>
+                    ) : optionValue === "happy" ? (
+                      <>
+                        <option value="remarkable">Remarkable</option>
+                        <option value="stunning">Stunning</option>
+                      </>
+                    ) : optionValue === "average" ? (
+                      <>
+                        <option value="remarkable">Remarkable</option>
+                        <option value="stunning">Stunning</option>
+                      </>
+                    ) : optionValue === "veryHappy" ? (
+                      <>
+                        <option value="remarkable">Remarkable</option>
+                        <option value="stunning">Stunning</option>
+                      </>
+                    ) : optionValue === "veryHappy" ? (
+                      <>
+                        <option value="remarkable">Remarkable</option>
+                        <option value="stunning">Stunning</option>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </select>
+                </>
+                {/* ) : optionValue ==='happy' ? (
+                  ""
+                )} */}
                 <label
                   style={{ fontWeight: "500", textShadow: "1px 1px white" }}
                 >

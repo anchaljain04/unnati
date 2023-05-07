@@ -83,13 +83,12 @@ function MyActivities() {
         ) : (
           <>
             <Table
-              striped
               bordered
               hover
-              variant="dark"
+              
               style={{ width: "75%", margin: "auto" }}
             >
-              <thead>
+              <thead style={{ background: "#330033", color: "white" }}>
                 <tr>
                   <th>#</th>
                   <th>{data?.serviceRequired}</th>
@@ -99,7 +98,7 @@ function MyActivities() {
                   <th>{data?.action}</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody style={{ background: "#990099" , color:"white"}}>
                 {requirementData === [] ? (
                   <h1>{data?.loading}</h1>
                 ) : (

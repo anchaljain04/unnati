@@ -33,7 +33,7 @@ function App() {
                 <NavBar />
                 <Home />
               </div>
-              // )
+              
             }
           />
           <Route exact path="/services/:service" element={<ProviderData />} />

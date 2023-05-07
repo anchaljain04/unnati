@@ -55,7 +55,7 @@ const AppState = (props) => {
       "Post your requirement now:",
     ],
     postRequirement: "Post Requirement",
-    requirementOf: "Requirement Of:",
+    requirementOf: "Requirement Of",
     requiredExperience: "Required Experience",
     preferredTime: "Preferred Time:",
     select: "select",
@@ -85,6 +85,7 @@ const AppState = (props) => {
     reject: "reject",
     giveFeedback: "give feedback",
     connectionRequestSentTitle: "List of connection requests you have sent",
+    feedbackStatus: "Feedback Status",
     customer: "Customer's",
     sentRequestSuccess: [
       "You have successfully accepted the request.",
@@ -121,14 +122,14 @@ const AppState = (props) => {
     chefService: "बावर्ची",
     homeTitle: "उन्नति - एक सेवा प्रदाता",
     homeDivP: "हमारे ग्राहकों की आवश्यकताओं को देखें",
-    exploreNow: "अभी एक्सप्लोर करें",
+    exploreNow: "एक्सप्लोर करें",
     homeDivC: [
       "स्थानीय श्रमिकों की उन्नति के लिए और उन लोगों के लिए जिन्हें श्रमिकों की आवश्यकता है,उन्नति में आपका स्वागत है |",
       "यहां, हम स्थानीय के लिए और उसके लिए विभिन्न सेवाएं प्रदान करते हैं नौकरानियों, प्लंबर, जैसे हमारे दैनिक सेवाओं के लिए कर्मचारी बढ़ई, बिजली मिस्त्री, चित्रकार आदि।",
     ],
     explore: "अन्वेषण",
     maidText:
-      "अपने घर को साफ और स्वच्छ बनाना चाहते हैं। हमारे विश्वसनीय नौकरानियों को रहने दो आपके घरेलू कामों में आपकी मदद करते हैं। उनसे संपर्क करने के लिए नीचे क्लिक करें सफाई, बर्तन धोने आदि के लिए",
+      "अपने घर को साफ और स्वच्छ बनाना चाहते हैं। हमारे विश्वसनीय नौकरानियों को रहने दो आपके घरेलू कामों में आपकी मदद करते हैं। उनसे संपर्क करने के लिए नीचे क्लिक करें |",
     carpenterText:
       "चाहते हैं कि कोई भी ढांचे का निर्माण, मरम्मत या स्थापित करे और आपके घर के लिए संरचना। हमारे मेहनती से संपर्क करने के लिए नीचे क्लिक करें सहकारी बढ़ई|",
     electricianText:
@@ -138,7 +139,7 @@ const AppState = (props) => {
     painterText:
       "अपनी दीवारों को ठीक करना चाहते हैं और अपनी जगह को अधिक जीवंत बनाना चाहते हैं रंग की। पेंट और अन्य सजावटी सामग्री लगाने के लिए हमारे पेंटर्स से संपर्क करें खत्म।",
     chefText:
-      "मुंह में पानी लाने वाला खाना चाहते हैं। हमारे रसोइयों और रसोइयों से संपर्क करें स्वस्थ, पौष्टिक और स्वादिष्ट भोजन करें।",
+      "मुंह में पानी लाने वाला खाना चाहते हैं। हमारे रसोइयों और रसोइयों से संपर्क करें स्वस्थ, पौष्टिक और स्वादिष्ट भोजन करें | संपर्क करने के लिए नीचे क्लिक करें।",
     providerDataTitle: "के लिए सेवा प्रदाताओं की सूची ",
     notProviderData: "फिलहाल कोई डेटा उपलब्ध नहीं है!",
     loading: "लोड हो रहा है",
@@ -186,6 +187,7 @@ const AppState = (props) => {
     reject: "अस्वीकार",
     giveFeedback: "प्रतिक्रिया दें",
     connectionRequestSentTitle: "आपके द्वारा भेजे गए कनेक्शन अनुरोधों की सूची",
+    feedbackStatus: "प्रतिक्रिया की स्थिति",
     customer: "ग्राहक",
     sentRequestSuccess: [
       "आपने अनुरोध को सफलतापूर्वक स्वीकार कर लिया है|",

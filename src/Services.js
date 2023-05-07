@@ -49,9 +49,7 @@ export default function Services() {
           <Card.Body>
             <Card.Title>{data?.maidService + " " + data?.services}</Card.Title>
             <Card.Text>
-              Want to make your home clean and hygienic. Let our reliable maids
-              help you with your household works. Click below to contact them
-              for cleaning , washing dishes etc
+              {data?.maidText}
             </Card.Text>
 
             <Button
@@ -88,9 +86,7 @@ export default function Services() {
               {data?.carpenterService + " " + data?.services}
             </Card.Title>
             <Card.Text>
-              Want anyone to construct, repair or install frameworks and
-              structure for your home . Click below to contact our hardworking
-              cooperative carpenters
+              {data?.carpenterText}
             </Card.Text>
             <Button
               onClick={(e) => handleClick("carpenter")}
@@ -125,9 +121,7 @@ export default function Services() {
               {data?.electricianService + " " + data?.services}
             </Card.Title>
             <Card.Text>
-              Want to correct your lose wires . Click below to contact our
-              electricians for all kinds of electrical work like
-              fitting,rewiring, repairing, installing etc.
+              {data?.electricianText}
             </Card.Text>
             <Button
               onClick={(e) => handleClick("electrician")}
@@ -164,9 +158,7 @@ export default function Services() {
               {data?.plumberService + " " + data?.services}
             </Card.Title>
             <Card.Text>
-              Want to correct the leaks . Click below to contact our plumbers to
-              install or repair pipes and fixtures carrying water, gas or any
-              fluid.
+              {data?.plumberText}
             </Card.Text>
             <br />
             <Button
@@ -177,6 +169,7 @@ export default function Services() {
                 justifyContent: "center",
                 alignItems: "center",
                 border: "1px solid var(--primary-color)",
+                marginTop: "-40px"
               }}
             >
               {data?.explore}{" "}
@@ -202,9 +195,7 @@ export default function Services() {
               {data?.painterService + " " + data?.services}
             </Card.Title>
             <Card.Text>
-              Want to fix your walls and make your place more lively filled with
-              colors. Contact our painters to apply paints and other decorative
-              finishes.
+              {data?.painterText}
             </Card.Text>
             <Button
               onClick={(e) => handleClick("painter")}
@@ -237,8 +228,7 @@ export default function Services() {
           <Card.Body>
             <Card.Title>{data?.chefService + " " + data?.services}</Card.Title>
             <Card.Text>
-              Want to have mouth watering food. Contact our cooks and chefs to
-              have healthy, nutritious and delicious meals.
+              {data?.chefText}
             </Card.Text>
             <br />
             <Button

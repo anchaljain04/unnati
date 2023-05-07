@@ -24,6 +24,7 @@ function Login() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone,setPhoneNumber] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [address, setAddress] = useState("");
   const [securityQues, setSecurityQues] = useState("");
@@ -62,6 +63,7 @@ function Login() {
         !name ||
         !email ||
         !password ||
+        !phone||
         !address ||
         !securityQues ||
         !securityAns ||
@@ -77,6 +79,7 @@ function Login() {
             name,
             email,
             password,
+            phone,
             address,
             category,
             serviceProviding: service,
@@ -103,6 +106,7 @@ function Login() {
         !name ||
         !email ||
         !password ||
+        !phone ||
         !address ||
         !securityQues ||
         !securityAns ||
@@ -115,6 +119,7 @@ function Login() {
             name,
             email,
             password,
+            phone,
             address,
             category,
             securityQues,
@@ -402,6 +407,20 @@ function Login() {
                 }}
                 required
                 onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <label>Phone Number:</label>
+              <input
+                type="text"
+                style={{
+                  width: "100%",
+                  marginBottom: "10px",
+                  borderRadius: "5px",
+                  border: "none",
+                  height: "30px",
+                  padding: "5px 10px",
+                }}
+                required
+                onChange={(e) => setPhoneNumber(e.target.value)}
               />
 
               

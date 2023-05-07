@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { useContext } from "react";
 import NavBar from "./NavBar";
 import UpdateAddressModal from "./UpdateAddressModal";
 import AppContext from "./context/AppContext";
