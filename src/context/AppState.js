@@ -107,7 +107,19 @@ const AppState = (props) => {
     change: "change",
     updateAddressTitle: "Update Address",
     enterNewAddress: "Enter new address:",
-    requirementsTitle:"List of customer requirements"
+    requirementsTitle: "List of customer requirements",
+    connectionRequestSentSuccess: "Connection request sent successfully!",
+    fillAllFields: "Please fill all the fields!",
+    connectionRequestReject: "Connection request rejected!",
+    passwordNotMatch: "Password doesn't match!",
+    invalid: "Invalid",
+    answerNotMatch: "Password doesn't match!",
+    registerAsCustomerMsg:
+      "You need to register as a customer to see the available provider's details!",
+    loginFirst: "You need to login first to see the details of providers!",
+    profile: "Profile",
+    activities: "Activities",
+    connectionRequests: "Connection Requests",
   };
   const dataHindi = {
     navTitle: "उन्नति",
@@ -209,7 +221,19 @@ const AppState = (props) => {
     change: "बदलें",
     updateAddressTitle: "पता अपडेट करें",
     enterNewAddress: "नया पता दर्ज करें:",
-    requirementsTitle:"ग्राहकों की आवश्यकताओं की सूची"
+    requirementsTitle: "ग्राहकों की आवश्यकताओं की सूची",
+    connectionRequestSentSuccess: "कनेक्शन अनुरोध सफलतापूर्वक भेजा गया!",
+    fillAllFields: "कृपया सभी फ़ील्ड भरें!",
+    connectionRequestReject: "कनेक्शन अनुरोध अस्वीकृत!",
+    passwordNotMatch: "पासवर्ड मेल नहीं खाता!",
+    invalid: "अमान्य",
+    answerNotMatch: "उत्तर मेल नहीं खाता!",
+    registerAsCustomerMsg:
+      "उपलब्ध प्रदाता के विवरण देखने के लिए आपको ग्राहक के रूप में पंजीकरण करना होगा!",
+    loginFirst: "प्रदाताओं का विवरण देखने के लिए आपको पहले लॉगिन करना होगा!",
+    profile: "प्रोफ़ाइल",
+    activities: "गतिविधियाँ",
+    connectionRequests: "कनेक्शन अनुरोध",
   };
 
   return (

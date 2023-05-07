@@ -10,6 +10,7 @@ function Requirements() {
   const [requirements, setRequirements] = useState([]);
   const userData = localStorage.getItem("Profile");
   const user = JSON.parse(userData);
+
   const myContext = useContext(AppContext);
   const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
   let url;
@@ -22,7 +23,8 @@ function Requirements() {
       params: { service: `${user.serviceProviding}` },
     };
   }
-  useEffect(() => {
+
+  const apiCall = () => {
     axios
       .get(url, raw)
       .then((res) => {
@@ -57,6 +59,9 @@ function Requirements() {
           .catch((error) => console.log(error));
       })
       .catch((error) => console.log(error));
+  };
+  useEffect(() => {
+    apiCall();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -74,6 +79,8 @@ function Requirements() {
       requirementId: requirement?._id,
       userId: requirement?.userId,
     };
+    window.alert(data?.connectionRequestSentSuccess);
+    apiCall();
     axios
       .post("http://localhost:8000/user/send-email", raw)
       .then((res) => {
@@ -113,11 +120,7 @@ function Requirements() {
           {requirements.length === 0 ? (
             <h2>{data?.notProviderData}</h2>
           ) : (
-            <Table
-              bordered
-              hover
-              style={{ width: "85%", margin: "auto" }}
-            >
+            <Table bordered hover style={{ width: "85%", margin: "auto" }}>
               <thead style={{ background: "#330033", color: "white" }}>
                 <tr>
                   <th>#</th>
@@ -125,12 +128,12 @@ function Requirements() {
                   <th>{data?.email}</th>
                   <th>{data?.address}</th>
                   <th>{data?.serviceRequired}</th>
-                  <th>{data?.experienceRequired}</th>
+                  <th>{data?.requiredExperience}</th>
                   <th>{data?.preferredTime}</th>
                   <th>{data?.action}</th>
                 </tr>
               </thead>
-              <tbody style={{ background: "#990099" , color:"white"}}>
+              <tbody style={{ background: "#990099", color: "white" }}>
                 {requirements === [] ? (
                   <h1>{data?.loading}</h1>
                 ) : (

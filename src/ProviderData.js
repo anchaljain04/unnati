@@ -27,7 +27,7 @@ export default function ProviderData() {
   const myContext = useContext(AppContext);
   const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
 
-  let serviceName = location + "" + "Service";
+  const serviceName = location + "Service";
   const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);

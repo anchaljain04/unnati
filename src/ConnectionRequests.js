@@ -154,7 +154,7 @@ function ConnectionRequests() {
   const handleSubmitFeedback = (e) => {
     e.preventDefault();
     if (!experience || !feedback || !message) {
-      window.alert("please fill all the fields");
+      window.alert(data?.fillAllFields);
     } else {
       axios
         .post("http://localhost:8000/feedback/save", {
@@ -166,7 +166,6 @@ function ConnectionRequests() {
           message: message,
         })
         .then((res) => {
-          console.log(res);
           setIsDone(true);
         })
         .catch((error) => console.log(error));
@@ -195,7 +194,7 @@ function ConnectionRequests() {
       .then((response) => {
         if (response.status === 200) {
           apiCall();
-          window.alert("Connection request rejected!");
+          window.alert(data?.connectionRequestReject);
         }
       })
       .catch((error) => console.log(error));
@@ -391,8 +390,9 @@ function ConnectionRequests() {
                         </td>
                       ) : (
                         <th>
-                          {/* {request.status === "accepted" &&
-                            request.feedBackSent ? "Feedback Sent" :"-"} */}
+                          {request.status === "accepted" && request.feedBackSent
+                            ? "Feedback Sent"
+                            : "-"}
                         </th>
                       )}
                     </tr>

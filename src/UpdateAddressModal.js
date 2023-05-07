@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
@@ -51,24 +51,28 @@ function UpdateAddressModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:8000/user/update-user", {
-        address: address,
-        email: user.email,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          localStorage.setItem("Profile", JSON.stringify(response?.data));
-          window.alert("Address updated successfully.");
-          window.location.reload(true);
-        }
-      })
-      .catch((error) => {
-        if (error.response.status === 400) {
-          window.alert("Failed to update address. Please try again later.");
-          navigate("/");
-        }
-      });
+    if (!address) {
+      window.alert("please enter a valid address!");
+    } else {
+      axios
+        .post("http://localhost:8000/user/update-user", {
+          address: address,
+          email: user.email,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            localStorage.setItem("Profile", JSON.stringify(response?.data));
+            window.alert("Address updated successfully.");
+            window.location.reload(true);
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 400) {
+            window.alert("Failed to update address. Please try again later.");
+            navigate("/");
+          }
+        });
+    }
   };
 
   return (

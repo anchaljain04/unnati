@@ -14,11 +14,10 @@ function Home() {
 
   return (
     <>
-      {/* <ToastComp style={{position:"fixed" , top:0 ,right:"40px"}}/> */}
       <div
         style={{
           backgroundImage: 'url("/images/bg4.png")',
-          height: "100vh",
+          minHeight: "100vh",
           width: "100%",
           paddingTop: "40px",
           textAlign: "center",
@@ -26,8 +25,9 @@ function Home() {
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundAttachment: "fixed",
+          paddingBottom: "20px",
           position: "fixed",
-          overflowY: "hidden",
+          // overflowY: "hidden",
         }}
       >
         <h1
@@ -61,7 +61,7 @@ function Home() {
             <>
               <h2
                 style={{
-                  fontSize: "32px",
+                  fontSize: "30px",
                   fontStyle: "italic",
                   color: "var(--primary-color)",
                   fontWeight: "600",
@@ -95,7 +95,7 @@ function Home() {
             <>
               <h2
                 style={{
-                  fontSize: "32px",
+                  fontSize: "30px",
                   fontStyle: "italic",
                   color: "var(--primary-color)",
                   fontWeight: "600",

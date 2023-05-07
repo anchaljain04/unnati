@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AppContext from "./context/AppContext";
+
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
@@ -21,8 +23,6 @@ const style = {
 
 function ForgotPasswordModal() {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [securityQues, setSecurityQues] = useState("");
@@ -31,8 +31,15 @@ function ForgotPasswordModal() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    setSecurityQues("");
+  };
 
   const navigate = useNavigate();
+  const myContext = useContext(AppContext);
+  const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
 
   const handleVisibilityClick = () => {
     setShowPassword(!showPassword);
@@ -50,9 +57,16 @@ function ForgotPasswordModal() {
         }
       )
       .then((res) => {
-        setSecurityQues(res.data.response);
+        if (res.status === 200) {
+          setSecurityQues(res.data.response);
+        }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status === 404) {
+          window.alert(data?.invalid + " " + data?.email);
+        }
+      });
   };
 
   const handleSubmit = (e) => {
@@ -66,21 +80,25 @@ function ForgotPasswordModal() {
         }
       )
       .then((res) => {
-        console.log(res);
         if (res.data.message === "Answer matched") {
           setIsAnswerMatched(true);
         } else {
           setIsAnswerMatched(false);
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        if (error.response.status === 400) {
+          window.alert(data?.answerNotMatch);
+        }
+      });
   };
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    console.log("=======");
-    if (password !== confirmPassword) {
-      window.alert("password doesn't match");
+    if (!password || !confirmPassword) {
+      window.alert(data?.fillAllFields);
+    } else if (password !== confirmPassword) {
+      window.alert(data?.passwordNotMatch);
     } else {
       axios
         .get(
@@ -129,6 +147,22 @@ function ForgotPasswordModal() {
                 marginBottom: "10px",
               }}
             >
+              {!securityQues ? (
+                ""
+              ) : (
+                <button
+                  style={{
+                    position: "fixed",
+                    left: "20px",
+                    background: "none",
+                    border: "none",
+                    textDecoration: "underline",
+                  }}
+                  onClick={() => setSecurityQues("")}
+                >
+                  Back
+                </button>
+              )}
               <h5>Change Password</h5>
               <button
                 onClick={handleClose}
@@ -214,7 +248,7 @@ function ForgotPasswordModal() {
                       width: "100%",
                       marginBottom: "10px",
                       borderRadius: "5px",
-                      border: "none",
+                      border: "1px solid var(--primary-color)",
                       height: "30px",
                       padding: "5px 10px",
                     }}
@@ -241,7 +275,7 @@ function ForgotPasswordModal() {
                     width: "100%",
                     marginBottom: "10px",
                     borderRadius: "5px",
-                    border: "none",
+                    border: "1px solid var(--primary-color)",
                     height: "30px",
                     padding: "5px 10px",
                   }}
@@ -272,6 +306,7 @@ function ForgotPasswordModal() {
                 <br />
                 <input
                   type="text"
+                  defaultValue=""
                   style={{
                     marginBottom: "10px",
                     borderRadius: "5px",

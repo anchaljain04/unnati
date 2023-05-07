@@ -17,12 +17,8 @@ export default function NavBar() {
     user
       ? userData.category === "customer"
         ? navigate(`/services/${service}`)
-        : window.alert(
-            "You need to register as a customer to see the available provider's details!"
-          )
-      : window.alert(
-          "You need to login first to see the details of providers!"
-        );
+        : window.alert(data?.registerAsCustomerMsg)
+      : window.alert(data?.loginFirst);
   };
 
   const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
@@ -88,7 +84,16 @@ export default function NavBar() {
             </Navbar.Brand>
             {window.location.pathname === "/" ? (
               <div>
-                <button className="me-2" style={{background:"#9e3369" , color:"var(--secondary-color-light)" , padding:"2px 10px" , borderRadius:"5px" }} onClick={myContext.changeLanguage}>
+                <button
+                  className="me-2"
+                  style={{
+                    background: "#9e3369",
+                    color: "var(--secondary-color-light)",
+                    padding: "2px 10px",
+                    borderRadius: "5px",
+                  }}
+                  onClick={myContext.changeLanguage}
+                >
                   {myContext.isHindi ? "English" : "हिन्दी"}
                 </button>
               </div>
@@ -130,7 +135,7 @@ export default function NavBar() {
             </Nav>
             {user ? (
               <>
-                <Nav  navbarScroll>
+                <Nav navbarScroll>
                   <NavDropdown
                     title={
                       <span
@@ -152,17 +157,16 @@ export default function NavBar() {
                     bg="dark"
                     align="end"
                   >
-                  
-                    <NavDropdown.Item   onClick={() => navigate("/about")}>
-                      Profile
+                    <NavDropdown.Item onClick={() => navigate("/about")}>
+                      {data?.profile}
                     </NavDropdown.Item>
                     {userData?.category === "customer" ? (
                       <>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item 
+                        <NavDropdown.Item
                           onClick={() => navigate("/activities")}
                         >
-                          Activities
+                          {data?.activities}
                         </NavDropdown.Item>
                       </>
                     ) : (
@@ -170,10 +174,10 @@ export default function NavBar() {
                     )}
 
                     <NavDropdown.Divider />
-                    <NavDropdown.Item 
+                    <NavDropdown.Item
                       onClick={() => navigate("/connection-requests")}
                     >
-                      Connection Requests
+                      {data?.connectionRequests}
                     </NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
