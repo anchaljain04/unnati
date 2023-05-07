@@ -54,7 +54,6 @@ function ConnectionRequests() {
   const [isDone, setIsDone] = useState(false);
   const [message, setMessage] = useState("");
 
-  const [feedbackData, setFeedbackData] = useState([]);
   const navigate = useNavigate();
 
   const [isCustomer, setIsCustomer] = useState(false);
@@ -73,29 +72,37 @@ function ConnectionRequests() {
     };
   }
 
-  const isExistingFeedback = (requirementId) => {
-    axios
-      .get("http://localhost:8000/feedback/get")
-      .then((res) => {
-        setFeedbackData(res.data);
-      })
-      .catch((error) => console.log(error));
-    const exists = feedbackData.filter(
-      (item) => item.requirementId === requirementId
-    );
-    if (exists.length > 0) {
-      return true;
-    }
-  };
-
   const apiCall = () => {
     axios
       .get(url, raw)
       .then((response) => {
         if (user?.category === "customer") {
           setIsCustomer(true);
-          setRequestReceived(
-            response.data.filter((item) => item.sentBy === "provider")
+          axios
+            .get("http://localhost:8000/feedback/get")
+            .then((res) => {
+              const updatedRequests = filteredReq.map((item) => {
+                let firstAttempt = false;
+                res.data.map((ele) => {
+                  if (
+                    firstAttempt ||
+                    ele.requirementId === item?.requirementId?._id
+                  ) {
+                    item.feedBackSent = true;
+                    firstAttempt = true;
+                    return item;
+                  } else {
+                    item.feedBackSent = false;
+                  }
+                  return item;
+                });
+                return item;
+              });
+              setRequestReceived(updatedRequests);
+            })
+            .catch((error) => console.log(error));
+          const filteredReq = response.data.filter(
+            (item) => item.sentBy === "provider"
           );
         } else {
           setRequestReceived(
@@ -151,6 +158,7 @@ function ConnectionRequests() {
           message: message,
         })
         .then((res) => {
+          console.log(res);
           setIsDone(true);
         })
         .catch((error) => console.log(error));
@@ -239,6 +247,7 @@ function ConnectionRequests() {
                       <th>Provider's Address</th>
                       <th>Provider's Experience</th>
                       <th>Provider's Availability</th>
+                      <th>Provider's Rating</th>
                     </>
                   ) : (
                     <>
@@ -286,6 +295,11 @@ function ConnectionRequests() {
                           <td>{request?.providerId?.experience}</td>
                           <td>
                             {request?.providerId?.availabilityTime || "-"}
+                          </td>
+                          <td>
+                            {request?.providerId?.rating
+                              ? request?.providerId?.rating + "/" + 5
+                              : "-"}
                           </td>
                         </>
                       ) : (
@@ -361,7 +375,7 @@ function ConnectionRequests() {
                       </td>
                       {isCustomer &&
                       request.status === "accepted" &&
-                      !isExistingFeedback(request?.requirementId?._id) ? (
+                      !request.feedBackSent ? (
                         <td
                           className="table-borderless"
                           style={{

@@ -153,6 +153,7 @@ export default function ProviderData() {
                 <th>Availability</th>
                 <th>Experience</th>
                 <th>Availability</th>
+                <th>Rating</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -174,6 +175,7 @@ export default function ProviderData() {
                         ? provider?.availabilityTime
                         : "-"}
                     </td>
+                    <td>{provider?.rating ? provider?.rating : "-"}</td>
                     <td>
                       {provider.isRequestSent ? (
                         "sent"
@@ -191,7 +193,13 @@ export default function ProviderData() {
             </tbody>
           </Table>
         )}
-        <h4 style={{ marginTop: "50px", color: "white",textShadow: "2px 2px black", }}>
+        <h4
+          style={{
+            marginTop: "50px",
+            color: "white",
+            textShadow: "2px 2px black",
+          }}
+        >
           Not found suitable provider?
           <br />
           Post your requirement now:
