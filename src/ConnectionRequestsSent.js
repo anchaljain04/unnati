@@ -70,13 +70,8 @@ function ConnectionRequestsSent() {
           {requestSent.length === 0 ? (
             <h2>{data?.notProviderData}</h2>
           ) : (
-            <Table
-              striped
-              bordered
-              hover
-              style={{ width: "85%", margin: "auto" }}
-            >
-              <thead style={{ color: "#870A30" }}>
+            <Table bordered hover style={{ width: "85%", margin: "auto" }}>
+              <thead style={{ background: "#330033", color: "white" }}>
                 <tr>
                   <th>S. No.</th>
                   <th>{data?.requirementOf}</th>
@@ -97,7 +92,7 @@ function ConnectionRequestsSent() {
                   <th>{data?.action}</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody style={{ background: "#990099", color: "white" }}>
                 {requestSent === [] ? (
                   <h1>{data?.loading}</h1>
                 ) : (

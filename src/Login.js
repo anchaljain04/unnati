@@ -254,6 +254,7 @@ function Login() {
                   marginRight: "5px",
                   transform: "scale(1.3)",
                   verticalAlign: "middle",
+                  
                 }}
               />
               <label loginFor="foc" style={{ marginBottom: "15px" }}>
@@ -270,6 +271,7 @@ function Login() {
                   border: "none",
                   height: "30px",
                   padding: "5px 10px",
+                  border:'1px solid var(--primary-color)' 
                 }}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -284,6 +286,7 @@ function Login() {
                     border: "none",
                     height: "30px",
                     padding: "5px 10px",
+                    border:'1px solid var(--primary-color)' 
                   }}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -347,6 +350,7 @@ function Login() {
                   border: "none",
                   height: "30px",
                   padding: "5px 10px",
+                  border:'1px solid var(--primary-color)' 
                 }}
                 required
                 onChange={(e) => setName(e.target.value)}
@@ -361,6 +365,7 @@ function Login() {
                   border: "none",
                   height: "30px",
                   padding: "5px 10px",
+                  border:'1px solid var(--primary-color)' 
                 }}
                 required
                 onChange={(e) => setEmail(e.target.value)}
@@ -377,6 +382,7 @@ function Login() {
                     border: "none",
                     height: "30px",
                     padding: "5px 10px",
+                    border:'1px solid var(--primary-color)' 
                   }}
                   required
                   onChange={(e) => setPassword(e.target.value)}
@@ -404,6 +410,7 @@ function Login() {
                   border: "none",
                   height: "30px",
                   padding: "5px 10px",
+                  border:'1px solid var(--primary-color)' 
                 }}
                 required
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -418,6 +425,7 @@ function Login() {
                   border: "none",
                   height: "30px",
                   padding: "5px 10px",
+                  border:'1px solid var(--primary-color)' 
                 }}
                 required
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -434,6 +442,7 @@ function Login() {
                   border: "none",
                   height: "30px",
                   padding: "5px 10px",
+                  border:'1px solid var(--primary-color)' 
                 }}
                 required
                 onChange={(e) => setAddress(e.target.value)}
@@ -447,6 +456,7 @@ function Login() {
                   borderRadius: "5px",
                   padding: "0px 5px",
                   marginBottom: "10px",
+                  border:'1px solid var(--primary-color)' 
                 }}
                 value={securityQues}
                 onChange={(e) => setSecurityQues(e.target.value)}
@@ -472,6 +482,7 @@ function Login() {
                   border: "none",
                   height: "30px",
                   padding: "5px 10px",
+                  border:'1px solid var(--primary-color)' 
                 }}
                 required
                 onChange={(e) => setSecurityAns(e.target.value)}
@@ -485,6 +496,7 @@ function Login() {
                   borderRadius: "5px",
                   padding: "0px 5px",
                   marginBottom: "10px",
+                  border:'1px solid var(--primary-color)' 
                 }}
                 value={category}
                 onChange={handleChange}
@@ -506,6 +518,7 @@ function Login() {
                       border: "none",
                       borderRadius: "5px",
                       padding: "0px 5px",
+                      border:'1px solid var(--primary-color)' 
                     }}
                     value={service}
                     onChange={(e) => setService(e.target.value)}
@@ -530,6 +543,7 @@ function Login() {
                       border: "none",
                       borderRadius: "5px",
                       padding: "0px 5px",
+                      border:'1px solid var(--primary-color)' 
                     }}
                     value={experience}
                     onChange={(e) => setExperience(e.target.value)}
@@ -551,6 +565,7 @@ function Login() {
                       border: "none",
                       borderRadius: "5px",
                       padding: "0px 5px",
+                      border:'1px solid var(--primary-color)' 
                     }}
                     value={availability}
                     onChange={(e) => setAvailability(e.target.value)}

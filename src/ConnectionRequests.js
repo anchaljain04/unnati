@@ -563,26 +563,35 @@ function ConnectionRequests() {
                       <>
                         <option value="remarkable">Remarkable</option>
                         <option value="stunning">Stunning</option>
+                        <option value="tremendous">Tremendous</option>
+                        <option value="amazing">Amazing</option>
                       </>
                     ) : optionValue === "happy" ? (
                       <>
-                        <option value="remarkable">Remarkable</option>
-                        <option value="stunning">Stunning</option>
+                        <option value="satisfied">Satisfied</option>
+                        <option value="fantastic">Fantastic</option>
+                        <option value="grateful">Grateful</option>
+                        <option value="pleased">Pleased</option>
                       </>
                     ) : optionValue === "average" ? (
                       <>
-                        <option value="remarkable">Remarkable</option>
-                        <option value="stunning">Stunning</option>
+                        <option value="nice">Nice</option>
+                        <option value="fine">Fine</option>
+                        <option value="glad">Glad</option>
                       </>
-                    ) : optionValue === "veryHappy" ? (
+                    ) : optionValue === "unhappy" ? (
                       <>
-                        <option value="remarkable">Remarkable</option>
-                        <option value="stunning">Stunning</option>
+                        <option value="unsatisfied">Unsatisfied</option>
+                        <option value="bad">Bad</option>
+                        <option value="poor">Poor</option>
+                        <option value="annoying">Annoying</option>
                       </>
-                    ) : optionValue === "veryHappy" ? (
+                    ) : optionValue === "veryUnhappy" ? (
                       <>
-                        <option value="remarkable">Remarkable</option>
-                        <option value="stunning">Stunning</option>
+                        <option value="terrified">Terrible</option>
+                        <option value="notGood">Not Good</option>
+                        <option value="disappointed">Disappointed</option>
+                        <option value="veryPoor">Very Poor</option>
                       </>
                     ) : (
                       ""
