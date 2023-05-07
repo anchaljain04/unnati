@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 
-import NavBar2 from "./NavBar2";
+import NavBar from "./NavBar";
 import {
   MDBContainer,
   MDBTabs,
@@ -46,9 +46,9 @@ function Login2() {
 
   const handleChange = (e) => {
     setCategory(e.target.value);
-    if (e.target.value === "प्रदाता") {
+    if (e.target.value === "provider") {
       setShowService(true);
-    } else if (e.target.value === "ग्राहक") {
+    } else if (e.target.value === "customer") {
       setShowService(false);
     }
   };
@@ -57,7 +57,7 @@ function Login2() {
     e.preventDefault();
     if (password !== confirmPassword) {
       window.alert("पासवर्ड मेल नहीं खाता");
-    } else if (category === "प्रदाता") {
+    } else if (category === "provider") {
       if (
         !name ||
         !email ||
@@ -145,7 +145,7 @@ function Login2() {
     if (!role || !email || !password) {
       window.alert("कृपया सभी विवरण भरें!");
     } else {
-      if (role === "प्रदाता") {
+      if (role === "provider") {
         url = "http:///localhost:8000/provider/login";
       } else if (role === "customer") {
         url = "http://localhost:8000/user/login";
@@ -179,7 +179,7 @@ function Login2() {
         height: "120vh",
       }}
     >
-      <NavBar2 />
+      <NavBar />
 
       <MDBContainer
         className="p-3 my-5 d-flex flex-column "
@@ -476,6 +476,7 @@ function Login2() {
                 <option value="customer"> ग्राहक</option>
               </select>
               <br />
+              {console.log("<<<<<<<<<<<",showService)}
               {showService ? (
                 <>
                   <label>सेवा प्रदान करना</label>

@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./NavBar.css";
 
 import Container from "react-bootstrap/Container";
-
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-
+import AppContext from "./context/AppContext";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ToastComp from "./ToastComp";
 
 export default function NavBar() {
   const navigate = useNavigate();
   const user = localStorage.getItem("Profile");
-  
+  const myContext = useContext(AppContext);
+
   const userData = JSON.parse(user);
   const handleClick = (service) => {
     user
@@ -26,6 +25,7 @@ export default function NavBar() {
         );
   };
 
+  const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
   return (
     <div
       style={{
@@ -45,34 +45,33 @@ export default function NavBar() {
               navbarScroll
             >
               <NavDropdown
-                title="Services"
+                title={data?.services}
                 id="navbarScrollingDropdown"
                 className="ms-2"
-                // bg="dark"
                 href="/services"
               >
                 <NavDropdown.Item onClick={() => handleClick("maid")}>
-                  Maid
+                  {data?.maidService}
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleClick("carpenter")}>
-                  Carpenter{" "}
+                  {data?.carpenterService}{" "}
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleClick("electrician")}>
-                  Electrician{" "}
+                  {data?.electricianService}{" "}
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleClick("plumber")}>
-                  Plumber
+                  {data?.plumberService}
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleClick("painter")}>
-                  Painter
+                  {data?.painterService}
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleClick("chef")}>
-                  Chef
+                  {data?.chefService}
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
@@ -85,9 +84,17 @@ export default function NavBar() {
               }}
               onClick={() => navigate("/")}
             >
-              <strong>UNNATI</strong>
+              <strong>{data?.navTitle}</strong>
             </Navbar.Brand>
-            
+            {window.location.pathname === "/" ? (
+              <div>
+                <button onClick={myContext.changeLanguage}>
+                  {myContext.isHindi ? "English" : "हिन्दी"}
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
             <Nav
               className="ms-2 me-2"
               style={{ maxHeight: "100px" }}
@@ -109,7 +116,7 @@ export default function NavBar() {
                     color: "var(--secondary-color-light)",
                   }}
                 >
-                  Logout
+                  {data?.logout}
                 </Nav.Link>
               ) : (
                 <Nav.Link
@@ -176,16 +183,6 @@ export default function NavBar() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* <nav className="navbar navbar-expand-sm bg-dark navbar-dark px-sm-5">
-        <ul className="navbar-nav align-items-center">
-          <li className="nav-item ml-5">
-            <Link to ="/" className="services">Services</Link>
-          </li>
-        </ul>
-        <Link to ="/">
-          <p className="navbar-brand"> UNNATI</p>
-        </Link>
-      </nav> */}
     </div>
   );
 }

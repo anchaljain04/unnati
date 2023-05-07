@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
 import axios from "axios";
 import { Table } from "react-bootstrap";
+import AppContext from "./context/AppContext";
 
 function ConnectionRequestsSent() {
   const [requestSent, setRequestSent] = useState([]);
   const userData = localStorage.getItem("Profile");
   const user = JSON.parse(userData);
-
+  const myContext = useContext(AppContext);
+  const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
   const [isCustomer, setIsCustomer] = useState(false);
 
   let url;
@@ -55,7 +57,7 @@ function ConnectionRequestsSent() {
             textShadow: "1px 1px black",
           }}
         >
-          "List of connection requests you have sent"
+          {data?.connectionRequestSentTitle}
         </h2>
         <div
           className="container"
@@ -66,53 +68,65 @@ function ConnectionRequestsSent() {
           }}
         >
           {requestSent.length === 0 ? (
-            <h2>No data Available at the moment!</h2>
+            <h2>{data?.notProviderData}</h2>
           ) : (
             <Table
               striped
               bordered
               hover
-              
               style={{ width: "85%", margin: "auto" }}
             >
-              <thead style={{color: "#870A30"}}>
+              <thead style={{ color: "#870A30" }}>
                 <tr>
                   <th>S. No.</th>
-                  <th>Requirement of</th>
+                  <th>{data?.requirementOf}</th>
                   {isCustomer ? (
                     <>
-                      <th>Provider's Name</th>
-                      <th>Provider's Address</th>
-                      <th>Provider's Experience</th>
+                      <th>{data?.provider + " " + data?.name}</th>
+                      <th>{data?.provider + " " + data?.address}</th>
+                      <th>{data?.provider + " " + data?.experience}</th>
                     </>
                   ) : (
                     <>
-                      <th>Requirement Posted On</th>
-                      <th>Required Experience</th>
-                      <th>Customer's Name</th>
-                      <th>Customer's Address</th>
+                      <th>{data?.requirementPostedOn}</th>
+                      <th>{data?.requiredExperience}</th>
+                      <th>{data?.customer + " " + data?.name}</th>
+                      <th>{data?.customer + " " + data?.address}</th>
                     </>
                   )}
-                  <th>Action taken</th>
+                  <th>{data?.action}</th>
                 </tr>
               </thead>
               <tbody>
                 {requestSent === [] ? (
-                  <h1>Loading</h1>
+                  <h1>{data?.loading}</h1>
                 ) : (
                   requestSent.map((request, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
                       {isCustomer ? (
                         <>
-                          <td>{request?.providerId?.serviceProviding}</td>
+                          <td>
+                            {
+                              data?.[
+                                request?.providerId?.serviceProviding +
+                                  "Service"
+                              ]
+                            }
+                          </td>
                           <td>{request.providerId.name}</td>
                           <td>{request.providerId.address}</td>
                           <td>{request?.providerId?.experience}</td>
                         </>
                       ) : (
                         <>
-                          <td>{request?.requirementId?.service}</td>
+                          <td>
+                            {
+                              data?.[
+                                request?.requirementId?.service + "Service"
+                              ]
+                            }
+                          </td>
                           <td>
                             {moment(request?.requirementId?.createdAt).format(
                               "DD-MM-YYYY"

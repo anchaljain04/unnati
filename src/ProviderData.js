@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
 import Box from "@mui/material/Box";
@@ -6,6 +6,7 @@ import Modal from "@mui/material/Modal";
 import { Table } from "react-bootstrap";
 import PostRequirements from "./PostRequirements";
 import { useNavigate } from "react-router-dom";
+import AppContext from "./context/AppContext";
 
 const style = {
   position: "absolute",
@@ -23,7 +24,10 @@ const style = {
 export default function ProviderData() {
   const location = window.location.pathname.split("/").pop();
   const [providers, setProviders] = useState([]);
+  const myContext = useContext(AppContext);
+  const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
 
+  let serviceName = location + "" + "Service";
   const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);
@@ -118,7 +122,17 @@ export default function ProviderData() {
           textShadow: "2px 2px black",
         }}
       >
-        List of Service Providers for {location.toLocaleUpperCase()} service
+        {myContext.isHindi
+          ? data?.[serviceName] +
+            " " +
+            data?.service +
+            " " +
+            data?.providerDataTitle
+          : data?.providerDataTitle +
+            " " +
+            data?.[serviceName] +
+            " " +
+            data?.service}{" "}
       </h1>
       <div
         className="container"
@@ -134,7 +148,7 @@ export default function ProviderData() {
               textShadow: "2px 2px black",
             }}
           >
-            No data Available at the moment!
+            {data?.noProviderData}
           </h2>
         ) : (
           <Table
@@ -147,28 +161,25 @@ export default function ProviderData() {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Availability</th>
-                <th>Experience</th>
-                <th>Availability</th>
-                <th>Rating</th>
-                <th>Action</th>
+                <th>{data?.fullName}</th>
+                <th>{data?.email}</th>
+                <th>{data?.address}</th>
+                <th>{data?.experience}</th>
+                <th>{data?.availability}</th>
+                <th>{data?.rating}</th>
+                <th>{data?.action}</th>
               </tr>
             </thead>
             <tbody>
               {providers === [] ? (
-                <h1>Loading</h1>
+                <h1>{data?.loading}</h1>
               ) : (
                 providers.map((provider, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{provider.name}</td>
                     <td>{provider.email}</td>
-                    
                     <td>{provider.address}</td>
-                    <td>Yes</td>
                     <td>{provider.experience}</td>
                     <td>
                       {provider?.availabilityTime
@@ -178,12 +189,12 @@ export default function ProviderData() {
                     <td>{provider?.rating ? provider?.rating : "-"}</td>
                     <td>
                       {provider.isRequestSent ? (
-                        "sent"
+                        data?.sent
                       ) : (
                         <button
                           onClick={(e) => handleConnectClick(e, provider)}
                         >
-                          connect
+                          {data?.connect}
                         </button>
                       )}
                     </td>
@@ -200,9 +211,9 @@ export default function ProviderData() {
             textShadow: "2px 2px black",
           }}
         >
-          Not found suitable provider?
+          {data?.notFoundProvider[0]}
           <br />
-          Post your requirement now:
+          {data?.notFoundProvider[1]}
         </h4>
         <PostRequirements />
       </div>

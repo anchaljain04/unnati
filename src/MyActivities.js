@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import NavBar from "./NavBar";
 import axios from "axios";
 import moment from "moment";
 import { Table } from "react-bootstrap";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import AppContext from "./context/AppContext";
+
 import Tooltip from "@mui/material/Tooltip";
 
 function MyActivities() {
   const userData = localStorage.getItem("Profile");
   const user = JSON.parse(userData);
+  const myContext = useContext(AppContext);
+  const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
   const [requirementData, setRequirementData] = useState([]);
   useEffect(() => {
     axios
@@ -58,7 +62,7 @@ function MyActivities() {
           textShadow: "1px 1px black",
         }}
       >
-        Requirements posted:
+        {data?.myActivitiesTitle}
       </h2>
       <div
         style={{
@@ -73,7 +77,7 @@ function MyActivities() {
                 color: "white",
               }}
             >
-              You haven't posted any requirement yet
+              {data?.myActivitiesEmpty}
             </h2>
           </>
         ) : (
@@ -88,21 +92,21 @@ function MyActivities() {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Service required</th>
-                  <th>Experience required</th>
-                  <th>Address</th>
-                  <th>Date of posting</th>
-                  <th>Action</th>
+                  <th>{data?.serviceRequired}</th>
+                  <th>{data?.requiredExperience}</th>
+                  <th>{data?.address}</th>
+                  <th>{data?.dateOfPosting}</th>
+                  <th>{data?.action}</th>
                 </tr>
               </thead>
               <tbody>
                 {requirementData === [] ? (
-                  <h1>Loading</h1>
+                  <h1>{data?.loading}</h1>
                 ) : (
                   requirementData.map((requirement, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
-                      <td>{requirement.service}</td>
+                      <td>{data?.[requirement.service + "Service"]}</td>
                       <td>{requirement.experience}</td>
                       <td>{requirement.address}</td>
                       <td>
@@ -116,7 +120,7 @@ function MyActivities() {
                                 fontSize: "14px",
                               }}
                             >
-                              delete
+                              {data?.delete}
                             </span>
                           }
                           placement="right"

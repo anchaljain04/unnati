@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import ToastComp from "./ToastComp";
+import AppContext from "./context/AppContext";
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Sansita&display=swap');
@@ -9,9 +9,12 @@ import ToastComp from "./ToastComp";
 
 function Home() {
   const user = localStorage.getItem("Profile");
+  const myContext = useContext(AppContext);
+  const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
+
   return (
     <>
-    {/* <ToastComp style={{position:"fixed" , top:0 ,right:"40px"}}/> */}
+      {/* <ToastComp style={{position:"fixed" , top:0 ,right:"40px"}}/> */}
       <div
         style={{
           backgroundImage: 'url("/images/bg4.png")',
@@ -38,7 +41,7 @@ function Home() {
             textShadow: "1px 1px var(--secondary-color-light)",
           }}
         >
-          UNNATI - THE SERVICE PROVIDER
+          {data?.homeTitle}
         </h1>
         <br />
         <div
@@ -65,7 +68,7 @@ function Home() {
                   fontFamily: "'Sansita', sans-serif",
                 }}
               >
-                See the requirements of our customers
+                {data?.homeDivP}
               </h2>
               <Link
                 to="/requirements"
@@ -84,7 +87,7 @@ function Home() {
                     border: "1px solid var(--primary-color)",
                   }}
                 >
-                  Explore Now{" "}
+                  {data?.exploreNow}{" "}
                 </Button>
               </Link>
             </>
@@ -99,11 +102,10 @@ function Home() {
                   fontFamily: "'Sansita', sans-serif",
                 }}
               >
-                Welcome to UNNATI for the unnati of local workers and for people
-                who need workers .<br />
-                <br /> Here, we provide various services of and for local
-                workers for our day to day services like maids, plumbers,
-                carpenters, electricians, painters etc.
+                {data?.homeDivC[0]}
+                <br />
+                <br />
+                {data?.homeDivC[1]}
               </h2>
               <br />
               <Link
@@ -123,7 +125,7 @@ function Home() {
                     border: "1px solid var(--primary-color)",
                   }}
                 >
-                  Explore Now{" "}
+                  {data?.exploreNow}{" "}
                 </Button>
               </Link>
             </>

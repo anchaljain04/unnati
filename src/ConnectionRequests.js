@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
 import axios from "axios";
 import NavBar from "./NavBar";
@@ -10,6 +10,7 @@ import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 import ConnectionRequestsSent from "./ConnectionRequestsSent";
+import AppContext from "./context/AppContext";
 import Tooltip from "@mui/material/Tooltip";
 
 const style = {
@@ -29,6 +30,8 @@ function ConnectionRequests() {
   const [requestReceived, setRequestReceived] = useState([]);
   const userData = localStorage.getItem("Profile");
   const user = JSON.parse(userData);
+  const myContext = useContext(AppContext);
+  const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -205,7 +208,7 @@ function ConnectionRequests() {
         paddingBottom: "20px",
       }}
     >
-      {/* <NavBar /> */}
+      <NavBar />
       <div>
         <h2
           style={{
@@ -216,7 +219,7 @@ function ConnectionRequests() {
             textShadow: "1px 1px black",
           }}
         >
-          "List of connection requests you received"
+          {data?.connectionRequestTitle}
         </h2>
         <div
           className="container"
@@ -226,28 +229,27 @@ function ConnectionRequests() {
           }}
         >
           {requestReceived.length === 0 ? (
-            <h2 style={{ color: "white" }}>No data Available at the moment!</h2>
+            <h2 style={{ color: "white" }}>{data?.notProviderData}</h2>
           ) : (
             <Table
               striped
               bordered
               hover
-              
               style={{ width: "90%", margin: "auto" }}
             >
-              <thead style={{background: "#870A30", color:"white"}}>
+              <thead style={{ background: "#870A30", color: "white" }}>
                 <tr>
                   <th>S. No.</th>
-                  <th>Requirement of</th>
+                  <th>{data?.requirementOf}</th>
                   {isCustomer ? (
                     <>
-                      <th>Requirement Posted On</th>
-                      <th>Required Experience</th>
-                      <th>Provider's Name</th>
-                      <th>Provider's Address</th>
-                      <th>Provider's Experience</th>
-                      <th>Provider's Availability</th>
-                      <th>Provider's Rating</th>
+                      <th>{data?.requirementPostedOn}</th>
+                      <th>{data?.requiredExperience}</th>
+                      <th>{data?.provider + " " + data?.name}</th>
+                      <th>{data?.provider + " " + data?.address}</th>
+                      <th>{data?.provider + " " + data?.experience}</th>
+                      <th>{data?.provider + " " + data?.availability}</th>
+                      <th>{data?.provider + " " + data?.rating}</th>
                     </>
                   ) : (
                     <>
@@ -255,7 +257,7 @@ function ConnectionRequests() {
                       <th>Customer's Address</th>
                     </>
                   )}
-                  <th>"Wish to connect?"</th>
+                  <th>{data?.wishToConnect}</th>
                   {isCustomer ? (
                     <th
                       style={{
@@ -273,17 +275,25 @@ function ConnectionRequests() {
                   )}
                 </tr>
               </thead>
-              <tbody style={{background:"#870A30" , color:"white"}}>
+              <tbody style={{ background: "#870A30", color: "white" }}>
                 {requestReceived === [] ? (
-                  <h1>Loading</h1>
+                  <h1>{data?.loading}</h1>
                 ) : (
                   requestReceived.map((request, index) => (
-                    <tr style={{background:"#870A30" , color:"white"}}
-                     key={index}>
-                      <td >{index + 1}</td>
+                    <tr
+                      style={{ background: "#870A30", color: "white" }}
+                      key={index}
+                    >
+                      <td>{index + 1}</td>
                       {isCustomer ? (
                         <>
-                          <td>{request?.requirementId?.service}</td>
+                          <td>
+                            {
+                              data?.[
+                                request?.requirementId?.service + "Service"
+                              ]
+                            }
+                          </td>
                           <td>
                             {moment(request?.requirementId?.createdAt).format(
                               "DD-MM-YYYY"
@@ -320,7 +330,7 @@ function ConnectionRequests() {
                                       fontSize: "14px",
                                     }}
                                   >
-                                    accept
+                                    {data?.accept}
                                   </span>
                                 }
                                 placement="right"
@@ -348,7 +358,7 @@ function ConnectionRequests() {
                                       fontSize: "14px",
                                     }}
                                   >
-                                    reject
+                                    {data?.reject}
                                   </span>
                                 }
                                 placement="right"
@@ -405,7 +415,7 @@ function ConnectionRequests() {
                               fontSize: "14px",
                             }}
                           >
-                            give feedback
+                            {data?.giveFeedback}
                           </button>
                         </td>
                       ) : (
@@ -441,25 +451,20 @@ function ConnectionRequests() {
         >
           <Box sx={style}>
             <div style={{ textAlign: "center" }}>
-              <h4>You have successfully accepted the request.</h4>
+              <h4>{data?.sentRequestSuccess[0]}</h4>
               <br />
               {isCustomer ? (
                 <>
-                  <h5>
-                    Contact details of the provider will be sent to your e-mail
-                    soon.
-                  </h5>
+                  <h5>{data?.sentRequestSuccess[1]}</h5>
                   <br />
                 </>
               ) : (
                 <>
-                  <h5>
-                    Your contact details will be shared with the user soon.
-                  </h5>
+                  <h5>Y{data?.sentRequestSuccess[2]}</h5>
                   <br />
                 </>
               )}
-              <h5>Thank you for your visit.</h5>
+              <h5>{data?.sentRequestSuccess[3]}</h5>
             </div>
             <div style={{ textAlign: "center", marginTop: "25px" }}>
               <button
@@ -473,7 +478,7 @@ function ConnectionRequests() {
                 }}
                 onClick={handleClose}
               >
-                Close
+                {data?.close}
               </button>
             </div>
           </Box>
@@ -488,10 +493,10 @@ function ConnectionRequests() {
             {isDone ? (
               <div style={{ textAlign: "center" }}>
                 <h4 style={{ marginTop: "10px", textShadow: "1px 1px white" }}>
-                  Thank you for your time. Your feedback is valuable to us.
+                  {data?.feedbackSuccess[0]}
                   <br />
                   <br />
-                  Have a nice day.
+                  {data?.feedbackSuccess[1]}
                 </h4>
                 <div style={{ textAlign: "center" }}>
                   <button
@@ -507,14 +512,14 @@ function ConnectionRequests() {
                     }}
                     onClick={() => navigate("/")}
                   >
-                    close
+                    {data?.close}
                   </button>
                 </div>
               </div>
             ) : (
               <>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h5>Feedback</h5>
+                  <h5>{data?.feedback}</h5>
                   <button
                     onClick={handleCloseFeedback}
                     style={{
@@ -534,7 +539,7 @@ function ConnectionRequests() {
                 <label
                   style={{ fontWeight: "500", textShadow: "1px 1px white" }}
                 >
-                  How was your experience?
+                  {data?.feedbackQuestions[0]}
                 </label>
                 <select
                   style={{
@@ -550,7 +555,7 @@ function ConnectionRequests() {
                   onChange={(e) => setExperience(e.target.value)}
                 >
                   <option value="" hidden>
-                    select
+                    {data?.select}
                   </option>
                   <option value="happy">Happy</option>
                   <option value="unhappy">Unhappy</option>
@@ -558,7 +563,7 @@ function ConnectionRequests() {
                 <label
                   style={{ fontWeight: "500", textShadow: "1px 1px white" }}
                 >
-                  How would you describe the service of our provider?
+                  {data?.feedbackQuestions[1]}
                 </label>
                 <select
                   style={{
@@ -574,7 +579,7 @@ function ConnectionRequests() {
                   onChange={(e) => setFeedback(e.target.value)}
                 >
                   <option value="" hidden>
-                    select
+                    {data?.select}
                   </option>
                   <option value="fantastic">Fantastic</option>
                   <option value="average">Average</option>
@@ -583,7 +588,7 @@ function ConnectionRequests() {
                 <label
                   style={{ fontWeight: "500", textShadow: "1px 1px white" }}
                 >
-                  Anything else you want to share?
+                  {data?.feedbackQuestions[2]}
                 </label>
                 <TextField
                   type="text"
@@ -609,7 +614,7 @@ function ConnectionRequests() {
                     }}
                     onClick={handleSubmitFeedback}
                   >
-                    Submit
+                    {data?.submit}
                   </button>
                 </div>
               </>

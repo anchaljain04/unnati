@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
+import AppContext from "./context/AppContext";
 
 export default function Services() {
   const navigate = useNavigate();
+  const myContext = useContext(AppContext);
+  const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
   let user = localStorage.getItem("Profile");
   const handleClick = (service) => {
     user
@@ -44,7 +47,7 @@ export default function Services() {
             height="180px"
           />
           <Card.Body>
-            <Card.Title>Maid Services</Card.Title>
+            <Card.Title>{data?.maidService + " " + data?.services}</Card.Title>
             <Card.Text>
               Want to make your home clean and hygienic. Let our reliable maids
               help you with your household works. Click below to contact them
@@ -62,7 +65,7 @@ export default function Services() {
                 border: "1px solid var(--primary-color)",
               }}
             >
-              Explore{" "}
+              {data?.explore}{" "}
             </Button>
           </Card.Body>
         </Card>
@@ -81,7 +84,9 @@ export default function Services() {
             height="180px"
           />
           <Card.Body>
-            <Card.Title>Carpenter Services</Card.Title>
+            <Card.Title>
+              {data?.carpenterService + " " + data?.services}
+            </Card.Title>
             <Card.Text>
               Want anyone to construct, repair or install frameworks and
               structure for your home . Click below to contact our hardworking
@@ -97,7 +102,7 @@ export default function Services() {
                 border: "1px solid var(--primary-color)",
               }}
             >
-              Explore{" "}
+              {data?.explore}{" "}
             </Button>
           </Card.Body>
         </Card>
@@ -116,7 +121,9 @@ export default function Services() {
             height="180px"
           />
           <Card.Body>
-            <Card.Title>Electrician Services</Card.Title>
+            <Card.Title>
+              {data?.electricianService + " " + data?.services}
+            </Card.Title>
             <Card.Text>
               Want to correct your lose wires . Click below to contact our
               electricians for all kinds of electrical work like
@@ -132,7 +139,7 @@ export default function Services() {
                 border: "1px solid var(--primary-color)",
               }}
             >
-              Explore{" "}
+              {data?.explore}{" "}
             </Button>
           </Card.Body>
         </Card>
@@ -153,7 +160,9 @@ export default function Services() {
             height="180px"
           />
           <Card.Body>
-            <Card.Title>Plumber Services</Card.Title>
+            <Card.Title>
+              {data?.plumberService + " " + data?.services}
+            </Card.Title>
             <Card.Text>
               Want to correct the leaks . Click below to contact our plumbers to
               install or repair pipes and fixtures carrying water, gas or any
@@ -170,7 +179,7 @@ export default function Services() {
                 border: "1px solid var(--primary-color)",
               }}
             >
-              Explore{" "}
+              {data?.explore}{" "}
             </Button>
           </Card.Body>
         </Card>
@@ -189,7 +198,9 @@ export default function Services() {
             height="180px"
           />
           <Card.Body>
-            <Card.Title>Painter</Card.Title>
+            <Card.Title>
+              {data?.painterService + " " + data?.services}
+            </Card.Title>
             <Card.Text>
               Want to fix your walls and make your place more lively filled with
               colors. Contact our painters to apply paints and other decorative
@@ -205,7 +216,7 @@ export default function Services() {
                 border: "1px solid var(--primary-color)",
               }}
             >
-              Explore{" "}
+              {data?.explore}{" "}
             </Button>
           </Card.Body>
         </Card>
@@ -224,7 +235,7 @@ export default function Services() {
             height="180px"
           />
           <Card.Body>
-            <Card.Title>Chef</Card.Title>
+            <Card.Title>{data?.chefService + " " + data?.services}</Card.Title>
             <Card.Text>
               Want to have mouth watering food. Contact our cooks and chefs to
               have healthy, nutritious and delicious meals.
@@ -240,7 +251,7 @@ export default function Services() {
                 border: "1px solid var(--primary-color)",
               }}
             >
-              Explore{" "}
+              {data?.explore}{" "}
             </Button>
           </Card.Body>
         </Card>

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AppContext from "./context/AppContext";
 
 const style = {
   position: "absolute",
@@ -25,6 +26,8 @@ function PostRequirements() {
   const [experience, setExperience] = useState("");
   const [address, setAddress] = useState("");
   const [availability, setAvailability] = useState("");
+  const myContext = useContext(AppContext);
+  const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
 
   const userData = localStorage.getItem("Profile");
   const navigate = useNavigate();
@@ -35,7 +38,7 @@ function PostRequirements() {
       .post("http://localhost:8000/user/save-requirements", {
         name: user.name,
         email: user.email,
-        
+        mobile: user.mobile,
         service: service.toLowerCase(),
         experience: experience,
         address: address,
@@ -70,7 +73,7 @@ function PostRequirements() {
           padding: "8px 15px",
         }}
       >
-        Post Requirement
+        {data?.postRequirement}
       </Button>
       <Modal
         open={open}
@@ -81,7 +84,7 @@ function PostRequirements() {
         <Box sx={style}>
           <form>
             <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
-              Requirement of:
+              {data?.requirementOf}
             </label>
             <select
               style={{
@@ -96,17 +99,17 @@ function PostRequirements() {
               onChange={(e) => setService(e.target.value)}
             >
               <option value="" hidden>
-                select
+                {data?.select}
               </option>
-              <option>Maid</option>
-              <option>Carpenter</option>
-              <option>Electrician</option>
-              <option>Plumber</option>
-              <option>Painter</option>
-              <option>Chef</option>
+              <option value="maid">{data?.maidService}</option>
+              <option value="carpenter">{data?.carpenterService}</option>
+              <option value="electrician">{data?.electricianService}</option>
+              <option value="plumber">{data?.plumberService}</option>
+              <option value="painter">{data?.painterService}</option>
+              <option value="chef">{data?.chefService}</option>
             </select>
             <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
-              Required experience:
+              {data?.requiredExperience}:
             </label>
             <select
               style={{
@@ -121,7 +124,7 @@ function PostRequirements() {
               onChange={(e) => setExperience(e.target.value)}
             >
               <option value="" hidden>
-                select
+                {data?.select}
               </option>
               <option>0-1</option>
               <option>1-2</option>
@@ -131,7 +134,7 @@ function PostRequirements() {
             </select>
 
             <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
-              Preferred time:
+              {data?.preferredTime}
             </label>
             <select
               style={{
@@ -146,16 +149,16 @@ function PostRequirements() {
               onChange={(e) => setAvailability(e.target.value)}
             >
               <option value="" hidden>
-                select
+                {data?.select}
               </option>
-              <option>Morning Only</option>
-              <option>Evening Only</option>
-              <option>Morning-Evening</option>
-              <option>All Day</option>
-              <option>Anytime</option>
+              <option value="Morning Only">{data?.morningOnly}</option>
+              <option value="Evening Only">{data?.eveningOnly}</option>
+              <option value="Morning/Evening">{data?.morningEvening}</option>
+              <option value="All Day">{data?.allDay}</option>
+              <option value="Anytime">{data?.anytime}</option>
             </select>
             <label style={{ fontWeight: "500", textShadow: "1px 1px white" }}>
-              Address:
+              {data?.address}:
             </label>
             <br />
             <input
@@ -183,7 +186,7 @@ function PostRequirements() {
                 }}
                 onClick={handleSubmit}
               >
-                Submit
+                {data?.submit}
               </button>
               <button
                 style={{
@@ -197,7 +200,7 @@ function PostRequirements() {
                 }}
                 onClick={handleClose}
               >
-                Cancel
+                {data?.cancel}
               </button>
             </div>
           </form>

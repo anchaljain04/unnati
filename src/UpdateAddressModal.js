@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useContext} from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
+import AppContext from "./context/AppContext";
 import { useNavigate } from "react-router-dom";
 
 const style = {
@@ -28,7 +29,8 @@ function UpdateAddressModal() {
 
   const userData = localStorage.getItem("Profile");
   const userInfo = JSON.parse(userData);
-
+  const myContext = useContext(AppContext);
+  const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
   useEffect(() => {
     axios
       .get("http://localhost:8000/user/get-user-data", {
@@ -81,7 +83,7 @@ function UpdateAddressModal() {
           textDecoration: "underline",
         }}
       >
-        change
+        {data?.change}
       </button>
       <Modal
         open={open}
@@ -91,7 +93,7 @@ function UpdateAddressModal() {
       >
         <Box sx={style}>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <h5>Update address</h5>
+            <h5>{data?.updateAddressTitle}</h5>
             <button
               onClick={handleClose}
               style={{
@@ -109,7 +111,7 @@ function UpdateAddressModal() {
           </div>
 
           <br />
-          <h5>Enter new address:</h5>
+          <h5>{data?.enterNewAddress}</h5>
           <input
             type="text"
             onChange={(e) => setAddress(e.target.value)}
@@ -127,7 +129,7 @@ function UpdateAddressModal() {
               }}
               onClick={handleSubmit}
             >
-              Submit
+              {data?.submit}
             </button>
           </div>
         </Box>

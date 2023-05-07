@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
 import { Table } from "react-bootstrap";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import Tooltip from "@mui/material/Tooltip";
+import AppContext from "./context/AppContext";
 
 function Requirements() {
   const [requirements, setRequirements] = useState([]);
   const userData = localStorage.getItem("Profile");
   const user = JSON.parse(userData);
+  const myContext = useContext(AppContext);
+  const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
   let url;
   let raw;
   if (user.category === "customer") {
@@ -98,7 +101,7 @@ function Requirements() {
             color: "white",
           }}
         >
-          List of customer requirements
+          {data?.requirementsTitle}
         </h1>
         <div
           className="container"
@@ -108,7 +111,7 @@ function Requirements() {
           }}
         >
           {requirements.length === 0 ? (
-            <h2>No data Available at the moment!</h2>
+            <h2>{data?.notProviderData}</h2>
           ) : (
             <Table
               striped
@@ -120,18 +123,18 @@ function Requirements() {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Full Name</th>
-                  <th>Email</th>
-                  <th>Address</th>
-                  <th>Service Required</th>
-                  <th>Experience Required</th>
-                  <th>Preferred Time</th>
-                  <th>Action</th>
+                  <th>{data?.fullName}</th>
+                  <th>{data?.email}</th>
+                  <th>{data?.address}</th>
+                  <th>{data?.serviceRequired}</th>
+                  <th>{data?.experienceRequired}</th>
+                  <th>{data?.preferredTime}</th>
+                  <th>{data?.action}</th>
                 </tr>
               </thead>
               <tbody>
                 {requirements === [] ? (
-                  <h1>Loading</h1>
+                  <h1>{data?.loading}</h1>
                 ) : (
                   requirements.map((requirement, index) => (
                     <tr key={index}>
@@ -139,7 +142,7 @@ function Requirements() {
                       <td>{requirement.name}</td>
                       <td>{requirement.email}</td>
                       <td>{requirement.address}</td>
-                      <td>{requirement.service}</td>
+                      <td>{data?.[requirement.service + "Service"]}</td>
                       <td>{requirement.experience}</td>
                       <td>
                         {requirement?.availabilityTime
@@ -159,7 +162,7 @@ function Requirements() {
                                     fontSize: "14px",
                                   }}
                                 >
-                                  connect
+                                  {data?.connect}
                                 </span>
                               }
                               placement="right"
