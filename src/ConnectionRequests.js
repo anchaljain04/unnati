@@ -166,11 +166,13 @@ function ConnectionRequests() {
           message: message,
         })
         .then((res) => {
+          console.log("====",res);
           setIsDone(true);
         })
         .catch((error) => console.log(error));
     }
   };
+  console.log(isDone);
   const handleAccept = (e, request) => {
     e.preventDefault();
     axios

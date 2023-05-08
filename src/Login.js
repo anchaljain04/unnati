@@ -24,7 +24,7 @@ function Login() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhoneNumber] = useState("");
+  const [mobile, setMobileNumber] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [address, setAddress] = useState("");
   const [securityQues, setSecurityQues] = useState("");
@@ -63,7 +63,7 @@ function Login() {
         !name ||
         !email ||
         !password ||
-        !phone ||
+        !mobile||
         !address ||
         !securityQues ||
         !securityAns ||
@@ -79,7 +79,7 @@ function Login() {
             name,
             email,
             password,
-            phone,
+            mobile,
             address,
             category,
             serviceProviding: service,
@@ -106,7 +106,7 @@ function Login() {
         !name ||
         !email ||
         !password ||
-        !phone ||
+        !mobile ||
         !address ||
         !securityQues ||
         !securityAns ||
@@ -119,7 +119,7 @@ function Login() {
             name,
             email,
             password,
-            phone,
+            mobile,
             address,
             category,
             securityQues,
@@ -425,7 +425,7 @@ function Login() {
                   border: "1px solid var(--primary-color)",
                 }}
                 required
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                onChange={(e) => setMobileNumber(e.target.value)}
               />
 
               <label>Address:</label>
