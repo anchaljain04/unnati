@@ -20,7 +20,7 @@ Mridul Shinghal (1900140100068)
 
 Parul Sahni (1900140100078)
 
-To run the project using nodejs, run the the following steps -
+## To run the project using npm, run the the following steps -
 
 Open terminal in project path and run the following commands
 
