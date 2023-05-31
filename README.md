@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Unnati - A Service Provider
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Final Year Project
 
-## Available Scripts
+## Unnati - A Service Provider is an app for connecting the local venders and the customers.
 
-In the project directory, you can run:
+The project focuses on developing a system that presents a cross-platform for the customers to find the pople for their day to day work and for the local vendors to find the work easily.
 
-### `npm start`
+The primary objective of this web portal is to provide various opportunities to general handymen and domestic workers to earn their livelihood in a managed manner. This system also helps the people who are in need of these services.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+It has been observed that many a times the vendors/service providers are not given wages according to their skills or the inflation on the other side sometimes the customers do not get the house helps according to their need and many times unknowingly result in paying more money as they do not know other service providers in their locality. From there disadvantages, there is a need for a linkage between them so as to work efficiently. For the customers, they can quickly search for the help they need, if it is available or not.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Team Members
 
-### `npm test`
+Anchal Jain (1900140100014)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Mahak Agarwal (1900140100060)
 
-### `npm run build`
+Mridul Shinghal (1900140100068)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Parul Sahni (1900140100078)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. To run the project using nodejs, run the the following steps -
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Open terminal in project path and run the following commands
 
-### `npm run eject`
+### cd client
+### npm i
+### npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Now open another terminal in project path and run the following commands
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### cd server
+### npm i
+### In server folder create an .env file and setup CONNECTION_URL, JWT_SECRET, MAIL_USER, MAIL_PASS and then run the command to activate server on port 8000
+### npm start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Open [http://localhost:3000](http://localhost:3000) to view this in your browser
