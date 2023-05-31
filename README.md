@@ -24,15 +24,15 @@ Parul Sahni (1900140100078)
 
 Open terminal in project path and run the following commands
 
-### cd client
-### npm i
-### npm start
+### `cd client`
+### `npm i`
+### `npm start`
 
 Now open another terminal in project path and run the following commands
 
-### cd server
-### npm i
+### `cd server`
+### `npm i`
 ### In server folder create an .env file and setup CONNECTION_URL, JWT_SECRET, MAIL_USER, MAIL_PASS and then run the command to activate server on port 8000
-### npm start
+### `npm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view this in your browser
