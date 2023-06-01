@@ -267,7 +267,6 @@ function Login2() {
                   width: "100%",
                   marginBottom: "10px",
                   borderRadius: "5px",
-                  border: "none",
                   height: "30px",
                   padding: "5px 10px",
                   border:'1px solid var(--primary-color)' 
@@ -282,7 +281,6 @@ function Login2() {
                     width: "100%",
                     marginBottom: "10px",
                     borderRadius: "5px",
-                    border: "none",
                     height: "30px",
                     padding: "5px 10px",
                     border:'1px solid var(--primary-color)' 
@@ -347,7 +345,6 @@ function Login2() {
                   width: "100%",
                   marginBottom: "10px",
                   borderRadius: "5px",
-                  border: "none",
                   height: "30px",
                   padding: "5px 10px",
                   border:'1px solid var(--primary-color)' 
@@ -362,7 +359,6 @@ function Login2() {
                   width: "100%",
                   marginBottom: "10px",
                   borderRadius: "5px",
-                  border: "none",
                   height: "30px",
                   padding: "5px 10px",
                   border:'1px solid var(--primary-color)' 
@@ -379,7 +375,6 @@ function Login2() {
                     width: "100%",
                     marginBottom: "10px",
                     borderRadius: "5px",
-                    border: "none",
                     height: "30px",
                     padding: "5px 10px",
                     border:'1px solid var(--primary-color)' 
@@ -407,7 +402,6 @@ function Login2() {
                   width: "100%",
                   marginBottom: "10px",
                   borderRadius: "5px",
-                  border: "none",
                   height: "30px",
                   padding: "5px 10px",
                   border:'1px solid var(--primary-color)' 
@@ -422,7 +416,6 @@ function Login2() {
                   width: "100%",
                   marginBottom: "10px",
                   borderRadius: "5px",
-                  border: "none",
                   height: "30px",
                   padding: "5px 10px",
                   border:'1px solid var(--primary-color)' 
@@ -438,7 +431,6 @@ function Login2() {
                   width: "100%",
                   marginBottom: "10px",
                   borderRadius: "5px",
-                  border: "none",
                   height: "30px",
                   padding: "5px 10px",
                   border:'1px solid var(--primary-color)' 
@@ -451,7 +443,6 @@ function Login2() {
                 style={{
                   width: "100%",
                   height: "32px",
-                  border: "none",
                   borderRadius: "5px",
                   padding: "0px 5px",
                   marginBottom: "10px",
@@ -478,7 +469,6 @@ function Login2() {
                   width: "100%",
                   marginBottom: "10px",
                   borderRadius: "5px",
-                  border: "none",
                   height: "30px",
                   padding: "5px 10px",
                   border:'1px solid var(--primary-color)' 
@@ -491,7 +481,6 @@ function Login2() {
                 style={{
                   width: "100%",
                   height: "32px",
-                  border: "none",
                   borderRadius: "5px",
                   padding: "0px 5px",
                   marginBottom: "10px",
@@ -515,7 +504,6 @@ function Login2() {
                     style={{
                       width: "100%",
                       height: "32px",
-                      border: "none",
                       borderRadius: "5px",
                       padding: "0px 5px",
                       border:'1px solid var(--primary-color)' 
@@ -540,7 +528,6 @@ function Login2() {
                     style={{
                       width: "100%",
                       height: "32px",
-                      border: "none",
                       borderRadius: "5px",
                       padding: "0px 5px",
                       border:'1px solid var(--primary-color)' 
@@ -562,7 +549,6 @@ function Login2() {
                     style={{
                       width: "100%",
                       height: "32px",
-                      border: "none",
                       borderRadius: "5px",
                       padding: "0px 5px",
                       border:'1px solid var(--primary-color)' 
