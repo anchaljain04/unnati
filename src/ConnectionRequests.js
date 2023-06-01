@@ -69,12 +69,12 @@ function ConnectionRequests() {
   let url;
   let raw;
   if (user.category === "customer") {
-    url = "http://localhost:8000/user/get-connection-requests";
+    url = "https://lucky-bear-hospital-gown.cyclic.app/user/get-connection-requests";
     raw = {
       params: { userId: user?._id },
     };
   } else {
-    url = "http://localhost:8000/provider/get-connection-requests";
+    url = "https://lucky-bear-hospital-gown.cyclic.app/provider/get-connection-requests";
     raw = {
       params: { providerId: user?._id },
     };
@@ -87,7 +87,7 @@ function ConnectionRequests() {
         if (user?.category === "customer") {
           setIsCustomer(true);
           axios
-            .get("http://localhost:8000/feedback/get")
+            .get("https://lucky-bear-hospital-gown.cyclic.app/feedback/get")
             .then((res) => {
               const updatedRequests = filteredReq.map((item) => {
                 let firstAttempt = false;
@@ -143,7 +143,7 @@ function ConnectionRequests() {
       providerMobile: request?.providerId?.mobile,
     };
     axios
-      .post("http://localhost:8000/user/send-email", raw)
+      .post("https://lucky-bear-hospital-gown.cyclic.app/user/send-email", raw)
       .then((res) => {
         console.log(res);
       })
@@ -157,7 +157,7 @@ function ConnectionRequests() {
       window.alert(data?.fillAllFields);
     } else {
       axios
-        .post("http://localhost:8000/feedback/save", {
+        .post("https://lucky-bear-hospital-gown.cyclic.app/feedback/save", {
           providerId: providerId,
           userId: userId,
           requirementId: requirementId,
@@ -176,7 +176,7 @@ function ConnectionRequests() {
   const handleAccept = (e, request) => {
     e.preventDefault();
     axios
-      .get("http://localhost:8000/user/update-connection-requests", {
+      .get("https://lucky-bear-hospital-gown.cyclic.app/user/update-connection-requests", {
         params: { id: request?._id, status: "accepted" },
       })
       .then((response) => {
@@ -190,7 +190,7 @@ function ConnectionRequests() {
   const handleReject = (e, request) => {
     e.preventDefault();
     axios
-      .get("http://localhost:8000/user/update-connection-requests", {
+      .get("https://lucky-bear-hospital-gown.cyclic.app/user/update-connection-requests", {
         params: { id: request?._id, status: "rejected" },
       })
       .then((response) => {

@@ -16,7 +16,7 @@ function MyActivities() {
   const [requirementData, setRequirementData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8000/user/get-requirements", {
+      .get("https://lucky-bear-hospital-gown.cyclic.app/user/get-requirements", {
         params: {
           email: user.email,
         },
@@ -29,7 +29,7 @@ function MyActivities() {
 
   const handleDelete = (e, requirement) => {
     axios
-      .delete("http://localhost:8000/user/delete-requirement", {
+      .delete("https://lucky-bear-hospital-gown.cyclic.app/user/delete-requirement", {
         params: {
           requirementId: requirement?._id,
         },

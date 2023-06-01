@@ -33,7 +33,7 @@ function UpdateAddressModal() {
   const data = myContext.isHindi ? myContext.dataHindi : myContext.dataEnglish;
   useEffect(() => {
     axios
-      .get("http://localhost:8000/user/get-user-data", {
+      .get("https://lucky-bear-hospital-gown.cyclic.app/user/get-user-data", {
         params: { email: userInfo.email },
       })
       .then((response) => {
@@ -55,7 +55,7 @@ function UpdateAddressModal() {
       window.alert("please enter a valid address!");
     } else {
       axios
-        .post("http://localhost:8000/user/update-user", {
+        .post("https://lucky-bear-hospital-gown.cyclic.app/user/update-user", {
           address: address,
           email: user.email,
         })

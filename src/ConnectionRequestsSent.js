@@ -15,12 +15,12 @@ function ConnectionRequestsSent() {
   let url;
   let raw;
   if (user.category === "customer") {
-    url = "http://localhost:8000/user/get-connection-requests";
+    url = "https://lucky-bear-hospital-gown.cyclic.app/user/get-connection-requests";
     raw = {
       params: { userId: user?._id },
     };
   } else {
-    url = "http://localhost:8000/provider/get-connection-requests";
+    url = "https://lucky-bear-hospital-gown.cyclic.app/provider/get-connection-requests";
     raw = {
       params: { providerId: user?._id },
     };

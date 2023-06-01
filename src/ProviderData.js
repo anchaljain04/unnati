@@ -38,10 +38,10 @@ export default function ProviderData() {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/provider/get-providers/${location}`)
+      .get(`https://lucky-bear-hospital-gown.cyclic.app/provider/get-providers/${location}`)
       .then((res) => {
         axios
-          .get("http://localhost:8000/user/get-connection-requests", {
+          .get("https://lucky-bear-hospital-gown.cyclic.app/user/get-connection-requests", {
             params: { userId: user?._id },
           })
           .then((response) => {
@@ -91,7 +91,7 @@ export default function ProviderData() {
       userId: user?._id,
     };
     axios
-      .post("http://localhost:8000/user/send-email", raw)
+      .post("https://lucky-bear-hospital-gown.cyclic.app/user/send-email", raw)
       .then((res) => {
         console.log(res);
       })

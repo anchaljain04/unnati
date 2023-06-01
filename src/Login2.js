@@ -75,7 +75,7 @@ function Login2() {
         window.alert("कृपया सभी विवरण भरें");
       } else {
         axios
-          .post("http://localhost:8000/provider/register", {
+          .post("https://lucky-bear-hospital-gown.cyclic.app/provider/register", {
             name,
             email,
             password,
@@ -115,7 +115,7 @@ function Login2() {
         window.alert("कृपया सभी विवरण भरें");
       } else {
         axios
-          .post("http://localhost:8000/user/register", {
+          .post("https://lucky-bear-hospital-gown.cyclic.app/user/register", {
             name,
             email,
             password,
@@ -153,7 +153,7 @@ function Login2() {
       if (role === "provider") {
         url = "http:///localhost:8000/provider/login";
       } else if (role === "customer") {
-        url = "http://localhost:8000/user/login";
+        url = "https://lucky-bear-hospital-gown.cyclic.app/user/login";
       }
       await axios
         .post(url, { email, password })

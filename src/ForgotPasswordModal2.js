@@ -42,7 +42,7 @@ function ForgotPasswordModal2() {
     e.preventDefault();
     axios
       .get(
-        `http://localhost:8000/${
+        `https://lucky-bear-hospital-gown.cyclic.app/${
           role === "customer" ? "user" : role
         }/fetch-security-ques`,
         {
@@ -58,7 +58,7 @@ function ForgotPasswordModal2() {
   const handleSubmit = (e) => {
     axios
       .get(
-        `http://localhost:8000/${
+        `https://lucky-bear-hospital-gown.cyclic.app/${
           role === "customer" ? "user" : role
         }/match-security-ans`,
         {
@@ -84,7 +84,7 @@ function ForgotPasswordModal2() {
     } else {
       axios
         .get(
-          `http://localhost:8000/${
+          `https://lucky-bear-hospital-gown.cyclic.app/${
             role === "customer" ? "user" : role
           }/change-password`,
           {

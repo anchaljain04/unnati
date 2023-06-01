@@ -35,7 +35,7 @@ function PostRequirements() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/user/save-requirements", {
+      .post("https://lucky-bear-hospital-gown.cyclic.app/user/save-requirements", {
         name: user.name,
         email: user.email,
         mobile: user.mobile,

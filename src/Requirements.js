@@ -16,9 +16,9 @@ function Requirements() {
   let url;
   let raw;
   if (user.category === "customer") {
-    url = `http://localhost:8000/user/get-requirements`;
+    url = `https://lucky-bear-hospital-gown.cyclic.app/user/get-requirements`;
   } else {
-    url = `http://localhost:8000/provider/get-requirements`;
+    url = `https://lucky-bear-hospital-gown.cyclic.app/provider/get-requirements`;
     raw = {
       params: { service: `${user.serviceProviding}` },
     };
@@ -29,7 +29,7 @@ function Requirements() {
       .get(url, raw)
       .then((res) => {
         axios
-          .get("http://localhost:8000/provider/get-connection-requests", {
+          .get("https://lucky-bear-hospital-gown.cyclic.app/provider/get-connection-requests", {
             params: { providerId: user?._id },
           })
           .then((response) => {
@@ -82,7 +82,7 @@ function Requirements() {
     window.alert(data?.connectionRequestSentSuccess);
     apiCall();
     axios
-      .post("http://localhost:8000/user/send-email", raw)
+      .post("https://lucky-bear-hospital-gown.cyclic.app/user/send-email", raw)
       .then((res) => {
         console.log(res);
       })
